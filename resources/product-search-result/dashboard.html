@@ -204,6 +204,8 @@
     var FORK_X_OFFSET = 50;
     var MSG_INTERVAL = 1400;
     var RLM_DURATION = 14000;  // RLM prelude plays for 14s before dashboard
+    var STOP_AFTER_RLM = true;
+    var FINAL_DOT_SCALE = 0.32;
 
     // main context: orchestrator-agent
     // all times offset by RLM_DURATION so dashboard starts after RLM
@@ -502,6 +504,231 @@
       scene.add(p); rlmParticles.push(p);
     }
 
+    // Team hierarchy (post-RLM click expansion)
+    var TEAM_DEFS = [
+      { id: 'team_database', label: 'database', content: 'Database team handling storage and schema systems.', engineers: ['Ava', 'Noah', 'Mia'] },
+      { id: 'team_frontend', label: 'front-end', content: 'Front-end team focused on client and UI implementation.', engineers: ['Liam', 'Zoe', 'Kai'] },
+      { id: 'team_ml', label: 'machine learning', content: 'Machine learning team for model and inference workflows.', engineers: ['Iris', 'Omar', 'Eli'] },
+      { id: 'team_backend', label: 'backend', content: 'Backend team building APIs and service orchestration.', engineers: ['Nia', 'Jules', 'Theo'] }
+    ];
+    var TEAM_RADIUS = 34;
+    var ENGINEER_OUTWARD = 14;
+    var ENGINEER_SPREAD = 7;
+    var teamNodes = [];
+    var teamHierarchyOpen = false;
+    var expandedTeams = [];
+    var teamTargetTmp = new THREE.Vector3();
+
+    for (var i = 0; i < TEAM_DEFS.length; i++) {
+      var teamAngle = (i / TEAM_DEFS.length) * Math.PI * 2 - Math.PI / 2;
+      var teamTarget = new THREE.Vector3(Math.cos(teamAngle) * TEAM_RADIUS, Math.sin(teamAngle) * TEAM_RADIUS, 0);
+
+      var tg = new THREE.Group();
+      var teamMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(1.75, 20, 20),
+        new THREE.MeshBasicMaterial({ color: WHITE, transparent: true, opacity: 1 })
+      );
+      tg.add(teamMesh);
+      var teamGlow = makeGlow('#ffffff', 12, 0.28);
+      tg.add(teamGlow);
+      tg.position.set(0, 0, 0);
+      tg.scale.set(0, 0, 0);
+      scene.add(tg);
+
+      var teamLineGeo = new THREE.BufferGeometry();
+      teamLineGeo.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+      var teamLine = new THREE.Line(
+        teamLineGeo,
+        new THREE.LineBasicMaterial({ color: 0x55ccff, transparent: true, opacity: 0 })
+      );
+      scene.add(teamLine);
+
+      registerRlmHover(teamMesh, tg, {
+        id: TEAM_DEFS[i].id,
+        type: 'team',
+        label: TEAM_DEFS[i].label,
+        content: TEAM_DEFS[i].content
+      });
+
+      var outwardDir = teamTarget.clone().normalize();
+      var tangent = new THREE.Vector3(-outwardDir.y, outwardDir.x, 0);
+      var engineers = [];
+
+      for (var j = 0; j < TEAM_DEFS[i].engineers.length; j++) {
+        var spread = (j - (TEAM_DEFS[i].engineers.length - 1) / 2) * ENGINEER_SPREAD;
+        var localOffset = outwardDir.clone().multiplyScalar(ENGINEER_OUTWARD).addScaledVector(tangent, spread);
+
+        var eg = new THREE.Group();
+        var engMesh = new THREE.Mesh(
+          new THREE.SphereGeometry(0.95, 16, 16),
+          new THREE.MeshBasicMaterial({ color: WHITE, transparent: true, opacity: 1 })
+        );
+        eg.add(engMesh);
+        var engGlow = makeGlow('#ffffff', 7, 0.2);
+        eg.add(engGlow);
+        eg.position.set(0, 0, 0);
+        eg.scale.set(0, 0, 0);
+        scene.add(eg);
+
+        var engLineGeo = new THREE.BufferGeometry();
+        engLineGeo.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+        var engLine = new THREE.Line(
+          engLineGeo,
+          new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 })
+        );
+        scene.add(engLine);
+
+        var engineerId = TEAM_DEFS[i].id + '_eng_' + ('0' + (j + 1)).slice(-2);
+        registerRlmHover(engMesh, eg, {
+          id: engineerId,
+          type: 'engineer',
+          label: TEAM_DEFS[i].engineers[j],
+          content: 'Engineer in ' + TEAM_DEFS[i].label + '.'
+        });
+
+        engineers.push({
+          group: eg,
+          mesh: engMesh,
+          glowSprite: engGlow,
+          line: engLine,
+          localOffset: localOffset,
+          progress: 0
+        });
+      }
+
+      teamNodes.push({
+        group: tg,
+        mesh: teamMesh,
+        glowSprite: teamGlow,
+        line: teamLine,
+        targetPos: teamTarget,
+        progress: 0,
+        engineers: engineers
+      });
+
+      expandedTeams.push(false);
+    }
+
+    function resetTeamHierarchy() {
+      teamHierarchyOpen = false;
+      for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = false;
+
+      for (var i = 0; i < teamNodes.length; i++) {
+        var team = teamNodes[i];
+        team.progress = 0;
+        team.group.position.set(0, 0, 0);
+        team.group.scale.set(0, 0, 0);
+        team.glowSprite.material.opacity = 0.28;
+        team.line.material.opacity = 0;
+        var teamLinePos = team.line.geometry.attributes.position.array;
+        teamLinePos[0] = rlmCenter.position.x; teamLinePos[1] = rlmCenter.position.y; teamLinePos[2] = rlmCenter.position.z;
+        teamLinePos[3] = rlmCenter.position.x; teamLinePos[4] = rlmCenter.position.y; teamLinePos[5] = rlmCenter.position.z;
+        team.line.geometry.attributes.position.needsUpdate = true;
+
+        for (var j = 0; j < team.engineers.length; j++) {
+          var eng = team.engineers[j];
+          eng.progress = 0;
+          eng.group.position.set(0, 0, 0);
+          eng.group.scale.set(0, 0, 0);
+          eng.glowSprite.material.opacity = 0.2;
+          eng.line.material.opacity = 0;
+          var engLinePos = eng.line.geometry.attributes.position.array;
+          engLinePos[0] = 0; engLinePos[1] = 0; engLinePos[2] = 0;
+          engLinePos[3] = 0; engLinePos[4] = 0; engLinePos[5] = 0;
+          eng.line.geometry.attributes.position.needsUpdate = true;
+        }
+      }
+    }
+
+    function toggleTeamHierarchy() {
+      teamHierarchyOpen = !teamHierarchyOpen;
+      if (!teamHierarchyOpen) {
+        for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = false;
+        statusEl.textContent = 'recursive prelude complete — click blue dot';
+        return;
+      }
+      statusEl.textContent = 'teams expanded — click a team to view engineers';
+    }
+
+    function toggleTeamEngineers(teamIndex) {
+      if (!teamHierarchyOpen) return;
+      expandedTeams[teamIndex] = !expandedTeams[teamIndex];
+      if (!expandedTeams[teamIndex]) {
+        statusEl.textContent = 'teams expanded — click a team to view engineers';
+        return;
+      }
+      statusEl.textContent = TEAM_DEFS[teamIndex].label + ' — engineers expanded';
+    }
+
+    function animateTeamHierarchy(t) {
+      for (var i = 0; i < teamNodes.length; i++) {
+        var team = teamNodes[i];
+        var teamTargetProgress = teamHierarchyOpen ? 1 : 0;
+        team.progress += (teamTargetProgress - team.progress) * 0.14;
+        if (Math.abs(teamTargetProgress - team.progress) < 0.001) team.progress = teamTargetProgress;
+
+        var teamPosT = easeInOutCubic(team.progress);
+        var teamScaleT = easeOutBack(Math.min(1, team.progress));
+
+        team.group.position.lerpVectors(ZERO, team.targetPos, teamPosT);
+
+        var teamScale = teamScaleT;
+        if (team.progress >= 1) teamScale *= 1 + Math.sin(t * 0.003 + i) * 0.05;
+        if (hoveredRlmGroup === team.group) teamScale *= 1.24;
+        team.group.scale.setScalar(teamScale);
+
+        var teamGlow = 0.18 + team.progress * 0.2 + Math.sin(t * 0.004 + i * 0.7) * 0.03;
+        if (hoveredRlmGroup === team.group) teamGlow += 0.16;
+        team.glowSprite.material.opacity = Math.min(0.72, teamGlow);
+
+        var teamLinePos = team.line.geometry.attributes.position.array;
+        teamLinePos[0] = rlmCenter.position.x; teamLinePos[1] = rlmCenter.position.y; teamLinePos[2] = rlmCenter.position.z;
+        teamLinePos[3] = team.group.position.x; teamLinePos[4] = team.group.position.y; teamLinePos[5] = team.group.position.z;
+        team.line.geometry.attributes.position.needsUpdate = true;
+        var teamLineOpacity = 0.16 * teamPosT;
+        if (hoveredRlmGroup === team.group) teamLineOpacity += 0.08;
+        team.line.material.opacity = teamLineOpacity;
+
+        for (var j = 0; j < team.engineers.length; j++) {
+          var eng = team.engineers[j];
+          var targetProgress = (teamHierarchyOpen && expandedTeams[i]) ? 1 : 0;
+          eng.progress += (targetProgress - eng.progress) * 0.16;
+          if (Math.abs(targetProgress - eng.progress) < 0.001) eng.progress = targetProgress;
+
+          if (eng.progress <= 0.001) {
+            eng.group.scale.set(0, 0, 0);
+            eng.group.position.copy(team.group.position);
+            var hiddenLinePos = eng.line.geometry.attributes.position.array;
+            hiddenLinePos[0] = team.group.position.x; hiddenLinePos[1] = team.group.position.y; hiddenLinePos[2] = team.group.position.z;
+            hiddenLinePos[3] = team.group.position.x; hiddenLinePos[4] = team.group.position.y; hiddenLinePos[5] = team.group.position.z;
+            eng.line.geometry.attributes.position.needsUpdate = true;
+            eng.line.material.opacity = 0;
+            continue;
+          }
+
+          var engT = easeInOutCubic(eng.progress);
+          teamTargetTmp.copy(team.group.position).add(eng.localOffset);
+          eng.group.position.lerpVectors(team.group.position, teamTargetTmp, engT);
+
+          var engScale = easeInOutCubic(eng.progress);
+          if (hoveredRlmGroup === eng.group) engScale *= 1.28;
+          eng.group.scale.setScalar(engScale);
+
+          var engGlow = 0.1 + eng.progress * 0.24 + Math.sin(t * 0.004 + j) * 0.02;
+          if (hoveredRlmGroup === eng.group) engGlow += 0.2;
+          eng.glowSprite.material.opacity = Math.min(0.65, engGlow);
+
+          var engLinePos = eng.line.geometry.attributes.position.array;
+          engLinePos[0] = team.group.position.x; engLinePos[1] = team.group.position.y; engLinePos[2] = team.group.position.z;
+          engLinePos[3] = eng.group.position.x; engLinePos[4] = eng.group.position.y; engLinePos[5] = eng.group.position.z;
+          eng.line.geometry.attributes.position.needsUpdate = true;
+          var engLineOpacity = 0.12 * engT;
+          if (hoveredRlmGroup === eng.group || hoveredRlmGroup === team.group) engLineOpacity += 0.06;
+          eng.line.material.opacity = engLineOpacity;
+        }
+      }
+    }
+
     // RLM phase timings (closer to original proportions)
     var RP1 = 0;        // center appears
     var RP2 = 1200;     // codegen pulse
@@ -574,8 +801,8 @@
       if (t > RP2 && t < RP3) centerScale *= 1 + Math.sin((t - RP2) * 0.015) * 0.1;
       if (t > RP6 && t < RP7) centerScale *= 1 + Math.max(0, 1 - (t - RP6) / 800) * 0.5;
       if (t > RP7) {
-        var settleT = easeInOutCubic(Math.min(1, (t - RP7) / 1200));
-        centerScale = 1 + (centerScale - 1) * (1 - settleT);
+        var settleT = easeInOutCubic(Math.min(1, (t - RP7) / RP7_DUR));
+        centerScale = centerScale + (FINAL_DOT_SCALE - centerScale) * settleT;
         var centerGlowSettle = (0.85 - 0.35 * settleT) + Math.sin(t * 0.003) * 0.08;
         if (hoveredRlmGroup === rlmCenter) centerGlowSettle += 0.22;
         rlmCenter.children[1].material.opacity = Math.min(1, centerGlowSettle);
@@ -684,6 +911,10 @@
         if (rawCt >= 1) {
           rlmActive = false;
           cleanupRLM();
+          rlmCenter.scale.setScalar(FINAL_DOT_SCALE);
+          rlmCenter.children[1].material.opacity = 0.45;
+          rlmCenter.children[2].material.opacity = 0.08;
+          if (STOP_AFTER_RLM) statusEl.textContent = 'recursive prelude complete — click blue dot';
         }
         return;
       }
@@ -1035,7 +1266,22 @@
     function typeColorFor(type) {
       if (type === 'context') return '#2288ff';
       if (type === 'query') return '#55ccff';
+      if (type === 'team') return '#ffffff';
+      if (type === 'engineer') return '#ffffff';
       return '#999';
+    }
+
+    function collectRaycastMeshes() {
+      var meshes = nodes.map(function(n) { return n.mesh; });
+      for (var i = 0; i < rlmHoverMeshes.length; i++) {
+        var hoverMesh = rlmHoverMeshes[i];
+        if (!hoverMesh.parent || hoverMesh.parent.scale.x <= 0.05) continue;
+        var root = hoverMesh;
+        while (root.parent) root = root.parent;
+        if (root !== scene) continue;
+        meshes.push(hoverMesh);
+      }
+      return meshes;
     }
 
     function clearHoverState() {
@@ -1056,17 +1302,7 @@
       mouseVec.y = -(e.clientY / innerHeight) * 2 + 1;
       raycaster.setFromCamera(mouseVec, camera);
 
-      var meshes = nodes.map(function(n) { return n.mesh; });
-      if (rlmActive) {
-        for (var i = 0; i < rlmHoverMeshes.length; i++) {
-          var rlmMesh = rlmHoverMeshes[i];
-          if (!rlmMesh.parent || rlmMesh.parent.scale.x <= 0.05) continue;
-          var root = rlmMesh;
-          while (root.parent) root = root.parent;
-          if (root !== scene) continue;
-          meshes.push(rlmMesh);
-        }
-      }
+      var meshes = collectRaycastMeshes();
       var hits = raycaster.intersectObjects(meshes);
 
       if (hits.length > 0) {
@@ -1107,6 +1343,34 @@
         renderer.domElement.style.cursor = 'pointer';
       } else {
         clearHoverState();
+      }
+    });
+
+    renderer.domElement.addEventListener('click', function(e) {
+      if (mouse.moved) return;
+
+      mouseVec.x = (e.clientX / innerWidth) * 2 - 1;
+      mouseVec.y = -(e.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouseVec, camera);
+
+      var hits = raycaster.intersectObjects(collectRaycastMeshes());
+      if (hits.length === 0) return;
+
+      var hitMesh = hits[0].object;
+      var rlmHover = hitMesh.userData.rlmHover || null;
+      if (!rlmHover || !STOP_AFTER_RLM || rlmActive) return;
+
+      if (rlmHover.group === rlmCenter) {
+        toggleTeamHierarchy();
+        return;
+      }
+
+      for (var i = 0; i < teamNodes.length; i++) {
+        if (rlmHover.group === teamNodes[i].group) {
+          if (!teamHierarchyOpen) return;
+          toggleTeamEngineers(i);
+          return;
+        }
       }
     });
 
@@ -1236,6 +1500,7 @@
       // Reset RLM state and visuals.
       rlmActive = true;
       rlmCleaned = false;
+      resetTeamHierarchy();
       for (var i = 0; i < rlmLogsFired.length; i++) rlmLogsFired[i] = false;
       delete rlmCenter.children[0].userData.timelineNode;
       rlmCenter.position.set(0, 0, 0);
@@ -1337,20 +1602,23 @@
 
       // RLM prelude
       if (rlmActive) animateRLM(t);
+      animateTeamHierarchy(t);
 
-      // spawn timeline nodes (after RLM)
-      for (var i = 0; i < timeline.length; i++) {
-        if (!spawned[i] && t >= timeline[i].time) {
-          spawned[i] = true;
-          spawnNode(timeline[i], t);
+      if (!STOP_AFTER_RLM) {
+        // spawn timeline nodes (after RLM)
+        for (var i = 0; i < timeline.length; i++) {
+          if (!spawned[i] && t >= timeline[i].time) {
+            spawned[i] = true;
+            spawnNode(timeline[i], t);
+          }
         }
-      }
 
-      // spawn version events
-      for (var i = 0; i < versionEvents.length; i++) {
-        if (!versionsFired[i] && t >= VERSIONS_START + versionEvents[i].time) {
-          versionsFired[i] = true;
-          addVersionToRail(versionEvents[i]);
+        // spawn version events
+        for (var i = 0; i < versionEvents.length; i++) {
+          if (!versionsFired[i] && t >= VERSIONS_START + versionEvents[i].time) {
+            versionsFired[i] = true;
+            addVersionToRail(versionEvents[i]);
+          }
         }
       }
 
