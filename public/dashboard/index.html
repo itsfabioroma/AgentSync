@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ultracontext — dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'SF Mono', 'Fira Code', monospace; }
+    * { scrollbar-width: none; -ms-overflow-style: none; }
+    *::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+    /* header */
+    #overlay {
+      position: fixed; top: 24px; left: 28px; z-index: 10;
+      pointer-events: none;
+    }
+    #overlay h1 {
+      font-size: 15px; color: rgba(255,255,255,0.7);
+      font-weight: 400; letter-spacing: 0.5px;
+    }
+    #overlay .sub {
+      color: rgba(255,255,255,0.15); font-size: 11px; margin-top: 4px;
+    }
+
+    /* realtime log */
+    #log {
+      position: fixed; top: 70px; left: 28px; z-index: 10;
+      width: 320px; max-height: calc(100vh - 120px); overflow-y: auto;
+      pointer-events: auto;
+    }
+    #log .entry {
+      padding: 6px 10px; margin: 3px 0; border-radius: 5px;
+      background: rgba(255,255,255,0.02); border-left: 2px solid transparent;
+      opacity: 0; transform: translateX(-12px);
+      animation: logIn 0.3s ease forwards;
+      transition: background 0.3s, border-left-width 0.2s, border-left-color 0.3s;
+      cursor: pointer;
+    }
+    @keyframes logIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    #log .entry.fresh {
+      background: rgba(255,255,255,0.05);
+    }
+    #log .entry.highlight {
+      background: rgba(255,255,255,0.08);
+      border-left-width: 3px;
+    }
+    #log .entry-header {
+      display: flex; align-items: center; gap: 8px;
+    }
+    #log .entry-type {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 1px 6px; border-radius: 3px; text-transform: uppercase;
+    }
+    #log .entry-agent {
+      font-size: 9px; color: rgba(255,255,255,0.2);
+    }
+    #log .entry-time {
+      font-size: 9px; color: rgba(255,255,255,0.15); margin-left: auto;
+    }
+    #log .entry-content {
+      font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #log .entry-id {
+      font-size: 9px; color: rgba(255,255,255,0.1); margin-top: 2px;
+    }
+
+    /* status */
+    #status {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 10; pointer-events: none;
+      color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 1px;
+    }
+
+    /* legend */
+    #legend {
+      position: fixed; bottom: 28px; right: 28px; z-index: 10;
+      pointer-events: none; display: flex; gap: 16px;
+    }
+    #legend .item { display: flex; align-items: center; gap: 6px; }
+    #legend .dot { width: 6px; height: 6px; border-radius: 50%; }
+    #legend .label { font-size: 9px; color: rgba(255,255,255,0.2); }
+
+    /* version rail */
+    #versions {
+      position: fixed; top: 70px; right: 28px; z-index: 10;
+      width: 180px; pointer-events: auto;
+    }
+    #versions .v-title {
+      font-size: 9px; color: rgba(255,255,255,0.2); text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 8px;
+    }
+    #versions .v-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 10px; margin: 2px 0; border-radius: 5px;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer; transition: background 0.3s;
+      position: relative;
+    }
+    #versions .v-item:hover { background: rgba(255,255,255,0.06); }
+    #versions .v-item.active { background: rgba(34,136,255,0.1); }
+    #versions .v-item.active::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: #2288ff; border-radius: 1px;
+    }
+    #versions .v-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    #versions .v-label {
+      font-size: 10px; color: rgba(255,255,255,0.4);
+    }
+    #versions .v-op {
+      font-size: 9px; font-weight: 600; margin-left: auto;
+    }
+    #versions .v-affected {
+      font-size: 8px; color: rgba(255,255,255,0.15);
+      margin-top: 1px;
+    }
+    /* connector line between version dots */
+    #versions .v-connector {
+      width: 2px; height: 8px; background: rgba(255,255,255,0.06);
+      margin-left: 13px;
+    }
+
+    /* tooltip */
+    #tooltip {
+      position: fixed; z-index: 20; pointer-events: none;
+      max-width: 340px; padding: 10px 14px; border-radius: 6px;
+      background: rgba(10,10,20,0.9); border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      opacity: 0; transition: opacity 0.15s;
+      transform: translate(12px, -50%);
+    }
+    #tooltip.visible { opacity: 1; }
+    #tooltip .tt-type {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.5px;
+      padding: 1px 6px; border-radius: 3px; text-transform: uppercase;
+      display: inline-block; margin-bottom: 4px;
+    }
+    #tooltip .tt-label {
+      font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 600;
+    }
+    #tooltip .tt-content {
+      font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;
+      white-space: pre-wrap; word-break: break-word; max-height: 120px; overflow: hidden;
+    }
+    #tooltip .tt-id {
+      font-size: 9px; color: rgba(255,255,255,0.15); margin-top: 4px;
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <div id="graph"></div>
+
+  <div id="overlay">
+    <h1>ultracontext</h1>
+    <div class="sub">context infrastructure for AI agents</div>
+  </div>
+
+  <div id="log"></div>
+  <div id="versions"></div>
+  <div id="tooltip"></div>
+  <div id="status">waiting...</div>
+
+  <div id="legend">
+    <div class="item"><div class="dot" style="background:#2288ff"></div><span class="label">context</span></div>
+    <div class="item"><div class="dot" style="background:#ffffff"></div><span class="label">message</span></div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'https://esm.sh/three@0.160.0';
+    import { EffectComposer } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+    var INITIAL_PLAYHEAD_MS = Number(window.__UC_INITIAL_PLAYHEAD_MS || 0);
+
+    // ================================
+    // COLORS
+    // ================================
+
+    var COLORS = {
+      context:     '#2288ff',
+      system:      '#ffffff',
+      user:        '#ffffff',
+      assistant:   '#ffffff',
+      tool_use:    '#ffffff',
+      tool_result: '#ffffff',
+    };
+
+    var SIZES = { context: 4, system: 2.2, user: 2.2, assistant: 2.2, tool_use: 1.8, tool_result: 1.8 };
+    var GLOW_SIZES = { context: 35, system: 14, user: 14, assistant: 14, tool_use: 11, tool_result: 11 };
+
+    // ================================
+    // TIMELINE — messages to spawn
+    // ================================
+
+    var NODE_SPACING = 18;
+    var FORK_X_OFFSET = 50;
+    var MSG_INTERVAL = 1400;
+    var RLM_DURATION = 14000;  // RLM prelude plays for 14s before dashboard
+
+    // main context: orchestrator-agent
+    // all times offset by RLM_DURATION so dashboard starts after RLM
+    var timeline = [
+      // context node spawns right as RLM collapses (it IS the RLM center)
+      { time: RLM_DURATION, branch: 'main', type: 'context', label: 'orchestrator-agent', id: 'ctx_orch_001', content: '{ name: "orchestrator-agent" }' },
+
+      // messages flow down
+      { time: RLM_DURATION + 800, branch: 'main', type: 'system', label: 'system prompt', id: 'msg_001', content: 'You are an orchestrator agent. Break complex tasks into subtasks and delegate to specialized sub-agents.' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL, branch: 'main', type: 'user', label: 'user request', id: 'msg_002', content: 'Analyze the auth module: review code quality AND check for security vulnerabilities' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*2, branch: 'main', type: 'assistant', label: 'planning', id: 'msg_003', content: 'I\'ll split this into two parallel subtasks: code review + security audit' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*3, branch: 'main', type: 'tool_use', label: 'spawn_agents()', id: 'msg_004', content: 'spawn_agents({ agents: ["code-reviewer", "security-auditor"], context: fork("ctx_orch_001") })' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*4, branch: 'main', type: 'tool_result', label: 'agents spawned', id: 'msg_005', content: '{ forked: ["ctx_review_001", "ctx_security_001"], status: "running" }' },
+
+      // FORK: two sub-agents spawn after msg_005
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5, branch: 'left', type: 'context', label: 'code-reviewer', id: 'ctx_review_001', content: '{ name: "code-reviewer", forked_from: "ctx_orch_001" }' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 600, branch: 'left', type: 'system', label: 'system prompt', id: 'msg_r01', content: 'You review code for quality, patterns, and maintainability.' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 1200, branch: 'left', type: 'user', label: 'delegated task', id: 'msg_r02', content: 'Review auth module code quality' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 2000, branch: 'left', type: 'tool_use', label: 'read_file()', id: 'msg_r03', content: 'read_file({ path: "src/middleware/auth.ts" })' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 2800, branch: 'left', type: 'tool_result', label: 'file contents', id: 'msg_r04', content: 'export function authMiddleware(req, res, next) { const token = req.headers.authorization?.split(" ")[1]; ... }' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 3600, branch: 'left', type: 'assistant', label: 'review complete', id: 'msg_r05', content: 'Code quality: B+. Issues: no error boundary around token parse, missing TS strict types on req params, inconsistent naming.' },
+
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 200, branch: 'right', type: 'context', label: 'security-auditor', id: 'ctx_security_001', content: '{ name: "security-auditor", forked_from: "ctx_orch_001" }' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 800, branch: 'right', type: 'system', label: 'system prompt', id: 'msg_s01', content: 'You audit code for security vulnerabilities (OWASP top 10).' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 1500, branch: 'right', type: 'user', label: 'delegated task', id: 'msg_s02', content: 'Security audit on auth module' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 2400, branch: 'right', type: 'tool_use', label: 'scan_vulnerabilities()', id: 'msg_s03', content: 'scan_vulnerabilities({ target: "src/middleware/auth.ts", rules: "owasp-top-10" })' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 3200, branch: 'right', type: 'tool_result', label: 'scan results', id: 'msg_s04', content: '{ critical: 1, high: 2, medium: 1 } — no token expiry validation, missing rate limit, JWT secret in env without rotation' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 4000, branch: 'right', type: 'assistant', label: 'audit complete', id: 'msg_s05', content: 'CRITICAL: No token expiry check. HIGH: Missing rate limiting, JWT secret rotation absent. MEDIUM: No CSRF protection.' },
+
+      // back to main: results merge
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 5000, branch: 'main', type: 'tool_result', label: 'results collected', id: 'msg_006', content: '{ code_review: "B+, 3 issues", security_audit: "1 critical, 2 high, 1 medium" }' },
+      { time: RLM_DURATION + 800 + MSG_INTERVAL*5 + 5800, branch: 'main', type: 'assistant', label: 'final summary', id: 'msg_007', content: 'Auth module analysis complete.\n\nCode Quality: B+ (missing error boundary, loose types, naming)\nSecurity: 1 critical (no token expiry), 2 high (rate limit, JWT rotation), 1 medium (CSRF)' },
+    ];
+
+    // ================================
+    // VERSION EVENTS — fire after messages settle
+    // ================================
+
+    var VERSIONS_START = RLM_DURATION + 800 + MSG_INTERVAL*5 + 7000;
+
+    var versionEvents = [
+      { time: 0, version: 0, operation: 'create', label: 'context created', color: '#44ffaa',
+        nodesAtVersion: ['ctx_orch_001'] },
+      { time: 800, version: 1, operation: 'create', label: 'system + user', color: '#44ffaa',
+        nodesAtVersion: ['ctx_orch_001', 'msg_001', 'msg_002'] },
+      { time: 1600, version: 2, operation: 'create', label: 'planning + fork', color: '#44ffaa',
+        nodesAtVersion: ['ctx_orch_001', 'msg_001', 'msg_002', 'msg_003', 'msg_004', 'msg_005'] },
+      { time: 2400, version: 3, operation: 'create', label: 'results merged', color: '#44ffaa',
+        nodesAtVersion: ['ctx_orch_001', 'msg_001', 'msg_002', 'msg_003', 'msg_004', 'msg_005', 'msg_006', 'msg_007'] },
+      { time: 3200, version: 4, operation: 'update', label: 'revised plan', color: '#ffaa44',
+        affected: ['msg_003'],
+        nodesAtVersion: ['ctx_orch_001', 'msg_001', 'msg_002', 'msg_003', 'msg_004', 'msg_005', 'msg_006', 'msg_007'] },
+      { time: 4000, version: 5, operation: 'delete', label: 'cleanup tool calls', color: '#ff6644',
+        affected: ['msg_004', 'msg_005'],
+        nodesAtVersion: ['ctx_orch_001', 'msg_001', 'msg_002', 'msg_003', 'msg_006', 'msg_007'] },
+    ];
+
+    var versionsFired = [];
+    for (var i = 0; i < versionEvents.length; i++) versionsFired.push(false);
+    var activeVersion = null;  // currently selected version (null = show all)
+    var versionAffectedIds = null;  // ids affected by selected version
+
+    // ================================
+    // SCENE
+    // ================================
+
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color('#000005');
+    var camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 2000);
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    document.getElementById('graph').appendChild(renderer.domElement);
+
+    // bloom
+    var composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.35, 0.3, 0.4));
+
+    window.addEventListener('resize', function() {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+      composer.setSize(innerWidth, innerHeight);
+    });
+
+    // --- orbit ---
+    var mouse = { down: false, moved: false };
+    var camAngle = { x: 0, y: 0.35 };
+    var camDist = 240;
+    var camTarget = new THREE.Vector3(0, 0, 0);
+    renderer.domElement.addEventListener('mousedown', function() { mouse.down = true; mouse.moved = false; });
+    window.addEventListener('mouseup', function() { mouse.down = false; });
+    window.addEventListener('mousemove', function(e) {
+      if (!mouse.down) return;
+      mouse.moved = true;
+      camAngle.x += e.movementX * 0.005;
+      camAngle.y += e.movementY * 0.005;
+      camAngle.y = Math.max(-1.2, Math.min(1.2, camAngle.y));
+    });
+    renderer.domElement.addEventListener('wheel', function(e) {
+      camDist += e.deltaY * 0.12;
+      camDist = Math.max(60, Math.min(400, camDist));
+      e.preventDefault();
+    }, { passive: false });
+
+    // --- glow texture ---
+    var gc = document.createElement('canvas');
+    gc.width = 256; gc.height = 256;
+    var gx = gc.getContext('2d');
+    var gr = gx.createRadialGradient(128,128,0, 128,128,128);
+    gr.addColorStop(0,'rgba(255,255,255,1)');
+    gr.addColorStop(0.08,'rgba(255,255,255,0.6)');
+    gr.addColorStop(0.25,'rgba(255,255,255,0.1)');
+    gr.addColorStop(0.5,'rgba(255,255,255,0.02)');
+    gr.addColorStop(1,'rgba(255,255,255,0)');
+    gx.fillStyle = gr; gx.fillRect(0,0,256,256);
+    var glowTex = new THREE.CanvasTexture(gc);
+
+    function makeGlow(color, size, opacity) {
+      var mat = new THREE.SpriteMaterial({ map: glowTex, color: new THREE.Color(color), transparent: true, opacity: opacity, blending: THREE.AdditiveBlending, depthWrite: false });
+      var s = new THREE.Sprite(mat); s.scale.set(size, size, 1); return s;
+    }
+
+    // --- easing (from RLM) ---
+    function easeOutBack(t) { var c = 1.7; return 1 + (c+1)*Math.pow(t-1,3) + c*Math.pow(t-1,2); }
+    function easeOutExpo(t) { return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+    function easeInOutCubic(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+    function easeOutElastic(t) {
+      if (t===0||t===1) return t;
+      return Math.pow(2,-12*t)*Math.sin((t-0.075)*(2*Math.PI)/0.3)+1;
+    }
+
+    // ================================
+    // RLM PRELUDE — plays on the first context node
+    // ================================
+
+    var BLUE = new THREE.Color('#2288ff');
+    var WHITE = new THREE.Color('#ffffff');
+    var CYAN = new THREE.Color('#55ccff');
+    var GREEN = new THREE.Color('#44ffaa');
+    var LIGHT_BLUE = new THREE.Color('#aaddff');
+    var ZERO = new THREE.Vector3(0, 0, 0);
+
+    // fibonacci sphere layout
+    function fibSphere(count, radius) {
+      var pts = [], ga = Math.PI * (3 - Math.sqrt(5));
+      for (var i = 0; i < count; i++) {
+        var y = 1 - (i / (count - 1)) * 2, r = Math.sqrt(1 - y * y), th = ga * i;
+        pts.push(new THREE.Vector3(Math.cos(th) * r * radius, y * radius, Math.sin(th) * r * radius));
+      }
+      return pts;
+    }
+
+    var rlmHoverMeshes = [];
+    function registerRlmHover(mesh, group, data) {
+      mesh.userData.rlmHover = { group: group, data: data };
+      rlmHoverMeshes.push(mesh);
+    }
+
+    // RLM center
+    var rlmCenter = new THREE.Group();
+    var rlmCenterMesh = new THREE.Mesh(new THREE.SphereGeometry(5, 48, 48), new THREE.MeshBasicMaterial({ color: BLUE }));
+    rlmCenter.add(rlmCenterMesh);
+    rlmCenter.add(makeGlow('#2288ff', 50, 0.85));
+    rlmCenter.add(makeGlow('#2288ff', 80, 0.15));
+    rlmCenter.scale.set(0, 0, 0);
+    scene.add(rlmCenter);
+    registerRlmHover(rlmCenterMesh, rlmCenter, {
+      id: 'rlm_root',
+      type: 'context',
+      label: 'recursive_language_model()',
+      content: 'Parsing the request and scheduling recursive sub-calls.'
+    });
+
+    // RLM sub-calls (depth 1)
+    var RLM_N = 7;
+    var RLM_RADIUS = 75;
+    var rlmTargets = fibSphere(RLM_N, RLM_RADIUS);
+    var rlmSubs = [], rlmSubLines = [];
+
+    for (var i = 0; i < RLM_N; i++) {
+      var g = new THREE.Group();
+      var subMesh = new THREE.Mesh(new THREE.SphereGeometry(1.5, 24, 24), new THREE.MeshBasicMaterial({ color: WHITE, transparent: true }));
+      g.add(subMesh);
+      g.add(makeGlow('#ffffff', 14, 0.25));
+      g.position.set(0, 0, 0); g.scale.set(0, 0, 0);
+      scene.add(g); rlmSubs.push(g);
+      registerRlmHover(subMesh, g, {
+        id: 'rlm_sub_' + ('0' + (i + 1)).slice(-2),
+        type: 'query',
+        label: 'llm_query() sub-call #' + (i + 1),
+        content: 'Recursive branch query running in parallel with live decomposition.'
+      });
+
+      var lg = new THREE.BufferGeometry();
+      lg.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+      var ln = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
+      scene.add(ln); rlmSubLines.push(ln);
+    }
+
+    // RLM outer nodes (depth 2)
+    var RLM_CHILDREN = 5;
+    var RLM_CHILD_R = 18;
+    var rlmOuters = [], rlmOuterLines = [], rlmOuterMeta = [];
+
+    for (var i = 0; i < RLM_N; i++) {
+      var outDir = rlmTargets[i].clone().normalize();
+      var up = Math.abs(outDir.y) < 0.9 ? new THREE.Vector3(0,1,0) : new THREE.Vector3(1,0,0);
+      var t1 = new THREE.Vector3().crossVectors(outDir, up).normalize();
+      var t2 = new THREE.Vector3().crossVectors(outDir, t1).normalize();
+      for (var j = 0; j < RLM_CHILDREN; j++) {
+        var a = (j / RLM_CHILDREN) * Math.PI * 2;
+        var d = outDir.clone().addScaledVector(t1, Math.cos(a)*0.4).addScaledVector(t2, Math.sin(a)*0.4).normalize();
+        var localTarget = d.multiplyScalar(RLM_CHILD_R);
+
+        var g = new THREE.Group();
+        var outerMesh = new THREE.Mesh(new THREE.SphereGeometry(0.8, 16, 16), new THREE.MeshBasicMaterial({ color: CYAN, transparent: true }));
+        g.add(outerMesh);
+        g.add(makeGlow('#55ccff', 7, 0.14));
+        g.position.set(0,0,0); g.scale.set(0,0,0);
+        scene.add(g); rlmOuters.push(g);
+        registerRlmHover(outerMesh, g, {
+          id: 'rlm_deep_' + (i + 1) + '_' + (j + 1),
+          type: 'query',
+          label: 'recursive sub-query #' + (i + 1) + '.' + (j + 1),
+          content: 'Depth-2 decomposition spawned from sub-call #' + (i + 1) + '.'
+        });
+
+        var lg = new THREE.BufferGeometry();
+        lg.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+        var ln = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
+        scene.add(ln); rlmOuterLines.push(ln);
+        rlmOuterMeta.push({ parentIdx: i, localTarget: localTarget });
+      }
+    }
+
+    // RLM outer-leaf nodes (depth 3)
+    var RLM_GRANDCHILDREN = 3;
+    var RLM_GRANDCHILD_R = 10;
+    var rlmLeaves = [], rlmLeafLines = [], rlmLeafMeta = [];
+
+    for (var i = 0; i < rlmOuters.length; i++) {
+      var outerMeta = rlmOuterMeta[i];
+      var outDir = outerMeta.localTarget.clone().normalize();
+      var up = Math.abs(outDir.y) < 0.9 ? new THREE.Vector3(0,1,0) : new THREE.Vector3(1,0,0);
+      var t1 = new THREE.Vector3().crossVectors(outDir, up).normalize();
+      var t2 = new THREE.Vector3().crossVectors(outDir, t1).normalize();
+      for (var j = 0; j < RLM_GRANDCHILDREN; j++) {
+        var a = (j / RLM_GRANDCHILDREN) * Math.PI * 2 + i * 0.37;
+        var d = outDir.clone().addScaledVector(t1, Math.cos(a)*0.55).addScaledVector(t2, Math.sin(a)*0.55).normalize();
+        var localTarget = d.multiplyScalar(RLM_GRANDCHILD_R);
+
+        var g = new THREE.Group();
+        var leafMesh = new THREE.Mesh(new THREE.SphereGeometry(0.52, 14, 14), new THREE.MeshBasicMaterial({ color: LIGHT_BLUE, transparent: true }));
+        g.add(leafMesh);
+        g.add(makeGlow('#aaddff', 5, 0.11));
+        g.position.set(0,0,0); g.scale.set(0,0,0);
+        scene.add(g); rlmLeaves.push(g);
+        registerRlmHover(leafMesh, g, {
+          id: 'rlm_leaf_' + (outerMeta.parentIdx + 1) + '_' + (i + 1) + '_' + (j + 1),
+          type: 'query',
+          label: 'recursive depth-3 query #' + (i + 1) + '.' + (j + 1),
+          content: 'Depth-3 decomposition spawned from depth-2 recursive branch.'
+        });
+
+        var lg = new THREE.BufferGeometry();
+        lg.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+        var ln = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 }));
+        scene.add(ln); rlmLeafLines.push(ln);
+        rlmLeafMeta.push({ parentIdx: outerMeta.parentIdx, parentOuterIdx: i, localTarget: localTarget });
+      }
+    }
+
+    // RLM particles — depth-1 (3 per edge) + depth-2 (2 per edge) + depth-3 (1 per edge)
+    var rlmParticles = [];
+    var rlmPGeo = new THREE.SphereGeometry(0.4, 8, 8);
+
+    for (var i = 0; i < RLM_N; i++) for (var j = 0; j < 3; j++) {
+      var p = new THREE.Mesh(rlmPGeo, new THREE.MeshBasicMaterial({ color: CYAN, transparent: true, opacity: 0.8 }));
+      p.visible = false; p.userData = { layer: 1, idx: i, offset: j/3, speed: 0.0004 + Math.random()*0.0002 };
+      scene.add(p); rlmParticles.push(p);
+    }
+
+    for (var i = 0; i < rlmOuters.length; i++) for (var j = 0; j < 2; j++) {
+      var p = new THREE.Mesh(rlmPGeo, new THREE.MeshBasicMaterial({ color: LIGHT_BLUE, transparent: true, opacity: 0.6 }));
+      p.visible = false; p.userData = { layer: 2, idx: i, parentIdx: rlmOuterMeta[i].parentIdx, offset: j/2, speed: 0.0005 + Math.random()*0.0003 };
+      scene.add(p); rlmParticles.push(p);
+    }
+
+    for (var i = 0; i < rlmLeaves.length; i++) {
+      var p = new THREE.Mesh(rlmPGeo, new THREE.MeshBasicMaterial({ color: LIGHT_BLUE, transparent: true, opacity: 0.5 }));
+      p.visible = false; p.userData = { layer: 3, idx: i, parentOuterIdx: rlmLeafMeta[i].parentOuterIdx, offset: Math.random(), speed: 0.00055 + Math.random()*0.00025 };
+      scene.add(p); rlmParticles.push(p);
+    }
+
+    // RLM phase timings (closer to original proportions)
+    var RP1 = 0;        // center appears
+    var RP2 = 1200;     // codegen pulse
+    var RP3 = 2200;     // sub-calls burst
+    var RP3_DUR = 1800;
+    var RP3_STAGGER = 28;
+    var RP4 = 5000;     // recursive decompose
+    var RP4_DUR = 1400;
+    var RP4_STAGGER = 12;
+    var RP4B = 6200;    // depth-3 recursive expansion
+    var RP4B_DUR = 1200;
+    var RP4B_STAGGER = 7;
+    var RP5 = 7500;     // resolve (green wave)
+    var RP6 = 9800;     // FINAL flash
+    var RP7 = 11000;    // collapse
+    var RP7_DUR = 2800;  // collapse duration
+    var rlmActive = true;
+    var rlmCleaned = false;
+
+    // RLM status label
+    var rlmLogs = [
+      [RP1,     '■ REPL initialized — loading context',   '#2288ff'],
+      [RP2,     '  ▸ codegen: analyzing prompt...',        '#ffaa44'],
+      [RP3,     '→ spawning ' + RLM_N + ' llm_query() sub-calls', '#55ccff'],
+      [RP4,     '→ recursive decompose — deeper queries',  '#55ccff'],
+      [RP4B,    '→ depth-3 recursive branches expanding',  '#aaddff'],
+      [RP5,     '  ✓ results resolving...',                '#44ffaa'],
+      [RP6,     '★ context ready — all data loaded',       '#2288ff'],
+    ];
+    var rlmLogsFired = [];
+    for (var i = 0; i < rlmLogs.length; i++) rlmLogsFired.push(false);
+
+    function cleanupRLM() {
+      if (rlmCleaned) return;
+      rlmCleaned = true;
+      hoveredRlmGroup = null;
+      // rlmCenter stays — it becomes the first dashboard context node
+      rlmSubs.forEach(function(g) { scene.remove(g); });
+      rlmSubLines.forEach(function(l) { scene.remove(l); });
+      rlmOuters.forEach(function(g) { scene.remove(g); });
+      rlmOuterLines.forEach(function(l) { scene.remove(l); });
+      rlmLeaves.forEach(function(g) { scene.remove(g); });
+      rlmLeafLines.forEach(function(l) { scene.remove(l); });
+      rlmParticles.forEach(function(p) { scene.remove(p); });
+    }
+
+    function animateRLM(t) {
+      if (!rlmActive) return;
+
+      // fire RLM log entries
+      for (var i = 0; i < rlmLogs.length; i++) {
+        if (!rlmLogsFired[i] && t >= rlmLogs[i][0]) {
+          rlmLogsFired[i] = true;
+          var div = document.createElement('div');
+          div.className = 'entry fresh';
+          div.style.borderLeftColor = rlmLogs[i][2];
+          div.innerHTML = '<div class="entry-content" style="color:' + rlmLogs[i][2] + '">' + rlmLogs[i][1] + '</div>';
+          logEl.appendChild(div);
+          logEl.scrollTop = logEl.scrollHeight;
+          setTimeout(function(d) { d.classList.remove('fresh'); }.bind(null, div), 2000);
+        }
+      }
+
+      statusEl.textContent = 'initializing context...';
+
+      // center — persists through collapse (becomes first dashboard node)
+      var centerScale = 0;
+      if (t >= RP1) centerScale = easeOutBack(Math.min(1, t / 1200));
+      if (t > 1200) centerScale = 1 + Math.sin(t * 0.002) * 0.04;
+      if (t > RP2 && t < RP3) centerScale *= 1 + Math.sin((t - RP2) * 0.015) * 0.1;
+      if (t > RP6 && t < RP7) centerScale *= 1 + Math.max(0, 1 - (t - RP6) / 800) * 0.5;
+      if (t > RP7) {
+        var settleT = easeInOutCubic(Math.min(1, (t - RP7) / 1200));
+        centerScale = 1 + (centerScale - 1) * (1 - settleT);
+        var centerGlowSettle = (0.85 - 0.35 * settleT) + Math.sin(t * 0.003) * 0.08;
+        if (hoveredRlmGroup === rlmCenter) centerGlowSettle += 0.22;
+        rlmCenter.children[1].material.opacity = Math.min(1, centerGlowSettle);
+      } else {
+        var centerGlow = 0.3 + Math.sin(t * 0.003) * 0.08;
+        if (hoveredRlmGroup === rlmCenter) centerGlow += 0.22;
+        rlmCenter.children[1].material.opacity = Math.min(1, centerGlow);
+      }
+      if (hoveredRlmGroup === rlmCenter) centerScale *= 1.2;
+      rlmCenter.scale.setScalar(centerScale);
+
+      // ========================
+      // COLLAPSE: converge everything to center
+      // ========================
+
+      if (t > RP7) {
+        var rawCt = (t - RP7) / RP7_DUR;
+
+        // subs converge to center
+        for (var i = 0; i < RLM_N; i++) {
+          var ct = easeInOutCubic(Math.min(1, rawCt * 1.1));
+          rlmSubs[i].position.lerpVectors(rlmTargets[i], ZERO, ct);
+          var subCollapseScale = 1 - ct;
+          if (hoveredRlmGroup === rlmSubs[i]) subCollapseScale *= 1.25;
+          rlmSubs[i].scale.setScalar(subCollapseScale);
+          rlmSubs[i].children[0].material.opacity = 1 - ct;
+          var subCollapseGlow = 0.25 * (1 - ct);
+          if (hoveredRlmGroup === rlmSubs[i]) subCollapseGlow += 0.22 * (1 - ct);
+          rlmSubs[i].children[1].material.opacity = Math.min(0.75, subCollapseGlow);
+          rlmSubLines[i].material.opacity = 0.15 * (1 - easeOutExpo(Math.min(1, rawCt * 1.5)));
+          var pos = rlmSubLines[i].geometry.attributes.position.array;
+          pos[3] = rlmSubs[i].position.x; pos[4] = rlmSubs[i].position.y; pos[5] = rlmSubs[i].position.z;
+          rlmSubLines[i].geometry.attributes.position.needsUpdate = true;
+        }
+
+        // outers converge faster
+        for (var i = 0; i < rlmOuters.length; i++) {
+          var meta = rlmOuterMeta[i];
+          var ct = easeInOutCubic(Math.min(1, rawCt * 1.4));
+          var wx = rlmTargets[meta.parentIdx].x + meta.localTarget.x;
+          var wy = rlmTargets[meta.parentIdx].y + meta.localTarget.y;
+          var wz = rlmTargets[meta.parentIdx].z + meta.localTarget.z;
+          rlmOuters[i].position.set(wx * (1-ct), wy * (1-ct), wz * (1-ct));
+          var outerCollapseScale = 1 - ct;
+          if (hoveredRlmGroup === rlmOuters[i]) outerCollapseScale *= 1.3;
+          rlmOuters[i].scale.setScalar(outerCollapseScale);
+          rlmOuters[i].children[0].material.opacity = 1 - ct;
+          var outerCollapseGlow = 0.14 * (1 - ct);
+          if (hoveredRlmGroup === rlmOuters[i]) outerCollapseGlow += 0.2 * (1 - ct);
+          rlmOuters[i].children[1].material.opacity = Math.min(0.65, outerCollapseGlow);
+          var pp = rlmSubs[meta.parentIdx].position;
+          var lpos = rlmOuterLines[i].geometry.attributes.position.array;
+          lpos[0] = pp.x; lpos[1] = pp.y; lpos[2] = pp.z;
+          lpos[3] = rlmOuters[i].position.x; lpos[4] = rlmOuters[i].position.y; lpos[5] = rlmOuters[i].position.z;
+          rlmOuterLines[i].geometry.attributes.position.needsUpdate = true;
+          rlmOuterLines[i].material.opacity = 0.1 * (1 - easeOutExpo(Math.min(1, rawCt * 2)));
+        }
+
+        // depth-3 leaves converge fastest
+        for (var i = 0; i < rlmLeaves.length; i++) {
+          var meta = rlmLeafMeta[i];
+          var outerMeta = rlmOuterMeta[meta.parentOuterIdx];
+          var ct = easeInOutCubic(Math.min(1, rawCt * 1.75));
+          var wx = rlmTargets[meta.parentIdx].x + outerMeta.localTarget.x + meta.localTarget.x;
+          var wy = rlmTargets[meta.parentIdx].y + outerMeta.localTarget.y + meta.localTarget.y;
+          var wz = rlmTargets[meta.parentIdx].z + outerMeta.localTarget.z + meta.localTarget.z;
+          rlmLeaves[i].position.set(wx * (1-ct), wy * (1-ct), wz * (1-ct));
+          var leafCollapseScale = 1 - ct;
+          if (hoveredRlmGroup === rlmLeaves[i]) leafCollapseScale *= 1.35;
+          rlmLeaves[i].scale.setScalar(leafCollapseScale);
+          rlmLeaves[i].children[0].material.opacity = 1 - ct;
+          var leafCollapseGlow = 0.11 * (1 - ct);
+          if (hoveredRlmGroup === rlmLeaves[i]) leafCollapseGlow += 0.18 * (1 - ct);
+          rlmLeaves[i].children[1].material.opacity = Math.min(0.5, leafCollapseGlow);
+          var pOuter = rlmOuters[meta.parentOuterIdx].position;
+          var lpos = rlmLeafLines[i].geometry.attributes.position.array;
+          lpos[0] = pOuter.x; lpos[1] = pOuter.y; lpos[2] = pOuter.z;
+          lpos[3] = rlmLeaves[i].position.x; lpos[4] = rlmLeaves[i].position.y; lpos[5] = rlmLeaves[i].position.z;
+          rlmLeafLines[i].geometry.attributes.position.needsUpdate = true;
+          rlmLeafLines[i].material.opacity = 0.08 * (1 - easeOutExpo(Math.min(1, rawCt * 2.3)));
+        }
+
+        // particles fade out
+        var pFade = easeOutExpo(Math.min(1, rawCt * 2));
+        for (var i = 0; i < rlmParticles.length; i++) {
+          if (pFade > 0.95) { rlmParticles[i].visible = false; continue; }
+          var pt = rlmParticles[i];
+          var g, from;
+          if (pt.userData.layer === 1) {
+            g = rlmSubs[pt.userData.idx]; from = ZERO;
+          } else if (pt.userData.layer === 2) {
+            g = rlmOuters[pt.userData.idx]; from = rlmSubs[pt.userData.parentIdx].position;
+          } else {
+            g = rlmLeaves[pt.userData.idx]; from = rlmOuters[pt.userData.parentOuterIdx].position;
+          }
+          if (g.scale.x < 0.05) { pt.visible = false; continue; }
+          pt.visible = true;
+          var progress = ((t * pt.userData.speed) + pt.userData.offset) % 1;
+          progress = 1 - progress;
+          pt.position.lerpVectors(from, g.position, progress);
+          var baseOp = pt.userData.layer === 1 ? 0.6 : (pt.userData.layer === 2 ? 0.4 : 0.3);
+          pt.material.opacity = Math.sin(progress * Math.PI) * baseOp * (1 - pFade);
+        }
+
+        // cleanup when fully converged
+        if (rawCt >= 1) {
+          rlmActive = false;
+          cleanupRLM();
+        }
+        return;
+      }
+
+      // ========================
+      // NORMAL PHASES (pre-collapse)
+      // ========================
+
+      // sub-calls burst
+      for (var i = 0; i < RLM_N; i++) {
+        var nt = (t - RP3 - i * RP3_STAGGER) / RP3_DUR;
+        if (nt < 0) continue;
+        var p = Math.min(1, nt);
+        rlmSubs[i].position.lerpVectors(ZERO, rlmTargets[i], easeOutElastic(p));
+        var subScale = easeOutBack(Math.min(1, p * 1.2));
+        if (hoveredRlmGroup === rlmSubs[i]) subScale *= 1.28;
+        rlmSubs[i].scale.setScalar(subScale);
+        rlmSubLines[i].material.opacity = easeOutExpo(p) * 0.15;
+        var subGlow = 0.25;
+        if (hoveredRlmGroup === rlmSubs[i]) subGlow += 0.22;
+        rlmSubs[i].children[1].material.opacity = Math.min(0.75, subGlow);
+
+        // wobble after settle
+        if (p >= 1) {
+          var w = Math.sin(t * 0.001 + i * 0.5) * 1.5;
+          rlmSubs[i].position.x = rlmTargets[i].x + Math.sin(t * 0.0008 + i) * w;
+          rlmSubs[i].position.y = rlmTargets[i].y + Math.cos(t * 0.0009 + i * 0.7) * w;
+          rlmSubs[i].position.z = rlmTargets[i].z + Math.sin(t * 0.0007 + i * 1.3) * w;
+        }
+
+        var pos = rlmSubLines[i].geometry.attributes.position.array;
+        pos[3] = rlmSubs[i].position.x; pos[4] = rlmSubs[i].position.y; pos[5] = rlmSubs[i].position.z;
+        rlmSubLines[i].geometry.attributes.position.needsUpdate = true;
+      }
+
+      // outer nodes
+      for (var i = 0; i < rlmOuters.length; i++) {
+        var meta = rlmOuterMeta[i];
+        var pp = rlmSubs[meta.parentIdx].position;
+        var ot = (t - RP4 - i * RP4_STAGGER) / RP4_DUR;
+        if (ot < 0 || rlmSubs[meta.parentIdx].scale.x < 0.5) continue;
+        var p = Math.min(1, ot);
+        var wt = new THREE.Vector3(pp.x + meta.localTarget.x, pp.y + meta.localTarget.y, pp.z + meta.localTarget.z);
+        rlmOuters[i].position.lerpVectors(pp, wt, easeOutElastic(p));
+        var outerScale = easeOutBack(Math.min(1, p * 1.3));
+        if (hoveredRlmGroup === rlmOuters[i]) outerScale *= 1.35;
+        rlmOuters[i].scale.setScalar(outerScale);
+        var outerGlow = 0.14;
+        if (hoveredRlmGroup === rlmOuters[i]) outerGlow += 0.2;
+        rlmOuters[i].children[1].material.opacity = Math.min(0.65, outerGlow);
+
+        var lpos = rlmOuterLines[i].geometry.attributes.position.array;
+        lpos[0] = pp.x; lpos[1] = pp.y; lpos[2] = pp.z;
+        lpos[3] = rlmOuters[i].position.x; lpos[4] = rlmOuters[i].position.y; lpos[5] = rlmOuters[i].position.z;
+        rlmOuterLines[i].geometry.attributes.position.needsUpdate = true;
+        rlmOuterLines[i].material.opacity = easeOutExpo(p) * 0.1;
+      }
+
+      // depth-3 leaves
+      for (var i = 0; i < rlmLeaves.length; i++) {
+        var meta = rlmLeafMeta[i];
+        var pp = rlmOuters[meta.parentOuterIdx].position;
+        var lt = (t - RP4B - i * RP4B_STAGGER) / RP4B_DUR;
+        if (lt < 0 || rlmOuters[meta.parentOuterIdx].scale.x < 0.35) continue;
+        var p = Math.min(1, lt);
+        var wt = new THREE.Vector3(pp.x + meta.localTarget.x, pp.y + meta.localTarget.y, pp.z + meta.localTarget.z);
+        rlmLeaves[i].position.lerpVectors(pp, wt, easeOutElastic(p));
+        var leafScale = easeOutBack(Math.min(1, p * 1.35));
+        if (hoveredRlmGroup === rlmLeaves[i]) leafScale *= 1.4;
+        rlmLeaves[i].scale.setScalar(leafScale);
+        var leafGlow = 0.11;
+        if (hoveredRlmGroup === rlmLeaves[i]) leafGlow += 0.2;
+        rlmLeaves[i].children[1].material.opacity = Math.min(0.5, leafGlow);
+
+        var lpos = rlmLeafLines[i].geometry.attributes.position.array;
+        lpos[0] = pp.x; lpos[1] = pp.y; lpos[2] = pp.z;
+        lpos[3] = rlmLeaves[i].position.x; lpos[4] = rlmLeaves[i].position.y; lpos[5] = rlmLeaves[i].position.z;
+        rlmLeafLines[i].geometry.attributes.position.needsUpdate = true;
+        rlmLeafLines[i].material.opacity = easeOutExpo(p) * 0.08;
+      }
+
+      // resolve wave + scale pulse
+      if (t > RP5) {
+        for (var i = 0; i < rlmLeaves.length; i++) {
+          var rt = (t - RP5 - i * 8) / 420;
+          if (rt < 0) continue;
+          var p = Math.min(1, rt);
+          rlmLeaves[i].children[0].material.color.copy(LIGHT_BLUE).lerp(GREEN, easeInOutCubic(p));
+        }
+        for (var i = 0; i < rlmOuters.length; i++) {
+          var rt = (t - RP5 - i * 20) / 500;
+          if (rt < 0) continue;
+          var p = Math.min(1, rt);
+          rlmOuters[i].children[0].material.color.copy(CYAN).lerp(GREEN, easeInOutCubic(p));
+        }
+        for (var i = 0; i < RLM_N; i++) {
+          var rt = (t - RP5 - 500 - i * 40) / 600;
+          if (rt < 0) continue;
+          var p = Math.min(1, rt);
+          rlmSubs[i].children[0].material.color.copy(WHITE).lerp(GREEN, easeInOutCubic(p));
+          if (p < 0.5) rlmSubs[i].scale.setScalar(1 + easeOutExpo(p * 2) * 0.2);
+          else rlmSubs[i].scale.setScalar(1 + (1 - easeOutExpo((p - 0.5) * 2)) * 0.2);
+        }
+      }
+
+      // particles (depth-1 + depth-2 + depth-3)
+      for (var i = 0; i < rlmParticles.length; i++) {
+        var pt = rlmParticles[i];
+        var g, from, startTime;
+        if (pt.userData.layer === 1) {
+          g = rlmSubs[pt.userData.idx]; from = ZERO; startTime = RP3 + 500;
+        } else if (pt.userData.layer === 2) {
+          g = rlmOuters[pt.userData.idx]; from = rlmSubs[pt.userData.parentIdx].position; startTime = RP4 + 500;
+        } else {
+          g = rlmLeaves[pt.userData.idx]; from = rlmOuters[pt.userData.parentOuterIdx].position; startTime = RP4B + 450;
+        }
+        if (t < startTime || g.scale.x < 0.1) { pt.visible = false; continue; }
+        pt.visible = true;
+        var progress = ((t * pt.userData.speed) + pt.userData.offset) % 1;
+        if (pt.userData.layer === 3 && t > RP5 + 300) progress = 1 - progress;
+        if (pt.userData.layer === 2 && t > RP5) progress = 1 - progress;
+        if (pt.userData.layer === 1 && t > RP5 + 500) progress = 1 - progress;
+        pt.position.lerpVectors(from, g.position, progress);
+        pt.material.opacity = Math.sin(progress * Math.PI) * (pt.userData.layer === 1 ? 0.6 : (pt.userData.layer === 2 ? 0.4 : 0.3));
+      }
+    }
+
+    // ================================
+    // STATE
+    // ================================
+
+    var nodes = [];       // { group, mesh, targetPos, spawnTime, type, branch }
+    var edges = [];       // { line, fromPos, toPos, spawnTime }
+    var particles = [];   // { mesh, from, to, speed, offset, spawnTime }
+    var nodeById = {};    // id -> node (for log hover lookup)
+    var highlightedNode = null;  // node highlighted from log hover
+    var spawned = [];     // track which timeline items already spawned
+    for (var i = 0; i < timeline.length; i++) spawned.push(false);
+
+    // branch counters — track Y position per branch
+    // main starts at NODE_SPACING so first node lands at y=0 (RLM center)
+    var branchY = { main: NODE_SPACING, left: 0, right: 0 };
+    var branchX = { main: 0, left: -FORK_X_OFFSET, right: FORK_X_OFFSET };
+
+    // fork point — Y of the last main node before fork
+    var forkY = 0;
+    var forkNode = null;
+
+    var startTime = performance.now() - INITIAL_PLAYHEAD_MS;
+    var lastPlayheadPost = -1000;
+    var logEl = document.getElementById('log');
+    var statusEl = document.getElementById('status');
+
+    // ================================
+    // SPAWN NODE
+    // ================================
+
+    function spawnNode(item, t) {
+      var branch = item.branch;
+      var x = branchX[branch];
+
+      // Y position
+      var y;
+      if (item.type === 'context' && branch !== 'main') {
+        // sub-agent context starts at fork point
+        y = forkY - NODE_SPACING;
+        branchY[branch] = y;
+      } else {
+        y = branchY[branch] - NODE_SPACING;
+        branchY[branch] = y;
+      }
+
+      // save fork point
+      if (branch === 'main' && item.id === 'msg_005') {
+        forkY = y;
+      }
+
+      var color = COLORS[item.type];
+      var size = SIZES[item.type];
+      var glowSize = GLOW_SIZES[item.type];
+      var pos = new THREE.Vector3(x, y, 0);
+
+      // seamless RLM transition: reuse center as first context node
+      if (item.id === 'ctx_orch_001' && rlmCenter) {
+        var g = rlmCenter;
+        var mesh = g.children[0];
+        var glowSprite = g.children[1];
+        g.position.copy(pos);
+        var node = { group: g, mesh: mesh, glowSprite: glowSprite, targetPos: pos, originPos: pos.clone(), spawnTime: t - SPAWN_DUR - 1, type: item.type, branch: branch, data: item };
+        nodes.push(node);
+        mesh.userData.timelineNode = node;
+        nodeById[item.id] = node;
+        addLogEntry(item, t);
+        statusEl.textContent = 'main: 1 · code-reviewer: 0 · security-auditor: 0';
+        camTarget.y = pos.y;
+        return;
+      }
+
+      // origin: where node flies in from
+      var originPos;
+      var prevForLerp = null;
+      if (item.type === 'context' && branch !== 'main') {
+        prevForLerp = forkNode;
+      } else {
+        for (var i = nodes.length - 1; i >= 0; i--) {
+          if (nodes[i].branch === branch) { prevForLerp = nodes[i]; break; }
+        }
+      }
+      originPos = prevForLerp ? prevForLerp.targetPos.clone() : pos.clone().setY(pos.y + 30);
+
+      // node group
+      var g = new THREE.Group();
+      var mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(size, 32, 32),
+        new THREE.MeshBasicMaterial({ color: new THREE.Color(color) })
+      );
+      g.add(mesh);
+      var glowSprite = makeGlow(color, glowSize, item.type === 'context' ? 0.5 : 0.2);
+      g.add(glowSprite);
+      if (item.type === 'context') g.add(makeGlow(color, glowSize * 1.5, 0.08));
+      g.position.copy(originPos);
+      g.scale.set(0, 0, 0);
+      scene.add(g);
+
+      var node = { group: g, mesh: mesh, glowSprite: glowSprite, targetPos: pos, originPos: originPos, spawnTime: t, type: item.type, branch: branch, data: item };
+      nodes.push(node);
+      mesh.userData.timelineNode = node;
+      nodeById[item.id] = node;
+
+      // edge to previous node in same branch (or fork edge for sub-agent contexts)
+      var prevNode = null;
+      if (item.type === 'context' && branch !== 'main') {
+        // fork edge from main fork point
+        prevNode = forkNode;
+      } else {
+        // find prev node in same branch
+        for (var i = nodes.length - 2; i >= 0; i--) {
+          if (nodes[i].branch === branch) { prevNode = nodes[i]; break; }
+        }
+      }
+
+      if (prevNode) {
+        var lg = new THREE.BufferGeometry();
+        lg.setAttribute('position', new THREE.Float32BufferAttribute([0,0,0, 0,0,0], 3));
+
+        var isFork = (item.type === 'context' && branch !== 'main');
+        var edgeColor = isFork ? 0x334466 : new THREE.Color(color).getHex();
+        var ln = new THREE.Line(lg, new THREE.LineBasicMaterial({
+          color: edgeColor, transparent: true, opacity: 0
+        }));
+        scene.add(ln);
+        edges.push({ line: ln, fromNode: prevNode, toNode: node, spawnTime: t, isFork: isFork });
+
+        // particles (multiple per edge like RLM)
+        for (var pi = 0; pi < 3; pi++) {
+          var pGeo = new THREE.SphereGeometry(0.4, 8, 8);
+          var p = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({
+            color: new THREE.Color(color), transparent: true, opacity: 0.8
+          }));
+          p.visible = false;
+          scene.add(p);
+          particles.push({ mesh: p, fromNode: prevNode, toNode: node, speed: 0.0004 + Math.random() * 0.0002, offset: pi / 3, spawnTime: t + 500 });
+        }
+      }
+
+      // save fork node ref
+      if (branch === 'main' && item.id === 'msg_005') {
+        forkNode = node;
+      }
+
+      // log entry
+      addLogEntry(item, t);
+
+      // update status
+      var mainCount = 0, leftCount = 0, rightCount = 0;
+      nodes.forEach(function(n) {
+        if (n.branch === 'main') mainCount++;
+        else if (n.branch === 'left') leftCount++;
+        else rightCount++;
+      });
+      statusEl.textContent = 'main: ' + mainCount + ' nodes · code-reviewer: ' + leftCount + ' · security-auditor: ' + rightCount;
+
+      // auto-follow camera target
+      var allY = nodes.map(function(n) { return n.targetPos.y; });
+      var minY = Math.min.apply(null, allY);
+      var maxY = Math.max.apply(null, allY);
+      camTarget.y = (minY + maxY) / 2;
+    }
+
+    // ================================
+    // LOG
+    // ================================
+
+    var logEntries = {};  // id -> dom element
+
+    function addLogEntry(item, t) {
+      var color = COLORS[item.type];
+      var branchLabel = item.branch === 'main' ? 'orchestrator' : item.branch === 'left' ? 'code-reviewer' : 'security-auditor';
+      var seconds = ((t - 0) / 1000).toFixed(1);
+
+      var div = document.createElement('div');
+      div.className = 'entry fresh';
+      div.style.borderLeftColor = color;
+
+      var logColor = item.type === 'context' ? '#2288ff' : '#999';
+      var typeStyle = 'background:' + logColor + '22; color:' + logColor;
+      div.innerHTML =
+        '<div class="entry-header">' +
+          '<span class="entry-type" style="' + typeStyle + '">' + item.type + '</span>' +
+          '<span class="entry-agent">' + branchLabel + '</span>' +
+          '<span class="entry-time">' + seconds + 's</span>' +
+        '</div>' +
+        '<div class="entry-content">' + escapeHtml(item.content.split('\n')[0]) + '</div>' +
+        '<div class="entry-id">' + item.id + '</div>';
+
+      logEntries[item.id] = div;
+      logEl.appendChild(div);
+      logEl.scrollTop = logEl.scrollHeight;
+
+      // remove "fresh" highlight after 2s
+      setTimeout(function() { div.classList.remove('fresh'); }, 2000);
+
+      // log hover -> highlight 3D node
+      div.addEventListener('mouseenter', function() {
+        div.classList.add('highlight');
+        var n = nodeById[item.id];
+        if (n) highlightedNode = n;
+      });
+      div.addEventListener('mouseleave', function() {
+        div.classList.remove('highlight');
+        highlightedNode = null;
+      });
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ================================
+    // HOVER TOOLTIP
+    // ================================
+
+    var raycaster = new THREE.Raycaster();
+    var mouseVec = new THREE.Vector2();
+    var tooltipEl = document.getElementById('tooltip');
+    var hoveredNode = null;
+    var hoveredRlmGroup = null;
+
+    function typeColorFor(type) {
+      if (type === 'context') return '#2288ff';
+      if (type === 'query') return '#55ccff';
+      return '#999';
+    }
+
+    function clearHoverState() {
+      if (hoveredNode && logEntries[hoveredNode.data.id]) {
+        logEntries[hoveredNode.data.id].classList.remove('highlight');
+      }
+      hoveredNode = null;
+      hoveredRlmGroup = null;
+      tooltipEl.classList.remove('visible');
+      renderer.domElement.style.cursor = 'default';
+    }
+
+    renderer.domElement.style.cursor = 'default';
+    renderer.domElement.addEventListener('mouseleave', clearHoverState);
+
+    renderer.domElement.addEventListener('mousemove', function(e) {
+      mouseVec.x = (e.clientX / innerWidth) * 2 - 1;
+      mouseVec.y = -(e.clientY / innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouseVec, camera);
+
+      var meshes = nodes.map(function(n) { return n.mesh; });
+      if (rlmActive) {
+        for (var i = 0; i < rlmHoverMeshes.length; i++) {
+          var rlmMesh = rlmHoverMeshes[i];
+          if (!rlmMesh.parent || rlmMesh.parent.scale.x <= 0.05) continue;
+          var root = rlmMesh;
+          while (root.parent) root = root.parent;
+          if (root !== scene) continue;
+          meshes.push(rlmMesh);
+        }
+      }
+      var hits = raycaster.intersectObjects(meshes);
+
+      if (hits.length > 0) {
+        var hitMesh = hits[0].object;
+        var nextNode = hitMesh.userData.timelineNode || null;
+        var rlmHover = hitMesh.userData.rlmHover || null;
+        var nextRlmGroup = rlmHover ? rlmHover.group : null;
+        var d = nextNode ? nextNode.data : (rlmHover ? rlmHover.data : null);
+
+        if (!d) {
+          clearHoverState();
+          return;
+        }
+
+        var hoverChanged = nextNode !== hoveredNode || nextRlmGroup !== hoveredRlmGroup;
+        if (hoverChanged) {
+          if (hoveredNode && logEntries[hoveredNode.data.id]) {
+            logEntries[hoveredNode.data.id].classList.remove('highlight');
+          }
+          hoveredNode = nextNode;
+          hoveredRlmGroup = nextRlmGroup;
+          var typeColor = typeColorFor(d.type);
+          var safeContent = d.content || '';
+          var contentText = safeContent.length > 160 ? safeContent.slice(0, 160) + '...' : safeContent;
+          tooltipEl.innerHTML =
+            '<div class="tt-type" style="background:' + typeColor + '22;color:' + typeColor + '">' + d.type + '</div>' +
+            '<div class="tt-label">' + escapeHtml(d.label) + '</div>' +
+            '<div class="tt-content">' + escapeHtml(contentText) + '</div>' +
+            '<div class="tt-id">' + d.id + '</div>';
+          if (hoveredNode && logEntries[d.id]) {
+            logEntries[d.id].classList.add('highlight');
+            logEntries[d.id].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+        tooltipEl.classList.add('visible');
+        tooltipEl.style.left = e.clientX + 'px';
+        tooltipEl.style.top = e.clientY + 'px';
+        renderer.domElement.style.cursor = 'pointer';
+      } else {
+        clearHoverState();
+      }
+    });
+
+    // ================================
+    // VERSION RAIL
+    // ================================
+
+    var versionsEl = document.getElementById('versions');
+    var versionItems = [];  // dom elements
+
+    function addVersionToRail(v) {
+      // connector line (except first)
+      if (versionItems.length > 0) {
+        var conn = document.createElement('div');
+        conn.className = 'v-connector';
+        versionsEl.appendChild(conn);
+      }
+
+      // add title on first
+      if (versionItems.length === 0) {
+        var title = document.createElement('div');
+        title.className = 'v-title';
+        title.textContent = 'versions';
+        versionsEl.appendChild(title);
+      }
+
+      var opColors = { create: '#44ffaa', update: '#ffaa44', 'delete': '#ff6644' };
+      var div = document.createElement('div');
+      div.className = 'v-item';
+      div.innerHTML =
+        '<div class="v-dot" style="background:' + opColors[v.operation] + '"></div>' +
+        '<div><div class="v-label">v' + v.version + ' — ' + v.label + '</div>' +
+        (v.affected ? '<div class="v-affected">' + v.affected.length + ' affected</div>' : '') +
+        '</div>' +
+        '<div class="v-op" style="color:' + opColors[v.operation] + '">' + v.operation + '</div>';
+
+      // click to select version
+      div.addEventListener('click', function() {
+        if (activeVersion === v.version) {
+          // deselect
+          activeVersion = null;
+          versionAffectedIds = null;
+          versionItems.forEach(function(el) { el.classList.remove('active'); });
+        } else {
+          activeVersion = v.version;
+          versionAffectedIds = v.affected || null;
+          versionItems.forEach(function(el) { el.classList.remove('active'); });
+          div.classList.add('active');
+        }
+      });
+
+      versionsEl.appendChild(div);
+      versionItems.push(div);
+
+      // flash the affected nodes in 3D
+      if (v.affected) {
+        v.affected.forEach(function(id) {
+          var n = nodeById[id];
+          if (n) {
+            // temporarily mark as "version-affected" for animation
+            n._versionFlashTime = performance.now() - startTime;
+            n._versionOp = v.operation;
+          }
+        });
+      }
+
+      // log the version event
+      var logDiv = document.createElement('div');
+      logDiv.className = 'entry fresh';
+      logDiv.style.borderLeftColor = opColors[v.operation];
+      var typeStyle = 'background:' + opColors[v.operation] + '22; color:' + opColors[v.operation];
+      logDiv.innerHTML =
+        '<div class="entry-header">' +
+          '<span class="entry-type" style="' + typeStyle + '">v' + v.version + '</span>' +
+          '<span class="entry-agent">' + v.operation + '</span>' +
+        '</div>' +
+        '<div class="entry-content">' + escapeHtml(v.label) + (v.affected ? ' → ' + v.affected.join(', ') : '') + '</div>';
+      logEl.appendChild(logDiv);
+      logEl.scrollTop = logEl.scrollHeight;
+      setTimeout(function() { logDiv.classList.remove('fresh'); }, 2000);
+    }
+
+    // ================================
+    // ANIMATE
+    // ================================
+
+    var SPAWN_DUR = 2000;  // elastic fly-in duration
+    var SCALE_DUR = 800;   // scale pop duration
+
+    function resetAnimation(options) {
+      var opts = options || {};
+      clearHoverState();
+      highlightedNode = null;
+      hoveredRlmGroup = null;
+
+      // Remove timeline scene objects from the previous run.
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].group !== rlmCenter) scene.remove(nodes[i].group);
+      }
+      for (var i = 0; i < edges.length; i++) scene.remove(edges[i].line);
+      for (var i = 0; i < particles.length; i++) scene.remove(particles[i].mesh);
+      nodes.length = 0;
+      edges.length = 0;
+      particles.length = 0;
+      nodeById = {};
+
+      // Reset version rail + state.
+      versionsEl.innerHTML = '';
+      versionItems.length = 0;
+      for (var i = 0; i < versionsFired.length; i++) versionsFired[i] = false;
+      activeVersion = null;
+      versionAffectedIds = null;
+
+      // Reset log panel.
+      logEntries = {};
+      logEl.innerHTML = '';
+      logEl.scrollTop = 0;
+
+      // Reset timeline spawn bookkeeping.
+      for (var i = 0; i < spawned.length; i++) spawned[i] = false;
+      branchY.main = NODE_SPACING;
+      branchY.left = 0;
+      branchY.right = 0;
+      forkY = 0;
+      forkNode = null;
+
+      // Reset RLM state and visuals.
+      rlmActive = true;
+      rlmCleaned = false;
+      for (var i = 0; i < rlmLogsFired.length; i++) rlmLogsFired[i] = false;
+      delete rlmCenter.children[0].userData.timelineNode;
+      rlmCenter.position.set(0, 0, 0);
+      rlmCenter.scale.set(0, 0, 0);
+      rlmCenter.children[0].material.color.copy(BLUE);
+      rlmCenter.children[1].material.opacity = 0.85;
+      rlmCenter.children[2].material.opacity = 0.15;
+      scene.add(rlmCenter);
+
+      for (var i = 0; i < RLM_N; i++) {
+        var sg = rlmSubs[i];
+        sg.position.set(0, 0, 0);
+        sg.scale.set(0, 0, 0);
+        sg.children[0].material.color.copy(WHITE);
+        sg.children[0].material.opacity = 1;
+        sg.children[1].material.opacity = 0.25;
+        scene.add(sg);
+
+        var sln = rlmSubLines[i];
+        sln.material.opacity = 0;
+        var spos = sln.geometry.attributes.position.array;
+        spos[0] = 0; spos[1] = 0; spos[2] = 0;
+        spos[3] = 0; spos[4] = 0; spos[5] = 0;
+        sln.geometry.attributes.position.needsUpdate = true;
+        scene.add(sln);
+      }
+
+      for (var i = 0; i < rlmOuters.length; i++) {
+        var og = rlmOuters[i];
+        og.position.set(0, 0, 0);
+        og.scale.set(0, 0, 0);
+        og.children[0].material.color.copy(CYAN);
+        og.children[0].material.opacity = 1;
+        og.children[1].material.opacity = 0.14;
+        scene.add(og);
+
+        var oln = rlmOuterLines[i];
+        oln.material.opacity = 0;
+        var opos = oln.geometry.attributes.position.array;
+        opos[0] = 0; opos[1] = 0; opos[2] = 0;
+        opos[3] = 0; opos[4] = 0; opos[5] = 0;
+        oln.geometry.attributes.position.needsUpdate = true;
+        scene.add(oln);
+      }
+
+      for (var i = 0; i < rlmLeaves.length; i++) {
+        var lg = rlmLeaves[i];
+        lg.position.set(0, 0, 0);
+        lg.scale.set(0, 0, 0);
+        lg.children[0].material.color.copy(LIGHT_BLUE);
+        lg.children[0].material.opacity = 1;
+        lg.children[1].material.opacity = 0.11;
+        scene.add(lg);
+
+        var lln = rlmLeafLines[i];
+        lln.material.opacity = 0;
+        var lpos = lln.geometry.attributes.position.array;
+        lpos[0] = 0; lpos[1] = 0; lpos[2] = 0;
+        lpos[3] = 0; lpos[4] = 0; lpos[5] = 0;
+        lln.geometry.attributes.position.needsUpdate = true;
+        scene.add(lln);
+      }
+
+      for (var i = 0; i < rlmParticles.length; i++) {
+        var rp = rlmParticles[i];
+        rp.visible = false;
+        rp.position.set(0, 0, 0);
+        scene.add(rp);
+      }
+
+      statusEl.textContent = 'waiting...';
+      if (!opts.keepCamera) {
+        camAngle.x = 0;
+        camAngle.y = 0.35;
+        camDist = 240;
+        camTarget.set(0, 0, 0);
+      }
+
+      startTime = performance.now();
+      lastPlayheadPost = -1000;
+      try { window.parent.postMessage({ type: 'uc-dashboard-playhead', ms: 0 }, '*'); } catch (_) {}
+    }
+
+    window.resetDashboardAnimation = resetAnimation;
+    window.addEventListener('message', function(event) {
+      var data = event.data;
+      if (!data || data.type !== 'uc-dashboard-reset') return;
+      resetAnimation(data.options || {});
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      var now = performance.now();
+      var t = now - startTime;
+      if (t - lastPlayheadPost >= 800) {
+        lastPlayheadPost = t;
+        try { window.parent.postMessage({ type: 'uc-dashboard-playhead', ms: t }, '*'); } catch (_) {}
+      }
+
+      // RLM prelude
+      if (rlmActive) animateRLM(t);
+
+      // spawn timeline nodes (after RLM)
+      for (var i = 0; i < timeline.length; i++) {
+        if (!spawned[i] && t >= timeline[i].time) {
+          spawned[i] = true;
+          spawnNode(timeline[i], t);
+        }
+      }
+
+      // spawn version events
+      for (var i = 0; i < versionEvents.length; i++) {
+        if (!versionsFired[i] && t >= VERSIONS_START + versionEvents[i].time) {
+          versionsFired[i] = true;
+          addVersionToRail(versionEvents[i]);
+        }
+      }
+
+      // determine visible node set based on active version
+      var visibleIds = null;
+      if (activeVersion !== null) {
+        for (var i = 0; i < versionEvents.length; i++) {
+          if (versionEvents[i].version === activeVersion) {
+            visibleIds = {};
+            versionEvents[i].nodesAtVersion.forEach(function(id) { visibleIds[id] = true; });
+            break;
+          }
+        }
+      }
+
+      // auto-zoom from RLM distance to dashboard distance
+      if (!rlmActive && nodes.length > 0 && camDist > 185) {
+        camDist += (180 - camDist) * 0.01;
+      }
+
+      // camera
+      camera.position.x = camDist * Math.sin(camAngle.x) * Math.cos(camAngle.y);
+      camera.position.y = camTarget.y + camDist * Math.sin(camAngle.y);
+      camera.position.z = camDist * Math.cos(camAngle.x) * Math.cos(camAngle.y);
+      camera.lookAt(camTarget);
+
+      // --- animate nodes (RLM-style) ---
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        var elapsed = t - n.spawnTime;
+        if (elapsed < 0) continue;
+
+        // elastic fly-in from origin to target
+        var posT = Math.min(1, elapsed / SPAWN_DUR);
+        var eased = easeOutElastic(posT);
+        n.group.position.lerpVectors(n.originPos, n.targetPos, eased);
+
+        // scale pop with easeOutBack
+        var scaleT = Math.min(1, elapsed / SCALE_DUR);
+        var scale = easeOutBack(Math.min(1, scaleT * 1.2));
+
+        // version visibility: ghost nodes not in selected version
+        var isGhost = (visibleIds !== null && !visibleIds[n.data.id]);
+        var isVersionAffected = (versionAffectedIds && versionAffectedIds.indexOf(n.data.id) >= 0);
+
+        // breathing pulse (after settled)
+        if (scaleT >= 1) {
+          scale *= 1 + Math.sin(t * 0.002 + i * 0.5) * 0.04;
+        }
+
+        // highlight from hover (node or log)
+        var isHighlighted = (n === hoveredNode || n === highlightedNode);
+        if (isHighlighted) {
+          scale *= 1.4 + Math.sin(t * 0.006) * 0.1;
+        }
+
+        // ghost: shrink + dim
+        if (isGhost) scale *= 0.4;
+
+        n.group.scale.setScalar(scale);
+
+        // settle at target (no wobble)
+        if (posT >= 1) {
+          n.group.position.copy(n.targetPos);
+        }
+
+        // glow pulsing + highlight glow boost
+        if (n.glowSprite) {
+          var baseOpacity = n.type === 'context' ? 0.5 : 0.2;
+          var glowOp = baseOpacity + Math.sin(t * 0.003 + i * 0.8) * 0.08;
+          if (isHighlighted) glowOp = 0.8 + Math.sin(t * 0.008) * 0.15;
+          if (isGhost) glowOp *= 0.15;
+          if (isVersionAffected) glowOp = 0.9;
+          n.glowSprite.material.opacity = glowOp;
+        }
+
+        // version flash: pulse orange (update) or red (delete) when affected
+        if (n._versionFlashTime && (t - n._versionFlashTime) < 3000) {
+          var flashProgress = (t - n._versionFlashTime) / 3000;
+          var flashIntensity = (1 - flashProgress) * ((Math.sin(t * 0.01) + 1) / 2);
+          var flashColor = n._versionOp === 'delete' ? 0xff4444 : 0xffaa44;
+          var fc_r = (flashColor >> 16 & 255) / 255, fc_g = (flashColor >> 8 & 255) / 255, fc_b = (flashColor & 255) / 255;
+          var base_r = n.type === 'context' ? 0.133 : 1, base_g = n.type === 'context' ? 0.533 : 1, base_b = n.type === 'context' ? 1 : 1;
+          n.mesh.material.color.setRGB(
+            base_r + (fc_r - base_r) * flashIntensity,
+            base_g + (fc_g - base_g) * flashIntensity,
+            base_b + (fc_b - base_b) * flashIntensity
+          );
+        } else if (isHighlighted) {
+          // hover highlight color
+          var flashT = (Math.sin(t * 0.005) + 1) / 2;
+          var baseColor = n.type === 'context' ? 0x2288ff : 0xffffff;
+          var highlightColor = 0x44aaff;
+          var r1 = (baseColor >> 16 & 255) / 255, g1 = (baseColor >> 8 & 255) / 255, b1 = (baseColor & 255) / 255;
+          var r2 = (highlightColor >> 16 & 255) / 255, g2 = (highlightColor >> 8 & 255) / 255, b2 = (highlightColor & 255) / 255;
+          n.mesh.material.color.setRGB(r1 + (r2-r1)*flashT, g1 + (g2-g1)*flashT, b1 + (b2-b1)*flashT);
+        } else if (isVersionAffected) {
+          // pulsing highlight for version-affected nodes
+          var pulseT = (Math.sin(t * 0.006) + 1) / 2;
+          var affColor = activeVersion !== null && versionEvents[activeVersion] && versionEvents[activeVersion].operation === 'delete' ? 0xff4444 : 0xffaa44;
+          var ac_r = (affColor >> 16 & 255) / 255, ac_g = (affColor >> 8 & 255) / 255, ac_b = (affColor & 255) / 255;
+          n.mesh.material.color.setRGB(ac_r * pulseT + (1-pulseT), ac_g * pulseT + (1-pulseT), ac_b * pulseT + (1-pulseT));
+        } else if (isGhost) {
+          n.mesh.material.color.set(0x333344);
+        } else {
+          n.mesh.material.color.set(n.type === 'context' ? 0x2288ff : 0xffffff);
+        }
+      }
+
+      // --- animate edges (dynamic, follow nodes) ---
+      for (var i = 0; i < edges.length; i++) {
+        var e = edges[i];
+        var et = (t - e.spawnTime) / 800;
+        if (et < 0) continue;
+
+        // update positions to follow wobbling nodes
+        var pos = e.line.geometry.attributes.position.array;
+        pos[0] = e.fromNode.group.position.x;
+        pos[1] = e.fromNode.group.position.y;
+        pos[2] = e.fromNode.group.position.z;
+        pos[3] = e.toNode.group.position.x;
+        pos[4] = e.toNode.group.position.y;
+        pos[5] = e.toNode.group.position.z;
+        e.line.geometry.attributes.position.needsUpdate = true;
+
+        // fade in with easeOutExpo
+        var targetOpacity = e.isFork ? 0.08 : 0.15;
+        // ghost edges if either endpoint is ghosted
+        var fromGhost = visibleIds && !visibleIds[e.fromNode.data.id];
+        var toGhost = visibleIds && !visibleIds[e.toNode.data.id];
+        if (fromGhost || toGhost) targetOpacity *= 0.15;
+        e.line.material.opacity = easeOutExpo(Math.min(1, et)) * targetOpacity;
+      }
+
+      // --- animate particles (follow node positions) ---
+      for (var i = 0; i < particles.length; i++) {
+        var pt = particles[i];
+        if (t < pt.spawnTime) { pt.mesh.visible = false; continue; }
+        pt.mesh.visible = true;
+        var progress = ((t * pt.speed) + pt.offset) % 1;
+        pt.mesh.position.lerpVectors(pt.fromNode.group.position, pt.toNode.group.position, progress);
+        pt.mesh.material.opacity = Math.sin(progress * Math.PI) * 0.6;
+      }
+
+      composer.render();
+    }
+
+    animate();
+  </script>
+</body>
+</html>

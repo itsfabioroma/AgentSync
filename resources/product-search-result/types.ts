@@ -1,16 +1,12 @@
 import { z } from "zod";
 
 export const propSchema = z.object({
-  query: z.string().describe("The search query"),
-  results: z.array(
-    z.object({
-      fruit: z.string().describe("Fruit name"),
-      color: z.string().describe("Tailwind background color class"),
-    })
-  ),
+  title: z.string().optional().describe("Dashboard title"),
+  subtitle: z.string().optional().describe("Dashboard subtitle"),
+  source: z.string().optional().describe("Dashboard HTML path"),
 });
 
-export type ProductSearchResultProps = z.infer<typeof propSchema>;
+export type DashboardWidgetProps = z.infer<typeof propSchema>;
 
 export type AccordionItemProps = {
   question: string;
