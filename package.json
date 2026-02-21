@@ -25,7 +25,6 @@
     "dev": "mcp-use dev",
     "start": "mcp-use start",
     "deploy": "mcp-use deploy",
-    "claude": "tsx src/cli.ts",
     "postinstall": "mcp-use generate-types || true"
   },
   "dependencies": {

@@ -23,85 +23,34 @@ server.tool(
   {
     name: "query-engineer-tasks",
     description:
-      "Query Claude/Codex task logs from ~/team/<engineer>/log directories",
+      "Query Claude/Codex task logs from ~/team/<engineer>/log. Accepts a natural-language prompt or a `claude -p \"...\"` style query to search across all engineers on the team.",
     schema: z.object({
-      query: z.string().describe("Task query text"),
+      query: z.string().describe("Task query or prompt text (supports `claude -p` style queries)"),
       teamRoot: z
         .string()
         .optional()
         .describe("Team root dir (default: ~/team)"),
+      teams: z
+        .array(z.string())
+        .optional()
+        .describe("Filter by team names, e.g. ['frontend', 'backend']"),
       engineers: z
         .array(z.string())
         .optional()
-        .describe("Optional engineer list filter"),
+        .describe("Filter by engineer names"),
       limit: z.number().int().min(1).max(200).optional().default(20),
     }),
   },
-  async ({ query, teamRoot, engineers, limit }) => {
+  async ({ query, teamRoot, teams, engineers, limit }) => {
     const result = await queryEngineerTasks({
       prompt: query,
       teamRoot,
+      teams,
       engineers,
       limit,
     });
 
-    return object({
-      ...result,
-    });
-  }
-);
-
-server.tool(
-  {
-    name: "claude-p",
-    description:
-      "Equivalent of `claude -p \"...\"` for querying engineer task logs",
-    schema: z.object({
-      p: z.string().describe("Prompt/query text used by `claude -p`"),
-      teamRoot: z
-        .string()
-        .optional()
-        .describe("Team root dir (default: ~/team)"),
-      engineers: z
-        .array(z.string())
-        .optional()
-        .describe("Optional engineer list filter"),
-      limit: z.number().int().min(1).max(200).optional().default(20),
-    }),
-  },
-  async ({ p, teamRoot, engineers, limit }) => {
-    const result = await queryEngineerTasks({
-      prompt: p,
-      teamRoot,
-      engineers,
-      limit,
-    });
-
-    return object({
-      command: `claude -p "${p}"`,
-      ...result,
-    });
-  }
-);
-
-// Compatibility tool for the existing sample widget shipped in this repo.
-server.tool(
-  {
-    name: "get-fruit-details",
-    description: "Compatibility tool for the default sample widget",
-    schema: z.object({
-      fruit: z.string().describe("Fruit name"),
-    }),
-    outputSchema: z.object({
-      fruit: z.string(),
-      facts: z.array(z.string()),
-    }),
-  },
-  async ({ fruit }) => {
-    return object({
-      fruit,
-      facts: [`${fruit} details are not part of this backend`],
-    });
+    return object({ ...result });
   }
 );
 
