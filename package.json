@@ -1,8 +1,8 @@
 {
-  "name": "hack-yc",
+  "name": "engineer-log-query",
   "type": "module",
   "version": "1.0.0",
-  "description": "MCP server: hack-yc",
+  "description": "MCP server for querying engineer tasks from Claude/Codex logs",
   "author": "",
   "license": "MIT",
   "keywords": [
@@ -25,6 +25,7 @@
     "dev": "mcp-use dev",
     "start": "mcp-use start",
     "deploy": "mcp-use deploy",
+    "claude": "tsx src/cli.ts",
     "postinstall": "mcp-use generate-types || true"
   },
   "dependencies": {

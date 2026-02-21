@@ -1,17 +1,15 @@
-import { MCPServer, object, text, widget } from "mcp-use/server";
+import { MCPServer, object } from "mcp-use/server";
 import { z } from "zod";
+import { queryEngineerTasks } from "./src/logBackend";
 
 const server = new MCPServer({
-  name: "hack-yc",
-  title: "hack-yc", // display name
+  name: "engineer-log-query",
+  title: "Engineer Log Query",
   version: "1.0.0",
-  description: "MCP server with MCP Apps integration",
-  // Do not hardcode localhost: Claude/tunnel clients need externally reachable URLs.
-  baseUrl: process.env.MCP_URL,
-  // Avoid dev-session transport churn across reconnects/hot reloads.
-  stateless: true,
+  description: "Query engineer task history from Claude and Codex logs",
+  baseUrl: process.env.MCP_URL || "http://localhost:3000",
   favicon: "favicon.ico",
-  websiteUrl: "https://mcp-use.com", // Can be customized later
+  websiteUrl: "https://mcp-use.com",
   icons: [
     {
       src: "icon.svg",
@@ -21,83 +19,90 @@ const server = new MCPServer({
   ],
 });
 
-const openDashboardWidget = (focus?: string) => {
-  const subtitle = focus
-    ? `Focus: ${focus}`
-    : "Context infrastructure for AI agents";
-  return widget({
-    props: {
-      title: "ultracontext",
-      subtitle,
-    },
-    output: text("Opened ultracontext dashboard."),
-  });
-};
-
 server.tool(
   {
-    name: "show-dashboard",
-    description: "Open the ultracontext dashboard widget",
-    schema: z.object({
-      focus: z
-        .string()
-        .optional()
-        .describe("Optional focus string displayed as dashboard subtitle"),
-    }),
-    widget: {
-      name: "product-search-result",
-      invoking: "Opening dashboard...",
-      invoked: "Dashboard ready",
-    },
-  },
-  async ({ focus }) => openDashboardWidget(focus)
-);
-
-// Backward-compatible alias for older clients/tool plans.
-server.tool(
-  {
-    name: "search-tools",
+    name: "query-engineer-tasks",
     description:
-      "Compatibility alias: opens the ultracontext dashboard widget",
+      "Query Claude/Codex task logs from ~/team/<engineer>/log directories",
     schema: z.object({
-      query: z
+      query: z.string().describe("Task query text"),
+      teamRoot: z
         .string()
         .optional()
-        .describe("Legacy search query; mapped to dashboard focus"),
-      focus: z
-        .string()
+        .describe("Team root dir (default: ~/team)"),
+      engineers: z
+        .array(z.string())
         .optional()
-        .describe("Optional focus string displayed as dashboard subtitle"),
+        .describe("Optional engineer list filter"),
+      limit: z.number().int().min(1).max(200).optional().default(20),
     }),
-    widget: {
-      name: "product-search-result",
-      invoking: "Opening dashboard...",
-      invoked: "Dashboard ready",
-    },
   },
-  async ({ query, focus }) => openDashboardWidget(focus ?? query)
+  async ({ query, teamRoot, engineers, limit }) => {
+    const result = await queryEngineerTasks({
+      prompt: query,
+      teamRoot,
+      engineers,
+      limit,
+    });
+
+    return object({
+      ...result,
+    });
+  }
 );
 
-// Backward-compatible stub for legacy fruit flows.
+server.tool(
+  {
+    name: "claude-p",
+    description:
+      "Equivalent of `claude -p \"...\"` for querying engineer task logs",
+    schema: z.object({
+      p: z.string().describe("Prompt/query text used by `claude -p`"),
+      teamRoot: z
+        .string()
+        .optional()
+        .describe("Team root dir (default: ~/team)"),
+      engineers: z
+        .array(z.string())
+        .optional()
+        .describe("Optional engineer list filter"),
+      limit: z.number().int().min(1).max(200).optional().default(20),
+    }),
+  },
+  async ({ p, teamRoot, engineers, limit }) => {
+    const result = await queryEngineerTasks({
+      prompt: p,
+      teamRoot,
+      engineers,
+      limit,
+    });
+
+    return object({
+      command: `claude -p "${p}"`,
+      ...result,
+    });
+  }
+);
+
+// Compatibility tool for the existing sample widget shipped in this repo.
 server.tool(
   {
     name: "get-fruit-details",
-    description: "Compatibility stub for legacy clients",
+    description: "Compatibility tool for the default sample widget",
     schema: z.object({
-      fruit: z.string().optional().describe("Legacy field"),
+      fruit: z.string().describe("Fruit name"),
     }),
     outputSchema: z.object({
-      status: z.string(),
-      message: z.string(),
+      fruit: z.string(),
+      facts: z.array(z.string()),
     }),
   },
-  async ({ fruit }) =>
-    object({
-      status: "deprecated",
-      message: fruit
-        ? `Legacy fruit tool "${fruit}" is deprecated. Use show-dashboard.`
-        : "Legacy fruit tool is deprecated. Use show-dashboard.",
-    })
+  async ({ fruit }) => {
+    return object({
+      fruit,
+      facts: [`${fruit} details are not part of this backend`],
+    });
+  }
 );
 
 server.listen().then(() => {
