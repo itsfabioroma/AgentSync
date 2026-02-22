@@ -186,13 +186,6 @@ const ProductSearchResult: React.FC = () => {
             scrolling="no"
           />
         </div>
-        {isPending ? (
-          <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-            <div className="px-3 py-1.5 rounded-md text-xs bg-black/55 text-white/90 border border-white/15">
-              Loading dashboard...
-            </div>
-          </div>
-        ) : null}
         <div className="absolute top-3 right-3 z-20 flex items-center gap-2">
           {isInline ? (
             <button
