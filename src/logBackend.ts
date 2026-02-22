@@ -378,7 +378,7 @@ export async function queryEngineerTasks(
   options: QueryTaskOptions
 ): Promise<QueryTaskResult> {
   const query = normalizeText(options.prompt);
-  const teamRoot = expandHome(options.teamRoot ?? "~/team");
+  const teamRoot = expandHome(options.teamRoot ?? path.join(path.dirname(new URL(import.meta.url).pathname), "..", "teams"));
   const limit = Math.min(Math.max(options.limit ?? DEFAULT_LIMIT, 1), MAX_LIMIT);
   const queryLower = query.toLowerCase();
   const queryTokens = tokenize(query);

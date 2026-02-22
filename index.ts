@@ -21,15 +21,15 @@ const server = new MCPServer({
 
 server.tool(
   {
-    name: "query-engineer-tasks",
+    name: "query-context",
     description:
-      "Query Claude/Codex task logs from ~/team/<engineer>/log. Accepts a natural-language prompt or a `claude -p \"...\"` style query to search across all engineers on the team.",
+      "General-purpose search over all engineer task logs in ~/teams. Call this for any query — it searches across all teams and engineers by default.",
     schema: z.object({
       query: z.string().describe("Task query or prompt text (supports `claude -p` style queries)"),
       teamRoot: z
         .string()
         .optional()
-        .describe("Team root dir (default: ~/team)"),
+        .describe("Team root dir (default: <repo>/teams)"),
       teams: z
         .array(z.string())
         .optional()
