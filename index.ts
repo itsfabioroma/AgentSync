@@ -1,4 +1,4 @@
-import { MCPServer, object } from "mcp-use/server";
+import { MCPServer, object, text, widget } from "mcp-use/server";
 import { z } from "zod";
 import { queryEngineerTasks } from "./src/logBackend";
 
@@ -52,6 +52,47 @@ server.tool(
 
     return object({ ...result });
   }
+);
+
+const openDashboardWidget = (focus?: string) => {
+  const subtitle = focus ? `Focus: ${focus}` : "Context infrastructure for AI agents";
+  return widget({
+    props: { title: "ultracontext", subtitle },
+    output: text("Opened ultracontext dashboard."),
+  });
+};
+
+server.tool(
+  {
+    name: "show-dashboard",
+    description: "Open the ultracontext dashboard widget",
+    schema: z.object({
+      focus: z.string().optional().describe("Optional focus string displayed as dashboard subtitle"),
+    }),
+    widget: {
+      name: "product-search-result",
+      invoking: "Opening dashboard...",
+      invoked: "Dashboard ready",
+    },
+  },
+  async ({ focus }) => openDashboardWidget(focus)
+);
+
+server.tool(
+  {
+    name: "search-tools",
+    description: "Compatibility alias: opens the ultracontext dashboard widget",
+    schema: z.object({
+      query: z.string().optional().describe("Legacy search query; mapped to dashboard focus"),
+      focus: z.string().optional().describe("Optional focus string displayed as dashboard subtitle"),
+    }),
+    widget: {
+      name: "product-search-result",
+      invoking: "Opening dashboard...",
+      invoked: "Dashboard ready",
+    },
+  },
+  async ({ query, focus }) => openDashboardWidget(focus ?? query)
 );
 
 server.listen().then(() => {
