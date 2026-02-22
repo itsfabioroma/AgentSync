@@ -92,13 +92,7 @@ const ProductSearchResult: React.FC = () => {
   }, [setState]);
 
   if (isPending) {
-    return (
-      <McpUseProvider>
-        <div className="flex items-center justify-center h-[72vh] text-sm text-secondary">
-          Loading dashboard...
-        </div>
-      </McpUseProvider>
-    );
+    return;
   }
 
   return (
