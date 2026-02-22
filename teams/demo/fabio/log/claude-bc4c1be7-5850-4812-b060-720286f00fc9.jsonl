@@ -1,0 +1,3 @@
+{"type":"user","source":"claude","timestamp":"2026-01-24T22:22:03.706Z","sessionId":"bc4c1be7-5850-4812-b060-720286f00fc9","contextId":"ctx_a8f196d75243a65fd3c703bd","message":{"content":"switch to daytona instead of e2b"}}
+{"type":"user","source":"claude","timestamp":"2026-01-24T22:26:59.250Z","sessionId":"bc4c1be7-5850-4812-b060-720286f00fc9","contextId":"ctx_a8f196d75243a65fd3c703bd","message":{"content":"[Request interrupted by user for tool use]"}}
+{"type":"user","source":"claude","timestamp":"2026-01-24T22:27:10.031Z","sessionId":"bc4c1be7-5850-4812-b060-720286f00fc9","contextId":"ctx_a8f196d75243a65fd3c703bd","message":{"content":"just install. its on npm"}}

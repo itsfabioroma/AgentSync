@@ -1,0 +1,5 @@
+{"type":"user","source":"claude","timestamp":"2026-01-21T23:56:29.396Z","sessionId":"c4a39153-d300-471f-a328-0499f8834eea","contextId":"ctx_819511f053d8b917feca4160","message":{"content":"use context7 to see what is and how Ultracontext works"}}
+{"type":"user","source":"claude","timestamp":"2026-01-21T23:57:09.202Z","sessionId":"c4a39153-d300-471f-a328-0499f8834eea","contextId":"ctx_819511f053d8b917feca4160","message":{"content":"how to index ultracontext on context7?"}}
+{"type":"user","source":"claude","timestamp":"2026-01-22T00:02:51.268Z","sessionId":"c4a39153-d300-471f-a328-0499f8834eea","contextId":"ctx_819511f053d8b917feca4160","message":{"content":"how to index ultracontext on context7?"}}
+{"type":"user","source":"claude","timestamp":"2026-01-22T00:02:52.786Z","sessionId":"c4a39153-d300-471f-a328-0499f8834eea","contextId":"ctx_819511f053d8b917feca4160","message":{"content":"[Request interrupted by user]"}}
+{"type":"user","source":"claude","timestamp":"2026-01-22T00:02:56.801Z","sessionId":"c4a39153-d300-471f-a328-0499f8834eea","contextId":"ctx_819511f053d8b917feca4160","message":{"content":"use context7 to see what is and how Ultracontext works"}}

@@ -1,0 +1,434 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.933Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:139c9b54-e118-451e-aed7-04e8e675f019",
+    "contextId": "ctx_56eb65ad76067eba97645fb9",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+    "updatedAtUnix": 1771690267
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "e10e6fe1-a8b5-4249-ab18-1a896d460d7f",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "copy all the code from ./agents/vercel-ai-sdk to ./codevolution"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:13:48.755Z",
+            "parentUuid": "32f043f7-8ce4-40e4-91a8-85d62d347ab3",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "copy all the code from ./agents/vercel-ai-sdk to ./codevolution",
+          "timestamp": "2026-01-24T22:13:48.755Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_5f32f113d184bc6913236344",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "223a2f546bf24296080483053220f6807ce15bda0ddb30e8202458385c81eb26",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 781
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "8a28917c-bbf7-4b0a-800e-5e420b03bb52",
+            "message": {
+              "id": "msg_01UZTiv4HePunrnU9y4iycG5",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Let me check what exists in those paths.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXSyQzSQnAWJSUgquCGfT",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:14:26.773Z",
+            "parentUuid": "8cb56c38-6046-4935-a0e1-e6a729bf7ce5",
+            "isSidechain": false
+          },
+          "message": "Let me check what exists in those paths.",
+          "timestamp": "2026-01-24T22:14:26.773Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_152b3dbeb4bdff23d0234219",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "7a0341f90608d64c5167f0c49eb0e5ea4ade7f1169ccafeabef6e72105faca3d",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 5522
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "bc0345cf-5469-47da-9ded-7ff154dbad6e",
+            "message": {
+              "id": "msg_01EccPwAKs7zRSRSKuPuUDfz",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "The source directory `./agents/vercel-ai-sdk` doesn't exist. Let me check if there's an `agents` folder or similar.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXSyRPcgnKiRwMMuEfUwV",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:14:31.990Z",
+            "parentUuid": "40688d73-dbb9-438f-acd9-2784c182a014",
+            "isSidechain": false
+          },
+          "message": "The source directory `./agents/vercel-ai-sdk` doesn't exist. Let me check if there's an `agents` folder or similar.",
+          "timestamp": "2026-01-24T22:14:31.990Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_8203df5d1ce1396a9087aeeb",
+        "index": 2,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "e23a684f075661e49834fb60869a9324c0c1aa4edce4e7fd216773fcc84a29fc",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 9858
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "4dd48413-e25f-4a31-afc7-d9f4e13fe21a",
+            "message": {
+              "id": "msg_01Cy3kR9WoauUH2hxqMu8mxB",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Found it at `./ultracontext/agents/vercel-ai-sdk`. Copying from there.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXSyS6hy2g7fDgFmJVSGe",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:14:40.950Z",
+            "parentUuid": "5dbbe4d1-b751-4d4e-bc4b-9ad241834f0e",
+            "isSidechain": false
+          },
+          "message": "Found it at `./ultracontext/agents/vercel-ai-sdk`. Copying from there.",
+          "timestamp": "2026-01-24T22:14:40.950Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_16fd997c5359fc4f41643db9",
+        "index": 3,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "494b4db839b9afa430c2e5d33b276b9c90fb0813329e620c124837fb15c1eb7f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 14167
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "ae28ef73-1181-4e06-8c60-2e0a09a3fb49",
+            "message": {
+              "id": "msg_01HmN3qpHZV2GLhK46FFANpy",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Let me verify.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXSyWXYKR81vuosGHcYSy",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:15:40.801Z",
+            "parentUuid": "ad355317-baa0-42c2-95a4-30d3874df48d",
+            "isSidechain": false
+          },
+          "message": "Done. Let me verify.",
+          "timestamp": "2026-01-24T22:15:40.801Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_5a2f4d63edb2007f6e650ce6",
+        "index": 4,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3bfa6763bb950dbd0dd01efc633fa9ee95007627096b8fad6ab3a0a6440fcb5b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 43425
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "90e74adf-6bca-4748-a828-8ef55b6402a8",
+            "message": {
+              "id": "msg_012M9oCAVk25oHP2qhbmVg2K",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "All files copied to `./codevolution/`.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXSyWngQ8XtC7GGNniMSC",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:15:44.178Z",
+            "parentUuid": "715b4f32-6c9d-4a96-8bff-72799f2875bb",
+            "isSidechain": false
+          },
+          "message": "All files copied to `./codevolution/`.",
+          "timestamp": "2026-01-24T22:15:44.178Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_678eb17418939cb15dfc2cba",
+        "index": 5,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b8abd23ccd7bfd13de8fe0ff67d9594a9aeb10ee1b93655192b26cdfa402eff6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 50070
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "b8bc03bc-565b-4e08-a64c-21e3f3025430",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "switch to daytona instead of e2b"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:21:21.067Z",
+            "parentUuid": "ee37afdb-fae3-4bb0-b9f1-44f1cf4c14fd",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "switch to daytona instead of e2b",
+          "timestamp": "2026-01-24T22:21:21.067Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_66b72ad89419856f3293255c",
+        "index": 6,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "001d68f2f098c29ee5c7b8e01372d3b94810a338c78e5a299776fbdd366b59c8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 52626
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "6ee6e845-f43d-490b-b2d2-e9ff0c513530",
+            "message": {
+              "role": "user",
+              "content": [
+                {
+                  "text": "[Request interrupted by user]",
+                  "type": "text"
+                }
+              ]
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "139c9b54-e118-451e-aed7-04e8e675f019",
+            "timestamp": "2026-01-24T22:21:25.398Z",
+            "parentUuid": "b8bc03bc-565b-4e08-a64c-21e3f3025430",
+            "isSidechain": false
+          },
+          "message": "[Request interrupted by user]",
+          "timestamp": "2026-01-24T22:21:25.398Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_8c8297b0392619f5077e91c0",
+        "index": 7,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ca87689b9c101406af905ffaf0885a511367dd0a031c534b661b7f3bc927322b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/139c9b54-e118-451e-aed7-04e8e675f019.jsonl",
+          "session_id": "139c9b54-e118-451e-aed7-04e8e675f019",
+          "engineer_id": "engineer-01",
+          "file_offset": 53112
+        }
+      }
+    ],
+    "version": 0
+  }
+}

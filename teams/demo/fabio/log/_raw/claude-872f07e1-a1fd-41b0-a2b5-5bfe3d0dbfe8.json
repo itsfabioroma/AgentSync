@@ -1,0 +1,502 @@
+{
+  "pulledAt": "2026-02-22T01:20:14.764Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+    "contextId": "ctx_acd7ae67f0250d5e37ce6059",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+    "updatedAtUnix": 1771690712
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "609cd8dd-3503-4e86-822e-524438cf8d54",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hey man"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:30.225Z",
+            "parentUuid": "97d8bc2c-cef2-4866-a89c-58d1797e662b",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "hey man",
+          "timestamp": "2026-02-21T16:18:30.225Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_0a98289978ee3e40d986f2bb",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "de4e3ebb60cb3dbed4b009d3ebdbb67b1c0c1d9da8b2292efc9f9ae0aa44f2f2",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 780
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "2e7ec09f-ab24-444a-a0e5-a91ed5894fb6",
+            "message": {
+              "id": "msg_01A6PZ9PqHPyJ48p6ycG74p3",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! What can I help you with?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWvmvjLNvRr7HaYgg66",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:34.423Z",
+            "parentUuid": "b061a78e-768a-431a-803c-e6369d25b0e0",
+            "isSidechain": false
+          },
+          "message": "Hey! What can I help you with?",
+          "timestamp": "2026-02-21T16:18:34.423Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_9f699caa85bd3881426ea819",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "c9a047fbeab84d57283a342d67ded4c7b46a7f14f83cc94c187ff88e8bceb316",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 2475
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "201eff91-48a4-4477-aecc-56c6da9ba7af",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "are u ok?"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:36.337Z",
+            "parentUuid": "c325c03f-bbca-490f-beb7-4e58c4fd2881",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "are u ok?",
+          "timestamp": "2026-02-21T16:18:36.337Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_435639a02ddfde36b8425859",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "0e9b7bd226400e835587788597a3b8da6e25f891320be18a53b54a3fddf9937e",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 4988
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "e73227c5-89a0-42f4-bc7d-42e7d5e9185e",
+            "message": {
+              "id": "msg_01JCLaC5rdY7qhpbVCxPa5Xs",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "All good here! Ready to help whenever you need something. What's up?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWwCvtagtfCaF6WoipZ",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:40.349Z",
+            "parentUuid": "d5a59857-e455-4c45-9b38-d4c14132bfc3",
+            "isSidechain": false
+          },
+          "message": "All good here! Ready to help whenever you need something. What's up?",
+          "timestamp": "2026-02-21T16:18:40.349Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_ceba1d7d1c4d3fe4c849a397",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ebfbebe951c12e680e4217c3cb3bf8b497486ad160b9ae2f8851318b4abd9cc4",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 6705
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "bc13a4b1-c23f-4d83-8081-d8c4efa99e3d",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hope so"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:42.319Z",
+            "parentUuid": "bdd4d881-3897-47dc-87e3-e2969e946fb8",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "hope so",
+          "timestamp": "2026-02-21T16:18:42.319Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_bc80d9ee590a7b7ca0e65883",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "40f81a9fdb0bcb3faa199fb088cc566293994fa1870d992f49b575faf5bf50cf",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 9095
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "00388579-bdda-4445-aeef-f02fd678c728",
+            "message": {
+              "id": "msg_012jU16jbVP1Cztjje791r7A",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Haha appreciate it. Let me know if you need anything!",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWweYkodcuTnZXiTyrs",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:46.533Z",
+            "parentUuid": "bb8b8777-2760-4c9f-b03d-8f1cb606359c",
+            "isSidechain": false
+          },
+          "message": "Haha appreciate it. Let me know if you need anything!",
+          "timestamp": "2026-02-21T16:18:46.533Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_fd1511f58b16ff1ab18e53a0",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b9a99a61d4339d4dd946440ccab79bb68fa26f734c08b0fa0ce05e2e54be7e4d",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 10618
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "9058f971-d379-48f6-b4e0-1da151a75a1b",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Im gabio"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:48.463Z",
+            "parentUuid": "fc4f8a99-da28-48df-8ac2-0f4037b76456",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "Im gabio",
+          "timestamp": "2026-02-21T16:18:48.463Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_5e73bf7db831903f02f3d628",
+        "index": 6,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ee79fe1aa0969bfb1d5e545c317fa3683d219ec96f2c54e136f7c4b82f40c4c6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 13159
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "0cf3d795-2ba0-4923-9f9c-e9460cb4385e",
+            "message": {
+              "id": "msg_01W8kQQeW8wmwczsoJvJskrW",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey Fabio! (guessing the typo 😄) Nice to meet you. What are we working on today?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWx6iMeyZXBcodqEobo",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:53.161Z",
+            "parentUuid": "5ad9bb5d-0ced-4406-87cc-dc6ca084cd49",
+            "isSidechain": false
+          },
+          "message": "Hey Fabio! (guessing the typo 😄) Nice to meet you. What are we working on today?",
+          "timestamp": "2026-02-21T16:18:53.161Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_f4c09b328b704ba859c8b36b",
+        "index": 7,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "52faca4df3759620bb293b956f070bb812a6282493cb8cac67ccd3248e67c977",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 14940
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "c4e398de-601f-49b5-9795-8905dc2eeee8",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "nice to meet you"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:55.081Z",
+            "parentUuid": "21055690-8be8-45ff-9dd5-3c3a92627f33",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "nice to meet you",
+          "timestamp": "2026-02-21T16:18:55.081Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_4cc17781bc37fd06d328301d",
+        "index": 8,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "a1464a72158a84f383b27841851a788d72434479a5cf27b5da9608d68c741779",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 17345
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "066bb798-dec0-4ec1-9992-a5f52b2b5586",
+            "message": {
+              "id": "msg_01GtPTThJMuJMLV3NKpTtURZ",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Likewise! Whenever you're ready to build something, I'm here.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWxbJ58spazXb6KakCb",
+            "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+            "timestamp": "2026-02-21T16:18:59.083Z",
+            "parentUuid": "2b2b8575-7308-473d-a7ba-9473bd378688",
+            "isSidechain": false
+          },
+          "message": "Likewise! Whenever you're ready to build something, I'm here.",
+          "timestamp": "2026-02-21T16:18:59.083Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_6ca4f0b9558b54f2737cc77a",
+        "index": 9,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "15dcc27296f1d8e0a1a885b93d8623da6b91b504429b96ab7557a98347886368",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 18844
+        }
+      }
+    ],
+    "version": 0
+  }
+}

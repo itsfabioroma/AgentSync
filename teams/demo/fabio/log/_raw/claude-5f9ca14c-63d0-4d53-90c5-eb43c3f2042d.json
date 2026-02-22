@@ -1,0 +1,202 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.402Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+    "contextId": "ctx_3bec92b16b9bc3162d1e5918",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+    "updatedAtUnix": 1771690304
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/codevolution",
+            "type": "user",
+            "uuid": "0f63875a-e662-436e-9ab4-f01117c2cbe0",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "delete data.json and delete it from the commit history too. I dont want anyone to see this file ever"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+            "timestamp": "2026-01-24T23:31:14.354Z",
+            "parentUuid": "c639134b-abf6-4da2-910a-fc4a0217f066",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "delete data.json and delete it from the commit history too. I dont want anyone to see this file ever",
+          "timestamp": "2026-01-24T23:31:14.354Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_5ac5dffabf1073c91775e931",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "380591db06b21389606d30142e278144245a3d61aa533822a7df168c54cb18b5",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-codevolution/5f9ca14c-63d0-4d53-90c5-eb43c3f2042d.jsonl",
+          "session_id": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+          "engineer_id": "engineer-01",
+          "file_offset": 798
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/codevolution",
+            "type": "assistant",
+            "uuid": "918b706b-b902-4e08-8188-6e5170cc04f6",
+            "message": {
+              "id": "msg_01KnsckgbQDrPfT48ygYSR4d",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "I'll delete the file and remove it from git history.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXT5H58AbzQ3QPZ9jt9mP",
+            "sessionId": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+            "timestamp": "2026-01-24T23:31:20.811Z",
+            "parentUuid": "ddbedd12-b9d8-4df8-8207-4465542ac9bd",
+            "isSidechain": false
+          },
+          "message": "I'll delete the file and remove it from git history.",
+          "timestamp": "2026-01-24T23:31:20.811Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_0c2acdc59e66d11f5152c48d",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "1b385317eccad376ca31956231850050c903cb1475459473ca12dd383701ae91",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-codevolution/5f9ca14c-63d0-4d53-90c5-eb43c3f2042d.jsonl",
+          "session_id": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+          "engineer_id": "engineer-01",
+          "file_offset": 3401
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/codevolution",
+            "slug": "ticklish-snacking-quill",
+            "type": "assistant",
+            "uuid": "62e4f383-5c02-44d1-a396-c6a8f6edfcc3",
+            "message": {
+              "id": "msg_01SNmyEMeNXUNmU4qubrYbt7",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Need to stash changes first.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXT5LQ6GKut6n8bbErRpM",
+            "sessionId": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+            "timestamp": "2026-01-24T23:32:03.756Z",
+            "parentUuid": "80884121-7321-4182-ac02-50ba66420d3c",
+            "isSidechain": false
+          },
+          "message": "Need to stash changes first.",
+          "timestamp": "2026-01-24T23:32:03.756Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_676201b2f13b36ec28d1d85f",
+        "index": 2,
+        "metadata": {
+          "day": "2026-01-24",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b6d4d4bc0e474d4b80dd361fbeb07b6675dbfed1d688d3c4b7958281fd093fd2",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-codevolution/5f9ca14c-63d0-4d53-90c5-eb43c3f2042d.jsonl",
+          "session_id": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+          "engineer_id": "engineer-01",
+          "file_offset": 19173
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "summary",
+            "summary": "Remove sensitive file from git history",
+            "leafUuid": "abaed883-0bd1-40c1-9ee2-ca9f45021a44"
+          },
+          "message": "Remove sensitive file from git history",
+          "timestamp": "2026-02-21T16:11:45.087Z",
+          "event_type": "claude.summary"
+        },
+        "id": "msg_b78b25e51dc1b0a7f4478842",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "d1db7f54a4dbc6ca86d2050d17e0812113b64ff138814e079dff0e56604a3143",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-codevolution/5f9ca14c-63d0-4d53-90c5-eb43c3f2042d.jsonl",
+          "session_id": "5f9ca14c-63d0-4d53-90c5-eb43c3f2042d",
+          "engineer_id": "engineer-01",
+          "file_offset": 21173
+        }
+      }
+    ],
+    "version": 0
+  }
+}

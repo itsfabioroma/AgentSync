@@ -1,0 +1,317 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.154Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:ddc960dd-a5c7-496d-b417-2e4f820d1145",
+    "contextId": "ctx_e42445cedb3b4d21b8c49f92",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+    "updatedAtUnix": 1771690474
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "da4fd481-982a-4371-80f5-7af3e209b10d",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Poooop"
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:02:58.645Z",
+            "parentUuid": "4f3d61a2-e065-41b6-a9af-c781d6bff401",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Poooop",
+          "timestamp": "2026-02-18T20:02:58.645Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_cf1fb16053aee70f9271d2ca",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "225ca0a4b364e622318a4919778b65a9a72ce3b10c6df7ea93886efab0bfd74a",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 798
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "d3306b7d-3d8d-464e-99b4-2f14ac075fba",
+            "message": {
+              "id": "msg_01PirKEgRfETaWsxWfczmZiX",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "💩\n\nWhat can I help you with?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYG8cqFL2DRLCWYNkAnEg",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:03:02.851Z",
+            "parentUuid": "da4fd481-982a-4371-80f5-7af3e209b10d",
+            "isSidechain": false
+          },
+          "message": "💩 What can I help you with?",
+          "timestamp": "2026-02-18T20:03:02.851Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_a0090e9692969d0978f12d8b",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "9b12929838152e43643c16f15ec59747bd2067b60debd7bb95cf0cd27a07f34f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 1255
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "ccb906c4-de7a-4b25-85e9-b65d750e0025",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hi brian"
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:20:14.191Z",
+            "parentUuid": "6287b577-40e6-4186-b3c6-a4fca6a602d8",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "hi brian",
+          "timestamp": "2026-02-18T20:20:14.191Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_ad75bfd434e927f2d6434b88",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "d0e9e376fd60043b5d584462da61a932186b15ecf9a9a60a64791d6d0ca139ca",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 3508
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "aa8f5c00-3e9c-43a0-9a37-586c6685ea12",
+            "message": {
+              "id": "msg_01Eeqofvtkzfu9u8o5Toup3i",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! I'm Claude, not Brian — but happy to help. What do you need?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYG9wAVL1kN2Xosv85og6",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:20:18.856Z",
+            "parentUuid": "ccb906c4-de7a-4b25-85e9-b65d750e0025",
+            "isSidechain": false
+          },
+          "message": "Hey! I'm Claude, not Brian — but happy to help. What do you need?",
+          "timestamp": "2026-02-18T20:20:18.856Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_37bc0e6440c18aae6ea82574",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "c4e8e4d83cc469fb1cee71872d0e95cbfab20c96e53ea4e9021871c8f75428f8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 3967
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "d83bc977-7363-4cc3-9b00-221813f74396",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hi"
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:20:25.425Z",
+            "parentUuid": "60ac1c74-fa64-4dda-8368-dba6f4918b95",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "hi",
+          "timestamp": "2026-02-18T20:20:25.425Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_9671c654effe1d6be45aab9a",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "796859cb00638cfb0657618d593a1309b3706000156bd991881ae9600782ca30",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 6252
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "f73b3398-b61b-40e4-973c-b307582e2838",
+            "message": {
+              "id": "msg_0175MEZSzXu4561ZWfTnvfcg",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! What can I help you with?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYG9wzCjCBQAFAn2RfL22",
+            "sessionId": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+            "timestamp": "2026-02-18T20:20:31.977Z",
+            "parentUuid": "d83bc977-7363-4cc3-9b00-221813f74396",
+            "isSidechain": false
+          },
+          "message": "Hey! What can I help you with?",
+          "timestamp": "2026-02-18T20:20:31.977Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_6db35d7b28b8f874eaadf0a7",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "01c5b5941ebb68259b2a028d7a3fb8b293aee0f047c76552bcf4b039f647b222",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/ddc960dd-a5c7-496d-b417-2e4f820d1145.jsonl",
+          "session_id": "ddc960dd-a5c7-496d-b417-2e4f820d1145",
+          "engineer_id": "engineer-01",
+          "file_offset": 6705
+        }
+      }
+    ],
+    "version": 0
+  }
+}

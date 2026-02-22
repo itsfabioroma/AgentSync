@@ -17,7 +17,7 @@ export const widgetMetadata: WidgetMetadata = {
 };
 
 const ProductSearchResult: React.FC = () => {
-  const { isPending, props, displayMode, requestDisplayMode, state, setState, callTool } =
+  const { props, displayMode, requestDisplayMode, state, setState } =
     useWidget<DashboardWidgetProps, { playheadMs?: number }>();
   const hasAutoRequestedFullscreen = React.useRef(false);
   const disableAutoFullscreen = React.useRef(false);
@@ -25,8 +25,6 @@ const ProductSearchResult: React.FC = () => {
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const initialPlayheadRef = React.useRef<number | null>(null);
   const lastSavedPlayheadRef = React.useRef(state?.playheadMs ?? 0);
-  const hasReportedRlmCompleteRef = React.useRef(false);
-  const lastSelectionDigestRef = React.useRef("");
 
   const isInline = displayMode === "inline";
   const zoomScale = 0.78;
@@ -49,36 +47,13 @@ const ProductSearchResult: React.FC = () => {
 
   const dashboardDoc = React.useMemo(() => {
     const themesJson = JSON.stringify(props?.themes ?? []).replace(/</g, "\\u003c");
-    const selectedNodeIdsJson = JSON.stringify(props?.selectedNodeIds ?? []).replace(/</g, "\\u003c");
-    const scopeTeamsJson = JSON.stringify(props?.scopeTeams ?? []).replace(/</g, "\\u003c");
-    const scopeEngineersJson = JSON.stringify(props?.scopeEngineers ?? []).replace(/</g, "\\u003c");
     const focusEngineersJson = JSON.stringify(props?.focusEngineers ?? []).replace(/</g, "\\u003c");
-    const injected = `<script>window.__UC_INITIAL_PLAYHEAD_MS=${initialPlayheadMs};window.__UC_THEMES=${themesJson};window.__UC_SELECTED_NODE_IDS=${selectedNodeIdsJson};window.__UC_SCOPE_TEAMS=${scopeTeamsJson};window.__UC_SCOPE_ENGINEERS=${scopeEngineersJson};window.__UC_FOCUS_ENGINEERS=${focusEngineersJson};</script>`;
+    const injected = `<script>window.__UC_INITIAL_PLAYHEAD_MS=${initialPlayheadMs};window.__UC_THEMES=${themesJson};window.__UC_FOCUS_ENGINEERS=${focusEngineersJson};</script>`;
     return dashboardHtml.replace(
       '<script type="module">',
       `${injected}\n  <script type="module">`
     );
-  }, [
-    initialPlayheadMs,
-    props?.themes,
-    props?.selectedNodeIds,
-    props?.scopeTeams,
-    props?.scopeEngineers,
-    props?.focusEngineers,
-  ]);
-
-  React.useEffect(() => {
-    const baseline = {
-      nodeIds: props?.selectedNodeIds ?? [],
-      teams: props?.scopeTeams ?? [],
-      engineers: props?.scopeEngineers ?? [],
-    };
-    lastSelectionDigestRef.current = JSON.stringify(baseline);
-  }, [props?.selectedNodeIds, props?.scopeTeams, props?.scopeEngineers]);
-
-  React.useEffect(() => {
-    hasReportedRlmCompleteRef.current = false;
-  }, [dashboardDoc]);
+  }, [initialPlayheadMs, props?.themes, props?.focusEngineers]);
 
   React.useEffect(() => {
     if (
@@ -108,49 +83,8 @@ const ProductSearchResult: React.FC = () => {
       const data = event.data as {
         type?: string;
         ms?: number;
-        nodeIds?: string[];
-        teams?: string[];
-        engineers?: string[];
       } | undefined;
       if (!data) return;
-
-      if (data.type === "uc-dashboard-selection") {
-        const normalizeList = (value: unknown): string[] => {
-          if (!Array.isArray(value)) return [];
-          const deduped = new Set<string>();
-          for (const item of value) {
-            if (typeof item !== "string") continue;
-            const trimmed = item.trim();
-            if (!trimmed) continue;
-            deduped.add(trimmed);
-          }
-          return [...deduped];
-        };
-
-        const payload = {
-          nodeIds: normalizeList(data.nodeIds),
-          teams: normalizeList(data.teams),
-          engineers: normalizeList(data.engineers),
-        };
-        const digest = JSON.stringify(payload);
-        if (digest === lastSelectionDigestRef.current) return;
-        lastSelectionDigestRef.current = digest;
-
-        void callTool("dashboard-set-selection", payload).catch(() => {});
-        return;
-      }
-
-      if (data.type === "uc-dashboard-rlm-complete") {
-        if (hasReportedRlmCompleteRef.current) return;
-        hasReportedRlmCompleteRef.current = true;
-        void callTool("dashboard-rlm-complete", {
-          playheadMs:
-            typeof data.ms === "number" && Number.isFinite(data.ms)
-              ? Math.max(0, Math.floor(data.ms))
-              : undefined,
-        }).catch(() => {});
-        return;
-      }
 
       if (data.type !== "uc-dashboard-playhead") return;
       const ms = data.ms;
@@ -161,7 +95,7 @@ const ProductSearchResult: React.FC = () => {
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [callTool, setState]);
+  }, [setState]);
 
   return (
     <McpUseProvider autoSize={isInline}>

@@ -1,0 +1,117 @@
+{
+  "pulledAt": "2026-02-22T01:20:16.856Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:65dd7db0-e89d-465a-9b1f-52b112286db6",
+    "contextId": "ctx_d998b0032bc7db05ecd8bd3b",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "65dd7db0-e89d-465a-9b1f-52b112286db6",
+    "updatedAtUnix": 1771690336
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "type": "user",
+            "uuid": "192c4cf3-576b-46b7-b5dd-324f773facb1",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "puiuiuiuiu"
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "65dd7db0-e89d-465a-9b1f-52b112286db6",
+            "timestamp": "2026-02-18T16:32:43.958Z",
+            "parentUuid": "bb3820c1-a885-4923-9546-86b63d7ce6ef",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "puiuiuiuiu",
+          "timestamp": "2026-02-18T16:32:43.958Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_e08feb1cb82191486bdd49ea",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "09ac991fb226c6fe0438899c6b0f1292dcd6df53cfdbdd4e32d45c1a1ce7f05e",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/65dd7db0-e89d-465a-9b1f-52b112286db6.jsonl",
+          "session_id": "65dd7db0-e89d-465a-9b1f-52b112286db6",
+          "engineer_id": "engineer-01",
+          "file_offset": 794
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "type": "assistant",
+            "uuid": "b5a662b3-ada7-443e-a8f8-14f69ba7b45b",
+            "message": {
+              "id": "msg_013wTfQcmAt8bjfHTcF1fG76",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "puiuiuiuiu indeed! 😄\n\nHow can I help you today?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.45",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CYFrawoJhKsK8rNLQ1Q3Q",
+            "sessionId": "65dd7db0-e89d-465a-9b1f-52b112286db6",
+            "timestamp": "2026-02-18T16:32:48.051Z",
+            "parentUuid": "192c4cf3-576b-46b7-b5dd-324f773facb1",
+            "isSidechain": false
+          },
+          "message": "puiuiuiuiu indeed! 😄 How can I help you today?",
+          "timestamp": "2026-02-18T16:32:48.051Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_a98f9e84028ec170c165ec77",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-18",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "be2ff7d4c3c2aea5e12d7e394355efad8c8fe57ccd699976047071856c933aa5",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/65dd7db0-e89d-465a-9b1f-52b112286db6.jsonl",
+          "session_id": "65dd7db0-e89d-465a-9b1f-52b112286db6",
+          "engineer_id": "engineer-01",
+          "file_offset": 1251
+        }
+      }
+    ],
+    "version": 0
+  }
+}

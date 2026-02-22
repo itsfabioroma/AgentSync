@@ -1,0 +1,1708 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.172Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:aeace44b-e309-4b28-8c55-10eb569ba914",
+    "contextId": "ctx_f30bd919152b140e65c6228c",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+    "updatedAtUnix": 1771690317
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "type": "user",
+            "uuid": "c29288ca-9aa6-4d05-b027-af4941fc72a0",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Create a repo for this project and publish on my github"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T07:59:23.740Z",
+            "parentUuid": "255973c1-0b5e-444e-8b56-c06e83000524",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "Create a repo for this project and publish on my github",
+          "timestamp": "2026-01-29T07:59:23.740Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_649150be49bb352121ccb92b",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "78c3ecedb58875b9d768288d2e3d2ddb5b15ce2f48d8a620e80afa3c9dab9886",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 801
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "type": "assistant",
+            "uuid": "d4022aaa-1dfd-40dc-8751-8e77d202c62a",
+            "message": {
+              "id": "msg_01L8wBRvrk2kQn3QuFaMDLFw",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "I'll initialize a git repo and publish it to GitHub.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXbKGE25srsmtytm456bB",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T07:59:29.926Z",
+            "parentUuid": "31f3b566-d4b4-4a8b-93aa-e3600c002066",
+            "isSidechain": false
+          },
+          "message": "I'll initialize a git repo and publish it to GitHub.",
+          "timestamp": "2026-01-29T07:59:29.926Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_41302b40c893a34a3541d628",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3ea59d05c861e87c231feaa67e8c9c18bdccaf285310a94f26bb190d8b8b4538",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 3267
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "68735680-2bbe-4f61-862d-e28c2370b75e",
+            "message": {
+              "id": "msg_01AFVkYQYRGZJ3LskbFEEdym",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Repo published at https://github.com/itsfabioroma/transcribe",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKNGEDB5FJdjdzPKyN6",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:00:50.286Z",
+            "parentUuid": "b50f74e9-f8f2-43f1-8715-dd18a8ca3145",
+            "isSidechain": false
+          },
+          "message": "Done. Repo published at https://github.com/itsfabioroma/transcribe",
+          "timestamp": "2026-01-29T08:00:50.286Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_ab4e8126f58e371a2fe86737",
+        "index": 2,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "35de1b9acb518330880e847aec9f1a784b9d03d29e68762f77a4dc9556c616bc",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 58867
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "8922b485-58ea-47a3-b949-7dd445585ec0",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "create a readme"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:01:31.210Z",
+            "parentUuid": "5dcba87e-2d95-4911-8a54-6847023aa627",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "create a readme",
+          "timestamp": "2026-01-29T08:01:31.210Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_246d55e7315fd29808d231c6",
+        "index": 3,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "2787da23e315ca1358a0fd09331312b29c1b425c4121a2fde7eaafc818ee73ec",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 61780
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "eb84bdfb-a2f8-402a-a617-20956e75e3c0",
+            "message": {
+              "id": "msg_016LGdMMEe9uGAmjA3atEFNi",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. README added and pushed to https://github.com/itsfabioroma/transcribe",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKTWqBY1FSQaGMfypFt",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:02:01.414Z",
+            "parentUuid": "dd084644-0b6f-49a8-9b3a-1ae3dbca0297",
+            "isSidechain": false
+          },
+          "message": "Done. README added and pushed to https://github.com/itsfabioroma/transcribe",
+          "timestamp": "2026-01-29T08:02:01.414Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_f812be026a24e78ab77c492e",
+        "index": 4,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "442f45d60cbb52454d00851c2777f1db34dad0f0753062c8b6a9c8e321a1bd0b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 125945
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "8448f7ec-246b-4918-9a44-ce7f13fcee39",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "I dont want the commit made by claude. Also, Be more descritive. Say what the project does and what is made for. Its means to get the transcripts to use as input to chat with the videos inside LLMs."
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:02:41.054Z",
+            "parentUuid": "4526f879-87ae-4f9f-ac35-a0f42b091fe7",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "I dont want the commit made by claude. Also, Be more descritive. Say what the project does and what is made for. Its means to get the transcripts to use as input to chat with the videos inside LLMs.",
+          "timestamp": "2026-01-29T08:02:41.054Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_b3cd27fd9897f76ab54235c0",
+        "index": 5,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f720f08322558182496400baa0df2cf0802dc173e127870ff8c5d4e59ead8b5a",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 128544
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "c1eeb53a-86ce-42a8-bafa-240c0422ea41",
+            "message": {
+              "id": "msg_01EFbJDvE7S6cBAbuLybHH6d",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Updated README with LLM use case context and removed co-author from all commits.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKYZDByn9GhjojRTgYs",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:03:09.983Z",
+            "parentUuid": "42de2533-8907-4d4b-8420-e4a298c5758d",
+            "isSidechain": false
+          },
+          "message": "Done. Updated README with LLM use case context and removed co-author from all commits.",
+          "timestamp": "2026-01-29T08:03:09.983Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_3a3aea39e640c41ee58ba44b",
+        "index": 6,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "36e8f301fd99bca6e3d39fa558dbbd7a8eea04c29c07ad9345c1fa82dd1f0318",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 152105
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "7d9b3340-8837-4512-ba24-9acb2828eee8",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Can be appended to .zshrc. Just add the line and use as transcribe\n\n# YouTube transcriber alias\nalias transcribe=\"noglob /Users/fabioroma/Code/personal/transcribe/transcribe.sh\"\n\nYou forgot also to mention that it works with local video files too"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:04:29.315Z",
+            "parentUuid": "e1444964-25a9-4c3d-9a1e-e110bbd42379",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "Can be appended to .zshrc. Just add the line and use as transcribe # YouTube transcriber alias alias transcribe=\"noglob /Users/fabioroma/Code/personal/transcribe/transcribe.sh\" You forgot also to mention that it works with local video files too",
+          "timestamp": "2026-01-29T08:04:29.315Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_74a848774fe38edbf38c3d3e",
+        "index": 7,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "4ab74578ab9be43e490577de0706d68cc84579704cb121112d4e880e0ed6aa13",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 154715
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "bd7008b7-b37c-4f2d-bba6-b1171dc162f0",
+            "message": {
+              "id": "msg_019KBpU5z4gdVbbHBgrfrncz",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Alias already in your .zshrc. Updating README.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKfCGoeHUdrQEg9NzAi",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:04:40.172Z",
+            "parentUuid": "6ecb717c-9886-418b-a655-69fb3e705ea9",
+            "isSidechain": false
+          },
+          "message": "Alias already in your .zshrc. Updating README.",
+          "timestamp": "2026-01-29T08:04:40.172Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_3a435560c62f0c988df6f319",
+        "index": 8,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f3321aec88a6cf39a73fea92b4a49d4f781c23f4d9ef23d2c44c3903a832f1fa",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 163475
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "0b3d5e4a-464c-4bb7-9807-bbe43a395f2e",
+            "message": {
+              "id": "msg_01Qy6bZ1to4aaXSNLkt2QMji",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Added shell alias section and local file usage examples.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKgEmemBsHJ7oK6VHkx",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:04:54.018Z",
+            "parentUuid": "0321c2a0-d085-4516-b948-4d265d11d9f5",
+            "isSidechain": false
+          },
+          "message": "Done. Added shell alias section and local file usage examples.",
+          "timestamp": "2026-01-29T08:04:54.018Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_ec151b36ed0d865d7cb5a46a",
+        "index": 9,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f0eec49b78f747aa6068872dd772112c3c1953986745470b680b9a518f79fbd3",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 183868
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "22a8afa1-054a-4f5b-b586-3013c85ea478",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Brand it as transcribee and add bee emojis. bees are cool"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:05:24.839Z",
+            "parentUuid": "1bb1da20-5c31-4fa7-ab63-b1de2aee0e34",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "Brand it as transcribee and add bee emojis. bees are cool",
+          "timestamp": "2026-01-29T08:05:24.839Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_8beb2d5620a099a12fbb76f3",
+        "index": 10,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "6d40dd572889cdb35d9a715a742d5f9986bb6ad043fe9830abf54789c12ec97d",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 186454
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "4bcaa34b-4587-4a6a-9e32-95b0ffc537ad",
+            "message": {
+              "id": "msg_01FivetERnzSPb2vjKuDzHaF",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done 🐝\n\n- Rebranded README with bee emojis\n- Renamed package to `transcribee`\n- Renamed GitHub repo to `transcribee`\n- Updated shell alias to `transcribee`\n\nNew repo: https://github.com/itsfabioroma/transcribee\n\nRun `source ~/.zshrc` to use the new alias.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKky9w944Vz221CyEQs",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:05:59.286Z",
+            "parentUuid": "897e565c-4f2f-4c93-8e22-4e0df1880c0c",
+            "isSidechain": false
+          },
+          "message": "Done 🐝 - Rebranded README with bee emojis - Renamed package to `transcribee` - Renamed GitHub repo to `transcribee` - Updated shell alias to `transcribee` New repo: https://github.com/itsfabioroma/transcribee Run `source ~/.zshrc` to use the new alias.",
+          "timestamp": "2026-01-29T08:05:59.286Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_19d2e05e6cdd2eedff20cec4",
+        "index": 11,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "97aab55c72098de33156e991df4c81e71e49f61e6db4fbdb53b470b616c05ac1",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 220665
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "e8f116d8-215a-44d7-be44-3a2c2593bce2",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "can we add the emoji to repo name or not?"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:06:21.004Z",
+            "parentUuid": "12a3d222-3718-44cd-9be7-5233fac74ebd",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "can we add the emoji to repo name or not?",
+          "timestamp": "2026-01-29T08:06:21.004Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_e7f6fb772cfd474ba55fd84f",
+        "index": 12,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "21855d87cbe5f54095d04f556333225076e1fd80dca22c1593ce64158ce7b8c4",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 223683
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "662c61fc-9d03-44be-9eb6-95c735975515",
+            "message": {
+              "id": "msg_01As7injj3jQxUhZvM4F6rfV",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "No, GitHub repo names only allow alphanumeric, hyphens, underscores, and periods.\n\nBut we can add it to the repo description:",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKo3Gnyk1nqnNeokGin",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:06:27.770Z",
+            "parentUuid": "b0664fe9-899a-4abe-b52d-f423dbcedc8e",
+            "isSidechain": false
+          },
+          "message": "No, GitHub repo names only allow alphanumeric, hyphens, underscores, and periods. But we can add it to the repo description:",
+          "timestamp": "2026-01-29T08:06:27.770Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_f202aef043d1bad1ae1997a9",
+        "index": 13,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "bf027e7f8b3803aa28b486bf207865ab6ddb8af86aadac3d09860702c4bc6e87",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 225974
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "5de8e70c-dc37-41c1-9896-ca8a57cc9e6a",
+            "message": {
+              "id": "msg_01Q1f25W1r9BHX6yftsDXbKm",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Bee emoji added to repo description.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKok1FF4tk5YWiHSGvZ",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:06:36.041Z",
+            "parentUuid": "7292a51c-fc99-4c8a-a3ad-e19e6a1853fc",
+            "isSidechain": false
+          },
+          "message": "Done. Bee emoji added to repo description.",
+          "timestamp": "2026-01-29T08:06:36.041Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_effb4eb2295540c93291ac2f",
+        "index": 14,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "51c921d92f45a8f635f6cc673199dc1d84df3569c0209b547987e7cef0d21b1b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 229841
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "4be969e3-c0d9-43cf-b914-74cec90653f2",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "remove claude as contribitor"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:06:43.791Z",
+            "parentUuid": "6b624bce-178d-45a5-94be-3ecad494fe43",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "remove claude as contribitor",
+          "timestamp": "2026-01-29T08:06:43.791Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_f29e5410e2408a2de2ed08b9",
+        "index": 15,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "9bbb540db82d49d3a070ac1093071fd9b0776a8b309cb07dcca6b20f76df1138",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 232634
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "2cd8e99e-c19f-47c3-ae20-6dc162c88f5b",
+            "message": {
+              "id": "msg_012EC1E4qhKwbB8L49BJYqLL",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "No co-authored-by lines in commits. Checking commit authors:",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKqATCKbopq779fprfD",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:06:56.027Z",
+            "parentUuid": "a7ba45e9-3877-46d3-8068-7b41865c74d0",
+            "isSidechain": false
+          },
+          "message": "No co-authored-by lines in commits. Checking commit authors:",
+          "timestamp": "2026-01-29T08:06:56.027Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_f5c137cb4ef9ed6af0f0ab05",
+        "index": 16,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "5c872fe839b343b7bd51cd1f34d8f6ee6b5498c1a2fd5f5f297b46e5fc3e5258",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 241625
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "31a559a2-90fe-4e97-ac9c-f3bc9bd4bcbb",
+            "message": {
+              "id": "msg_01BZHtaAUjUJACRbStUiBXbM",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "All commits are authored by you. Claude isn't listed as a contributor.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKqV2Q66LAkuQ9msFoZ",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:00.726Z",
+            "parentUuid": "70733c8b-aabf-4f3a-b8e5-50a66ea37c43",
+            "isSidechain": false
+          },
+          "message": "All commits are authored by you. Claude isn't listed as a contributor.",
+          "timestamp": "2026-01-29T08:07:00.726Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_7259552b8a881de4c75cac7f",
+        "index": 17,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "044f899f4087592d6252b95632c40b51ce49c251b0886074eb5065839194ac44",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 246287
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "67f75451-c607-4c29-a329-ede20ea7d6db",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "but claude show on the sidebar as contributor"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:12.846Z",
+            "parentUuid": "6a845ee9-f764-4f22-b571-b2f883f8d0fc",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "but claude show on the sidebar as contributor",
+          "timestamp": "2026-01-29T08:07:12.846Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_c3bbd3d5aaedad777f7ba3ac",
+        "index": 18,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "208db4e0b6ad03b0f0571e443024ec83a3bf6b29aeacda854c93091c09c07f22",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 249108
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "c4ab3725-0128-44fe-b81d-c2f7d46fd734",
+            "message": {
+              "id": "msg_016CC3UTjNuRvrGTLwSrwA4k",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "GitHub caches contributor data. Force-pushing clean history should fix it:",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKrqVjPPsf19wEXUgw5",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:23.980Z",
+            "parentUuid": "34368a87-7dbe-4d05-aa3a-20a36645d908",
+            "isSidechain": false
+          },
+          "message": "GitHub caches contributor data. Force-pushing clean history should fix it:",
+          "timestamp": "2026-01-29T08:07:23.980Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_b9aa399b530aa5f6006f6d0e",
+        "index": 19,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3456305b73fb354e0864d64bb896b4647afe883127abbf9ef1b91a5bb2897c5a",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 253313
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "b8e689d2-3bff-4a36-9b6f-07f730ff94b5",
+            "message": {
+              "id": "msg_01MbfjoNYVa9aTE3buMhidbf",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. GitHub may take a few minutes to update the contributors sidebar. Refresh the page in a bit.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKsydu76Zq8UKW6ms4e",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:34.246Z",
+            "parentUuid": "854a2a4a-d530-464d-97ec-569be3e33084",
+            "isSidechain": false
+          },
+          "message": "Done. GitHub may take a few minutes to update the contributors sidebar. Refresh the page in a bit.",
+          "timestamp": "2026-01-29T08:07:34.246Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_cf3263be052018082294e002",
+        "index": 20,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "2e8ec95f872ffc8ca6a61a05316c2e68298dc7827b9299882d884f18ab8a88ac",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 260231
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "a995c90f-5edb-4ce7-ab87-349b4ea190df",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "still"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:36.325Z",
+            "parentUuid": "a62cce1b-2c1c-49df-8597-f5c1984e44ba",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "still",
+          "timestamp": "2026-01-29T08:07:36.325Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_93aceee57e77862a2918b59e",
+        "index": 21,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "79e0d495e471bae7b128aa50bb56e64a1cddd3af297662491a191d0155d504b6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 263080
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "525cfec8-60f5-4b19-8044-cf36ecd0dfa3",
+            "message": {
+              "id": "msg_01FQh5BwEMEf7TkbUQM5ZNwV",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "GitHub API shows only you as contributor. The sidebar is just cached.\n\nTry:\n- Hard refresh (Cmd+Shift+R)\n- Clear browser cache for github.com\n- Wait ~10 mins for GitHub's cache to clear",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKuTtYub7HzaqnfsGqf",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:07:54.907Z",
+            "parentUuid": "38e0cb46-d28f-470e-96da-dddb22eb284b",
+            "isSidechain": false
+          },
+          "message": "GitHub API shows only you as contributor. The sidebar is just cached. Try: - Hard refresh (Cmd+Shift+R) - Clear browser cache for github.com - Wait ~10 mins for GitHub's cache to clear",
+          "timestamp": "2026-01-29T08:07:54.907Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_01b3c1420d5628e68686a679",
+        "index": 22,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "942993253585c56492630b1e00a067c8f0b42dfff1882651286912065ecd3717",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 271413
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "64be3245-212b-4f26-9fc7-c76d941f1160",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Im not sure we need to use quotes on yt video path"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:08:37.955Z",
+            "parentUuid": "b907ce07-aa74-46d9-abb1-387184af99b8",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "Im not sure we need to use quotes on yt video path",
+          "timestamp": "2026-01-29T08:08:37.955Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_a2a3c315985cdf16985bfbb5",
+        "index": 23,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "51538a983504f60731c044f4cbc712b6a9b89d9e5bac0e6290e756430b5d881f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 274354
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "70f860b2-ab64-42b3-8e3f-e99ab21866fe",
+            "message": {
+              "id": "msg_01FCFj9byQv88qtwTnhpYWfQ",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "The `noglob` in the alias prevents shell expansion of `?` and `&`, so quotes aren't needed with the alias.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbKySfExaW8Gypu7wuB6",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:08:51.310Z",
+            "parentUuid": "589a5e22-f720-4e7f-9756-b7abd443d3c1",
+            "isSidechain": false
+          },
+          "message": "The `noglob` in the alias prevents shell expansion of `?` and `&`, so quotes aren't needed with the alias.",
+          "timestamp": "2026-01-29T08:08:51.310Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_fa6c0ec55b3e3b5a46c3f164",
+        "index": 24,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "bf7fb315eb1e33edb3fd098359cdce1a415547cfe9d9560bee17641656c6e455",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 282890
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "6baddcd2-8b98-4644-be75-f6796a463844",
+            "message": {
+              "id": "msg_01HUL5WWeAQVDiNczW2xXGcR",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Removed quotes from examples - `noglob` handles `?` and `&` in URLs.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbL1ZaGtEuXzuhoLgcoi",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:09:16.937Z",
+            "parentUuid": "5fca90f3-d101-4d0f-876c-618a5fe38234",
+            "isSidechain": false
+          },
+          "message": "Done. Removed quotes from examples - `noglob` handles `?` and `&` in URLs.",
+          "timestamp": "2026-01-29T08:09:16.937Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_3f19ae026d82e8df839b3339",
+        "index": 25,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "96c1097fd44ba6aafae6877d3c62401e3a0609d133e73d95955eae612672e46b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 310633
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "fc99b112-d20c-410a-bcf3-883798a4f2db",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "rollback actually"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:09:34.624Z",
+            "parentUuid": "f88c04e0-b709-45fd-8568-f233eddb76aa",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "rollback actually",
+          "timestamp": "2026-01-29T08:09:34.624Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_c7d3bafdc65c2492446b4514",
+        "index": 26,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "57ac8627de7554bce93fd7537b188d47ffaced302608b49e6a9b888218e70e3b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 313995
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "a4cc34f7-26a0-4c83-8f40-8ba7c66a0f7e",
+            "message": {
+              "id": "msg_01S2XPNgDqhNEsteDGJzXG52",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbL3s4YiQaQHLx2Paz8d",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:09:48.219Z",
+            "parentUuid": "850186be-2e4f-49e1-adb6-75a54649a0c0",
+            "isSidechain": false
+          },
+          "message": "Done.",
+          "timestamp": "2026-01-29T08:09:48.219Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_5b859cc119503eb11ad60712",
+        "index": 27,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "662c962f02e78cf3149215804d49a8ee1c70fb2820970e054803135b974175f0",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 319004
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "f02fe3e5-87e2-4aeb-8be0-74aa0f66ef5b",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Mention on readme its meant for macos"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:10:37.566Z",
+            "parentUuid": "52ba2964-bb61-44b9-9176-01f04a9f35aa",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "Mention on readme its meant for macos",
+          "timestamp": "2026-01-29T08:10:37.566Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_08ae92f008113c2449c9c368",
+        "index": 28,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ca8745c12d436a14206c1a78aa7ed674fd6e9be09af07694b9a28a91a98d7f81",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 321871
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "c5b6aefc-6b81-401c-947b-c9a9c7f229b5",
+            "message": {
+              "id": "msg_01AZWLMrMkHbQdLnNZX9BSZf",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbL8doxoJDWyqmEsjdtb",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:10:51.865Z",
+            "parentUuid": "57ee5f08-f6cf-4a55-80b0-8f94d8cbbb79",
+            "isSidechain": false
+          },
+          "message": "Done.",
+          "timestamp": "2026-01-29T08:10:51.865Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_eaf1182aa72c875fffe5a559",
+        "index": 29,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "45e670c582961e0e56529194835bb8be6704bd58527d8aa7919cb6a93426b651",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 333551
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "user",
+            "uuid": "1c400f3b-52b8-4430-9350-42f6c94c9a7d",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "mention that the script auto organize the folders. actually read the code before"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:14:13.521Z",
+            "parentUuid": "70d0db97-eaa6-45f5-802a-c950375c2e64",
+            "isSidechain": false,
+            "permissionMode": "acceptEdits",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "mention that the script auto organize the folders. actually read the code before",
+          "timestamp": "2026-01-29T08:14:13.521Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_6ad2ed1cf6afc7a9b6ea74cf",
+        "index": 30,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "a9f930ea60f65744a0b854dd12c86a8d4bedac73dc8851af9a7773d8075563e6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 336416
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/personal/transcribe",
+            "slug": "drifting-dreaming-reef",
+            "type": "assistant",
+            "uuid": "b1fcf4a6-df7f-4189-a6ad-5ae27f6b1074",
+            "message": {
+              "id": "msg_0131gMjtoCvXKJ43aKsRpL4r",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Added auto-organization section with library structure example.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXbLRcUKLp2rnBrCqbkXg",
+            "sessionId": "aeace44b-e309-4b28-8c55-10eb569ba914",
+            "timestamp": "2026-01-29T08:14:42.892Z",
+            "parentUuid": "314dac66-c60f-476d-b95e-ae896607968c",
+            "isSidechain": false
+          },
+          "message": "Done. Added auto-organization section with library structure example.",
+          "timestamp": "2026-01-29T08:14:42.892Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_8fe53208e98188214b92ce05",
+        "index": 31,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "620af356f619eefe77a6003328e391d62b25a643c43b9e0733f2b5db770145ed",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-personal-transcribe/aeace44b-e309-4b28-8c55-10eb569ba914.jsonl",
+          "session_id": "aeace44b-e309-4b28-8c55-10eb569ba914",
+          "engineer_id": "engineer-01",
+          "file_offset": 375833
+        }
+      }
+    ],
+    "version": 0
+  }
+}

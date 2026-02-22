@@ -1,0 +1,453 @@
+{
+  "pulledAt": "2026-02-22T01:20:16.652Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:9169e914-9aeb-4804-884c-128ec4f2e53b",
+    "contextId": "ctx_2e07937cdde52a98265c4fc1",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+    "updatedAtUnix": 1771690343
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "type": "user",
+            "uuid": "8d46a63b-f24b-4966-86bb-3f58ce728434",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "How do I integrate ultracontext in this project?\n\nhere is uc docs:\n# Append messages\nSource: https://ultracontext.ai/docs/api-reference/append-messages\n\napi-reference/openapi.json post /contexts/{id}\nAppend one or more messages to the context.\n\n<Info>Appends do **not** create a new version of the context. This happens because the `at` parameter on the GET endpoint is enough to retrieve previous states by index.</Info>\n\n<Warning>`index` is a reserved field. The `metadata` field is extracted and stored at the message level—it won't appear as a regular content field.</Warning>\n\n\n# Authentication\nSource: https://ultracontext.ai/docs/api-reference/authentication\n\nAPI keys and security\n\nAll API requests require authentication via Bearer token.\n\n## API Key Format\n\n```\nuc_live_***\nuc_test_***\n```\n\n* `uc_live_` prefix for production\n* `uc_test_` prefix for development/testing\n\n## Using with SDK\n\n```typescript theme={null}\nimport { UltraContext } from 'ultracontext'\n\nconst uc = new UltraContext({\n  apiKey: process.env.ULTRACONTEXT_API_KEY\n})\n```\n\n## Using with REST\n\nInclude the API key in the `Authorization` header:\n\n```bash theme={null}\ncurl https://api.ultracontext.ai/contexts \\\n  -H \"Authorization: Bearer ******\"\n```\n\n## Security Best Practices\n\n<CardGroup>\n  <Card title=\"Use environment variables\" icon=\"lock\">\n    Never hardcode API keys. Use `.env` files or secret managers.\n  </Card>\n\n  <Card title=\"Don't commit keys\" icon=\"code-branch\">\n    Add `.env` to `.gitignore`. Use `.env.example` for templates.\n  </Card>\n\n  <Card title=\"Rotate if exposed\" icon=\"rotate\">\n    If a key is compromised, regenerate it immediately in the dashboard.\n  </Card>\n\n  <Card title=\"Use test keys for dev\" icon=\"flask\">\n    Use `uc_test_` keys during development to avoid polluting production data.\n  </Card>\n</CardGroup>\n\n## Environment Setup\n\n```bash theme={null}\n# .env\nULTRACONTEXT_API_KEY=uc_live_***\n\n# .env.example (commit this)\nULTRACONTEXT_API_KEY=uc_live_***\n```\n\n```typescript theme={null}\n// Load from environment\nconst uc = new UltraContext({\n  apiKey: process.env.ULTRACONTEXT_API_KEY!\n})\n```\n\n## Server-Side Only\n\n<Warning>\n  API keys should only be used server-side. Never expose them in client-side code or browser JavaScript.\n</Warning>\n\nFor client-side applications, create a backend API route that proxies requests to UltraContext.\n\n\n# Create context\nSource: https://ultracontext.ai/docs/api-reference/create-context\n\napi-reference/openapi.json post /contexts\nCreate a new context. Optionally copy from an existing context using the `from` parameter, and specify a `version` to fork from a specific version.\n\n<Tip>Use `from` with `version`, `at`, or `before` to fork from a specific point in history. Learn more in the [Fork & Clone Contexts](/guides/fork-clone-contexts) guide.</Tip>\n\n\n# Delete messages\nSource: https://ultracontext.ai/docs/api-reference/delete-messages\n\napi-reference/openapi.json delete /contexts/{id}\nDelete one or more messages by `id` or `index`. Each deletion automatically creates a new version.\n\n<Tip>Mix IDs and indices: `[\"msg_abc\", 0, -1]`</Tip>\n\n<Info>Include `metadata` in the request body to record why this deletion was made. It is optional, but recommended to make audit trail easier to understand.</Info>\n\n\n# Errors\nSource: https://ultracontext.ai/docs/api-reference/errors\n\nError codes and handling\n\nAll errors return a JSON object with an `error` field.\n\n## Error Response Format\n\n```json theme={null}\n{\n  \"error\": \"Context not found\"\n}\n```\n\n## HTTP Status Codes\n\n| Status | Description                            |\n| ------ | -------------------------------------- |\n| 200    | Success                                |\n| 201    | Created                                |\n| 400    | Bad request (invalid params)           |\n| 401    | Unauthorized (invalid/missing API key) |\n| 404    | Not found                              |\n| 500    | Server error                           |\n\n## Common Errors\n\n| Error                                | Status | Cause                                            |\n| ------------------------------------ | ------ | ------------------------------------------------ |\n| Context not found                    | 404    | Context ID doesn't exist                         |\n| Version not found                    | 404    | Version number out of range                      |\n| Message not found:                   | 404    | Message ID doesn't exist in context              |\n| Invalid index                        | 400    | `at` parameter is negative or invalid            |\n| Index out of range                   | 400    | Index exceeds message count                      |\n| version, at, and before require from | 400    | Used time-travel params without `from` in create |\n| Invalid timestamp format             | 400    | `before` param is not a valid ISO timestamp      |\n\n## SDK Error Handling\n\nThe SDK throws `UltraContextHttpError` for failed requests:\n\n```typescript theme={null}\nimport { UltraContext, UltraContextHttpError } from 'ultracontext'\n\ntry {\n  await uc.get('ctx_invalid')\n} catch (error) {\n  if (error instanceof UltraContextHttpError) {\n    console.log('Status:', error.status)      // 404\n    console.log('URL:', error.url)            // https://api.ultracontext.ai/contexts/ctx_invalid\n    console.log('Body:', error.bodyText)      // {\"error\":\"Context not found\"}\n  }\n}\n```\n\n## Error Properties\n\n```typescript theme={null}\nclass UltraContextHttpError extends Error {\n  readonly status: number    // HTTP status code\n  readonly url: string       // Request URL\n  readonly bodyText?: string // Response body\n}\n```\n\n## Handling Specific Errors\n\n```typescript theme={null}\nasync function safeGet(contextId: string) {\n  try {\n    return await uc.get(contextId)\n  } catch (error) {\n    if (error instanceof UltraContextHttpError) {\n      switch (error.status) {\n        case 404:\n          // context doesn't exist - create it\n          const ctx = await uc.create()\n          return uc.get(ctx.id)\n        case 401:\n          throw new Error('Invalid API key')\n        default:\n          throw error\n      }\n    }\n    throw error\n  }\n}\n```\n\n## Retry Logic\n\nFor transient errors (500), implement exponential backoff:\n\n```typescript theme={null}\nasync function withRetry<T>(fn: () => Promise<T>, maxRetries = 3): Promise<T> {\n  for (let i = 0; i < maxRetries; i++) {\n    try {\n      return await fn()\n    } catch (error) {\n      if (error instanceof UltraContextHttpError && error.status >= 500) {\n        // wait before retry: 1s, 2s, 4s\n        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)))\n        continue\n      }\n      throw error\n    }\n  }\n  throw new Error('Max retries exceeded')\n}\n\n// usage\nconst ctx = await withRetry(() => uc.create())\n```\n\n\n# Get context\nSource: https://ultracontext.ai/docs/api-reference/get-context\n\napi-reference/openapi.json get /contexts/{id}\nGet context with all messages. Returns latest version by default.\n\n<Info>The `versions` array is only returned when `?history=true`.</Info>\n\n\n# Introduction\nSource: https://ultracontext.ai/docs/api-reference/introduction\n\nUltraContext API reference\n\n## Base URL\n\n```\nhttps://api.ultracontext.ai\n```\n\n## Authentication\n\nAll endpoints require a Bearer token. Get your API key from the dashboard.\n\n```bash theme={null}\ncurl https://api.ultracontext.ai/contexts \\\n  -H \"Authorization: Bearer ******\"\n```\n\n## Quick Example\n\nCreate a context, append a message, and retrieve it:\n\n<CodeGroup>\n  ```typescript Node.js theme={null}\n  import { UltraContext } from 'ultracontext';\n  const uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY });\n\n  // create a context\n  const ctx = await uc.create();\n\n  // append a message\n  await uc.append(ctx.id, { role: 'user', content: 'Hello!' });\n\n  // retrieve the context\n  const { data } = await uc.get(ctx.id);\n  ```\n\n  ```python Python theme={null}\n  from ultracontext import UltraCon... [truncated 71339 chars]"
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-03T03:23:07.335Z",
+            "parentUuid": "2d0098e8-b8b7-4f1b-b292-6a9750ed3492",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "How do I integrate ultracontext in this project? here is uc docs: # Append messages Source: https://ultracontext.ai/docs/api-reference/append-messages api-reference/openapi.json post /contexts/{id} Append one or more messages to the context. <Info>Appends do **not** create a new version of the context. This happens because the `at` parameter on the GET endpoint is enough to retrieve previous states by index.</Info> <Warning>`index` is a reserved field. The `metadata` field is extracted and stored at the message level—it won't appear as a regular content field.</Warning> # Authentication Source: https://ultracontext.ai/docs/api-reference/authentication API keys and security All API requests require authentication via Bearer token. ## API Key Format ``` uc_live_xxxxxxxxxxxxxxxxxxxxxxxxxx uc_test_xxxxxxxxxxxxxxxxxxxxxxxxxx ``` * `uc_live_` prefix for production * `uc_test_` prefix for development/testing ## Using with SDK ```typescript theme={null} import { UltraContext } from 'ultracontext' const uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY }) ``` ## Using with REST Include the API key in the `Authorization` header: ```bash theme={null} curl https://api.ultracontext.ai/contexts \\ -H \"Authorization: Bearer uc_live_xxxxx\" ``` ## Security Best Practices <CardGroup> <Card title=\"Use environment variables\" icon=\"lock\"> Never hardcode API keys. Use `.env` files or secret managers. </Card> <Card title=\"Don't commit keys\" icon=\"code-branch\"> Add `.env` to `.gitignore`. Use `.env.example` for templates. </Card> <Card title=\"Rotate if exposed\" icon=\"rotate\"> If a key is compromised, regenerate it immediately in the dashboard. </Card> <Card title=\"Use test keys for dev\" icon=\"flask\"> Use `uc_test_` keys during development to avoid polluting production data. </Card> </CardGroup> ## Environment Setup ```bash theme={null} # .env ULTRACONTEXT_API_KEY=uc_live_xxxxx # .env.example (commit this) ULTRACONTEXT_API_KEY=uc_live_your_key_here ``` ```typescript theme={null} // Load from environment const uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY! }) ``` ## Server-Side Only <Warning> API keys should only be used server-side. Never expose them in client-side code or browser JavaScript. </Warning> For client-side applications, create a backend API route that proxies requests to UltraContext. # Create context Source: https://ultracontext.ai/docs/api-reference/create-context api-reference/openapi.json post /contexts Create a new context. Optionally copy from an existing context using the `from` parameter, and specify a `version` to fork from a specific version. <Tip>Use `from` with `version`, `at`, or `before` to fork from a specific point in history. Learn more in the [Fork & Clone Contexts](/guides/fork-clone-contexts) guide.</Tip> # Delete messages Source: https://ultracontext.ai/docs/api-reference/delete-messages api-reference/openapi.json delete /contexts/{id} Delete one or more messages by `id` or `index`. Each deletion automati... [truncated 69989 chars]",
+          "timestamp": "2026-02-03T03:23:07.335Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_5e062b75e8bd1bdf32f8e617",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-03",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "0c2ecdfca8e7f50f3d266d4fc0d1ec2dc62ae160f0282b924e228258ece0647d",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 794
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "type": "assistant",
+            "uuid": "e13da698-0e39-44f0-8ebe-fb3c274a4a09",
+            "message": {
+              "id": "msg_01GW55TNvh1v4s4ptVza4qbY",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "I'll explore the codebase to understand the project structure and identify where UltraContext could be integrated.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXkREvgWLDVbJuFXMDEhp",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-03T03:23:15.856Z",
+            "parentUuid": "c254dd61-2d62-4b52-af52-1c3d699a22cf",
+            "isSidechain": false
+          },
+          "message": "I'll explore the codebase to understand the project structure and identify where UltraContext could be integrated.",
+          "timestamp": "2026-02-03T03:23:15.856Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_e13bd8c97b8a2180083f3e8c",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-03",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "812196f5b2a2655a448a85b54ee3bd5d9ca0a0974adac881375a6e58d752ae71",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 87535
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "assistant",
+            "uuid": "cc62deee-7e57-4761-9d37-6fdd587a1068",
+            "message": {
+              "id": "msg_013Xoau32BHCSPNG9L4GQGuc",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now I understand the project. Let me look at the key session/transcript files to identify specific integration points.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXkRLw8ToY622zpcUW5sA",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-03T03:24:36.359Z",
+            "parentUuid": "41693c4d-edf2-42d5-8674-e7591c9a5ac4",
+            "isSidechain": false
+          },
+          "message": "Now I understand the project. Let me look at the key session/transcript files to identify specific integration points.",
+          "timestamp": "2026-02-03T03:24:36.359Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_516fbe410cbd6d2b561b2a66",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-03",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f42fd32ca8db00100f6ba9612f91b678cb167c7c69e83e90a34c7734566f4790",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 382331
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "assistant",
+            "uuid": "029540a5-70b7-495b-ab05-2649814abe16",
+            "message": {
+              "id": "msg_019bkeqpr8v6ceLHyQMiJ7jV",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now I have a clear picture. Here's how to integrate UltraContext:\n\n## Integration Strategy\n\n### Option 1: Parallel Sync (Recommended for gradual adoption)\n\nKeep existing JSONL transcripts, sync to UltraContext for versioning/time-travel.\n\n```typescript\n// src/infra/ultracontext.ts\nimport { UltraContext } from 'ultracontext'\n\nexport const uc = new UltraContext({\n  apiKey: process.env.ULTRACONTEXT_API_KEY\n})\n\n// map sessionKey → contextId\nconst contextMap = new Map<string, string>()\n\nexport async function getOrCreateContext(sessionKey: string): Promise<string> {\n  if (contextMap.has(sessionKey)) return contextMap.get(sessionKey)!\n  \n  const ctx = await uc.create({ metadata: { sessionKey } })\n  contextMap.set(sessionKey, ctx.id)\n  return ctx.id\n}\n```\n\n### Option 2: Wrap SessionManager\n\nHook into existing transcript appends:\n\n```typescript\n// src/config/sessions/transcript.ts - add after line 134\n\n// sync to UltraContext\nif (process.env.ULTRACONTEXT_API_KEY) {\n  const ctxId = await getOrCreateContext(sessionKey)\n  await uc.append(ctxId, {\n    role: 'assistant',\n    content: mirrorText,\n    metadata: { provider: 'openclaw', model: 'delivery-mirror' }\n  })\n}\n```\n\n### Option 3: Full replacement (for new sessions)\n\nCreate an UltraContext-backed session manager:\n\n```typescript\n// src/config/sessions/uc-transcript.ts\nimport { UltraContext } from 'ultracontext'\n\nconst uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY! })\n\nexport async function createSession(sessionKey: string) {\n  return uc.create({ metadata: { sessionKey, version: 1 } })\n}\n\nexport async function appendMessage(ctxId: string, msg: { role: string; content: string }) {\n  return uc.append(ctxId, msg)\n}\n\nexport async function getHistory(ctxId: string, opts?: { at?: number; before?: string }) {\n  return uc.get(ctxId, opts)\n}\n\nexport async function forkSession(ctxId: string, atIndex?: number) {\n  return uc.create({ from: ctxId, at: atIndex })\n}\n```\n\n---\n\n## Quick Start Steps\n\n1. **Install**: `pnpm add ultracontext`\n\n2. **Add env var**:\n```bash\n# .env\nULTRACONTEXT_API_KEY=uc_live_***\n```\n\n3. **Create wrapper** in `src/infra/ultracontext.ts`\n\n4. **Hook into transcript.ts** (line ~134) to sync messages\n\n---\n\n## Key Integration Points\n\n| File | Hook Point | Purpose |\n|------|------------|---------|\n| `src/config/sessions/transcript.ts:134` | After `sessionManager.appendMessage()` | Sync outbound msgs |\n| `src/agents/pi-embedded-runner/run.ts` | Message processing loop | Sync inbound + tool calls |\n| `src/agents/compaction.ts` | Before compaction | Fork context to preserve full history |\n\n---\n\n## Unresolved Questions\n\n- Replace JSONL entirely or run parallel?\n- Sync tool calls/usage metadata to UltraContext?\n- Use UltraContext versioning for prompt A/B testing?\n- Store UltraContext contextIds in `sessions.json` or separate mapping?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXkRMQD8jEZkKhabV7VQL",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-03T03:24:58.792Z",
+            "parentUuid": "c2d51bbc-b8c5-4d71-853e-14c8ff02b556",
+            "isSidechain": false
+          },
+          "message": "Now I have a clear picture. Here's how to integrate UltraContext: ## Integration Strategy ### Option 1: Parallel Sync (Recommended for gradual adoption) Keep existing JSONL transcripts, sync to UltraContext for versioning/time-travel. ```typescript // src/infra/ultracontext.ts import { UltraContext } from 'ultracontext' export const uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY }) // map sessionKey → contextId const contextMap = new Map<string, string>() export async function getOrCreateContext(sessionKey: string): Promise<string> { if (contextMap.has(sessionKey)) return contextMap.get(sessionKey)! const ctx = await uc.create({ metadata: { sessionKey } }) contextMap.set(sessionKey, ctx.id) return ctx.id } ``` ### Option 2: Wrap SessionManager Hook into existing transcript appends: ```typescript // src/config/sessions/transcript.ts - add after line 134 // sync to UltraContext if (process.env.ULTRACONTEXT_API_KEY) { const ctxId = await getOrCreateContext(sessionKey) await uc.append(ctxId, { role: 'assistant', content: mirrorText, metadata: { provider: 'openclaw', model: 'delivery-mirror' } }) } ``` ### Option 3: Full replacement (for new sessions) Create an UltraContext-backed session manager: ```typescript // src/config/sessions/uc-transcript.ts import { UltraContext } from 'ultracontext' const uc = new UltraContext({ apiKey: process.env.ULTRACONTEXT_API_KEY! }) export async function createSession(sessionKey: string) { return uc.create({ metadata: { sessionKey, version: 1 } }) } export async function appendMessage(ctxId: string, msg: { role: string; content: string }) { return uc.append(ctxId, msg) } export async function getHistory(ctxId: string, opts?: { at?: number; before?: string }) { return uc.get(ctxId, opts) } export async function forkSession(ctxId: string, atIndex?: number) { return uc.create({ from: ctxId, at: atIndex }) } ``` --- ## Quick Start Steps 1. **Install**: `pnpm add ultracontext` 2. **Add env var**: ```bash # .env ULTRACONTEXT_API_KEY=uc_live_xxx ``` 3. **Create wrapper** in `src/infra/ultracontext.ts` 4. **Hook into transcript.ts** (line ~134) to sync messages --- ## Key Integration Points | File | Hook Point | Purpose | |------|------------|---------| | `src/config/sessions/transcript.ts:134` | After `sessionManager.appendMessage()` | Sync outbound msgs | | `src/agents/pi-embedded-runner/run.ts` | Message processing loop | Sync inbound + tool calls | | `src/agents/compaction.ts` | Before compaction | Fork context to preserve full history | --- ## Unresolved Questions - Replace JSONL entirely or run parallel? - Sync tool calls/usage metadata to UltraContext? - Use UltraContext versioning for prompt A/B testing? - Store UltraContext contextIds in `sessions.json` or separate mapping?",
+          "timestamp": "2026-02-03T03:24:58.792Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_7d21d95159b4ed063e18153e",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-03",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "724c6fcb2b1fb3ff4c0c80bb2289a09a3b0c5854be601584375acd56245d9d06",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 436057
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "user",
+            "uuid": "f4c4bdeb-50ae-4f2f-ac14-9d2567695b84",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "what about a context store?"
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-04T04:27:45.425Z",
+            "parentUuid": "10c40389-cb68-4ebe-9abc-9a0070ddc67a",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "what about a context store?",
+          "timestamp": "2026-02-04T04:27:45.425Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_77410a4cfda3064676b77eca",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-04",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b3d874ff1f05345734e8b6b3f99cd6008e8cf2c0ffe4042d0f12d4826dcc3ffa",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 441711
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "assistant",
+            "uuid": "1fae3af6-4df3-4c13-a19a-cbf9f6832069",
+            "message": {
+              "id": "msg_01LFsfDj3kUmVupKJUnXjBhQ",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "(no content)",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXnPymdGVxA4z96ie6aek",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-04T04:27:53.354Z",
+            "parentUuid": "f4c4bdeb-50ae-4f2f-ac14-9d2567695b84",
+            "isSidechain": false
+          },
+          "message": "(no content)",
+          "timestamp": "2026-02-04T04:27:53.354Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_e91ddf38fed04aa401556b3c",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-04",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "8a570a84feb2a9597ef11adca7ccd79bb369c90f5f27df4179f86a57f60615db",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 442218
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "assistant",
+            "uuid": "0074c44d-b990-4bdc-8754-0fc09653d3cf",
+            "message": {
+              "id": "msg_01LFsfDj3kUmVupKJUnXjBhQ",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Let me look at the existing store pattern and types to design a context store that fits.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXnPymdGVxA4z96ie6aek",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-04T04:27:57.649Z",
+            "parentUuid": "18f90966-99ba-4624-ac12-b077b39b9b8e",
+            "isSidechain": false
+          },
+          "message": "Let me look at the existing store pattern and types to design a context store that fits.",
+          "timestamp": "2026-02-04T04:27:57.649Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_172f7ccb99e6fff80496d100",
+        "index": 6,
+        "metadata": {
+          "day": "2026-02-04",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "41e669d193afe2610dce80586f01899206c0983d26952e2c0091e40d9a9c5883",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 445716
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/openclaw",
+            "slug": "splendid-finding-valley",
+            "type": "assistant",
+            "uuid": "f6f5b725-8373-485a-8f14-ba8919a7c7f4",
+            "message": {
+              "id": "msg_01BUMb9xaZRt3vn4dMH3sbU6",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Here's a context store design that mirrors the existing session store pattern:\n\n```\nsrc/config/sessions/\n├── store.ts              # existing: sessionKey → SessionEntry (local metadata)\n├── context-store.ts      # new:      sessionKey → UC contextId (remote context)\n├── transcript.ts         # existing: JSONL append (local transcripts)\n└── types.ts              # existing: SessionEntry type\n```\n\n### `src/config/sessions/context-store.ts`\n\n```typescript\nimport { UltraContext, UltraContextHttpError } from 'ultracontext'\nimport { loadSessionStore, updateSessionStore } from './store.js'\n\n// singleton client\nlet _uc: UltraContext | null = null\n\nfunction getClient(): UltraContext | null {\n  if (_uc) return _uc\n  const key = process.env.ULTRACONTEXT_API_KEY\n  if (!key) return null\n  _uc = new UltraContext({ apiKey: key })\n  return _uc\n}\n\n// resolve or create a UC context for a session\nexport async function resolveContext(params: {\n  storePath: string\n  sessionKey: string\n  agentId?: string\n}): Promise<string | null> {\n  const uc = getClient()\n  if (!uc) return null\n\n  const { storePath, sessionKey } = params\n\n  // check if contextId already stored on the session entry\n  const store = loadSessionStore(storePath)\n  const entry = store[sessionKey]\n  if (entry?.contextId) return entry.contextId\n\n  // create new UC context\n  const ctx = await uc.create({\n    metadata: {\n      sessionKey,\n      agentId: params.agentId,\n      createdAt: new Date().toISOString(),\n    },\n  })\n\n  // persist contextId on the session entry\n  await updateSessionStore(storePath, (current) => {\n    const existing = current[sessionKey]\n    if (existing) {\n      existing.contextId = ctx.id\n    }\n  })\n\n  return ctx.id\n}\n\n// append a message to the UC context\nexport async function appendToContext(\n  contextId: string,\n  msg: { role: string; content: string; metadata?: Record<string, unknown> },\n): Promise<void> {\n  const uc = getClient()\n  if (!uc) return\n  await uc.append(contextId, msg)\n}\n\n// get full context history\nexport async function getContext(\n  contextId: string,\n  opts?: { at?: number; before?: string; version?: number; history?: boolean },\n) {\n  const uc = getClient()\n  if (!uc) return null\n  return uc.get(contextId, opts)\n}\n\n// fork context (e.g. before compaction, or for branching)\nexport async function forkContext(\n  contextId: string,\n  opts?: { at?: number; version?: number; metadata?: Record<string, unknown> },\n): Promise<string | null> {\n  const uc = getClient()\n  if (!uc) return null\n  const fork = await uc.create({ from: contextId, ...opts })\n  return fork.id\n}\n\n// update system prompt or any message by index\nexport async function updateContextMessage(\n  contextId: string,\n  update: { index: number; content: string },\n  opts?: { metadata?: Record<string, unknown> },\n): Promise<void> {\n  const uc = getClient()\n  if (!uc) return\n  await uc.update(contextId, update, opts)\n}\n```\n\n### Wire into existing flows\n\n**1. Session creation** - `resolveContext` auto-creates on first use\n\n**2. Transcript appends** - hook into `transcript.ts`:\n\n```typescript\n// after sessionManager.appendMessage() in appendAssistantMessageToSessionTranscript\nconst contextId = await resolveContext({ storePath, sessionKey })\nif (contextId) {\n  await appendToContext(contextId, { role: 'assistant', content: mirrorText })\n}\n```\n\n**3. Compaction** - fork before discarding history:\n\n```typescript\n// in compaction.ts, before pruning\nconst forkedId = await forkContext(contextId, {\n  metadata: { reason: 'pre-compaction', compactionCount }\n})\n```\n\n**4. Session reset** (`/new`) - fork + start fresh context:\n\n```typescript\nconst freshCtx = await forkContext(oldContextId, {\n  at: 0, // system prompt only\n  metadata: { reason: 'user-reset' }\n})\n```\n\n### Add `contextId` to SessionEntry\n\n```typescript\n// types.ts - add to SessionEntry\nexport type SessionEntry = {\n  // ... existing fields\n  contextId?: string  // UltraContext context ID\n}\n```\n\n---\n\n### Key design choices\n\n| Decision | Rationale |\n|----------|-----------|\n| Opt-in via env var | No-op when `ULTRACONTEXT_API_KEY` absent |\n| contextId on SessionEntry | Reuses existing store; no separate mapping file |\n| Singleton client | Matches codebase patterns (single config, lazy init) |\n| Fork before compaction | Preserves full history remotely while pruning locally |\n\n### Unresolved questions\n\n- Store contextId per session or per agent?\n- Fork on every compaction or only first?\n- Sync inbound user messages too, or only assistant replies?\n- Batch appends (UC supports arrays) to reduce API calls?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXnQ13kuRNCdQqp9smbHN",
+            "sessionId": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+            "timestamp": "2026-02-04T04:28:33.863Z",
+            "parentUuid": "6608a418-b9dc-4901-a228-033401b0ac2b",
+            "isSidechain": false
+          },
+          "message": "Here's a context store design that mirrors the existing session store pattern: ``` src/config/sessions/ ├── store.ts # existing: sessionKey → SessionEntry (local metadata) ├── context-store.ts # new: sessionKey → UC contextId (remote context) ├── transcript.ts # existing: JSONL append (local transcripts) └── types.ts # existing: SessionEntry type ``` ### `src/config/sessions/context-store.ts` ```typescript import { UltraContext, UltraContextHttpError } from 'ultracontext' import { loadSessionStore, updateSessionStore } from './store.js' // singleton client let _uc: UltraContext | null = null function getClient(): UltraContext | null { if (_uc) return _uc const key = process.env.ULTRACONTEXT_API_KEY if (!key) return null _uc = new UltraContext({ apiKey: key }) return _uc } // resolve or create a UC context for a session export async function resolveContext(params: { storePath: string sessionKey: string agentId?: string }): Promise<string | null> { const uc = getClient() if (!uc) return null const { storePath, sessionKey } = params // check if contextId already stored on the session entry const store = loadSessionStore(storePath) const entry = store[sessionKey] if (entry?.contextId) return entry.contextId // create new UC context const ctx = await uc.create({ metadata: { sessionKey, agentId: params.agentId, createdAt: new Date().toISOString(), }, }) // persist contextId on the session entry await updateSessionStore(storePath, (current) => { const existing = current[sessionKey] if (existing) { existing.contextId = ctx.id } }) return ctx.id } // append a message to the UC context export async function appendToContext( contextId: string, msg: { role: string; content: string; metadata?: Record<string, unknown> }, ): Promise<void> { const uc = getClient() if (!uc) return await uc.append(contextId, msg) } // get full context history export async function getContext( contextId: string, opts?: { at?: number; before?: string; version?: number; history?: boolean }, ) { const uc = getClient() if (!uc) return null return uc.get(contextId, opts) } // fork context (e.g. before compaction, or for branching) export async function forkContext( contextId: string, opts?: { at?: number; version?: number; metadata?: Record<string, unknown> }, ): Promise<string | null> { const uc = getClient() if (!uc) return null const fork = await uc.create({ from: contextId, ...opts }) return fork.id } // update system prompt or any message by index export async function updateContextMessage( contextId: string, update: { index: number; content: string }, opts?: { metadata?: Record<string, unknown> }, ): Promise<void> { const uc = getClient() if (!uc) return await uc.update(contextId, update, opts) } ``` ### Wire into existing flows **1. Session creation** - `resolveContext` auto-creates on first use **2. Transcript appends** - hook into `transcript.ts`: ```typescript // after sessionManager.appendMessage() in appendAssistantMessageToSessionTranscript const contextId = await resolveCo... [truncated 1341 chars]",
+          "timestamp": "2026-02-04T04:28:33.863Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_c8dc89d8e888b4f6368cd5b1",
+        "index": 7,
+        "metadata": {
+          "day": "2026-02-04",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f85a98d7fe4abae53f308ae889b815f08da2b63e919f55794112f585f22057e1",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-openclaw/9169e914-9aeb-4804-884c-128ec4f2e53b.jsonl",
+          "session_id": "9169e914-9aeb-4804-884c-128ec4f2e53b",
+          "engineer_id": "engineer-01",
+          "file_offset": 493651
+        }
+      }
+    ],
+    "version": 0
+  }
+}

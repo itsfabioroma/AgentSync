@@ -1,0 +1,49 @@
+{
+  "pulledAt": "2026-02-22T01:20:14.841Z",
+  "cache": {
+    "cacheKey": "ctx:session:openclaw:Fabios-MacBook-Pro.local:engineer-01:1beb185d",
+    "contextId": "ctx_e9449dd305e77b2ea2453a12",
+    "source": "openclaw",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "1beb185d",
+    "updatedAtUnix": 1771690593
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "id": "1beb185d",
+            "type": "message",
+            "message": {
+              "role": "user",
+              "contentTypes": [
+                "text"
+              ]
+            },
+            "parentId": "2d217fe4",
+            "timestamp": "2026-02-21T16:16:32.708Z"
+          },
+          "message": "Conversation info (untrusted metadata): ```json { \"message_id\": \"121\", \"sender\": \"8291441498\" } ``` hii",
+          "timestamp": "2026-02-21T16:16:32.708Z",
+          "event_type": "openclaw.user"
+        },
+        "id": "msg_a94f6e5caa6ee78feb286135",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "openclaw",
+          "event_id": "ef55b487e0391adadb5ab9cec9bf651fea48acab18bc87281468edac43174c82",
+          "file_path": "/Users/fabioroma/.openclaw/agents/main/sessions/d9ca831e-c6c5-447c-b7be-9371dfbfc8dd.jsonl",
+          "session_id": "1beb185d",
+          "engineer_id": "engineer-01",
+          "file_offset": 17235
+        }
+      }
+    ],
+    "version": 0
+  }
+}

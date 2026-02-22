@@ -1,0 +1,345 @@
+{
+  "pulledAt": "2026-02-22T01:20:14.638Z",
+  "cache": {
+    "cacheKey": "ctx:session:codex:Fabios-MacBook-Pro.local:engineer-01:872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+    "contextId": "ctx_8988d4baa19755075dbf119a",
+    "source": "codex",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+    "updatedAtUnix": 1771690773
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "session_meta",
+            "payload": {
+              "id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+              "cwd": "/Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+              "source": "cli",
+              "timestamp": "2026-02-21T16:18:30.225Z",
+              "originator": "ultracontext_daemon",
+              "cli_version": "restored",
+              "model_provider": "openai"
+            },
+            "timestamp": "2026-02-21T16:18:30.225Z"
+          },
+          "message": "Session started in /Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+          "timestamp": "2026-02-21T16:18:30.225Z",
+          "event_type": "session_meta"
+        },
+        "id": "msg_ba5b89b8992540fe850ea7cf",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "7fca76bbec6762adfdec8e7e0cd412d84c1f50e64c04c981cec9816b4870d8a1",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "hey man",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:18:30.225Z"
+          },
+          "message": "hey man",
+          "timestamp": "2026-02-21T16:18:30.225Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_b8c34335759b70737ae9726d",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "b7109304354cc4617fd9ce21fc60af72ab8043c75693c1e0fede0776cd315887",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 324
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Hey! What can I help you with?"
+            },
+            "timestamp": "2026-02-21T16:18:34.423Z"
+          },
+          "message": "Hey! What can I help you with?",
+          "timestamp": "2026-02-21T16:18:34.423Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_442c5f99f6cfec750ef820bf",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "65064d477af0ed2ef0136b4b9efcd9a629429080d6104b088301320c4d708059",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 487
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "are u ok?",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:18:36.337Z"
+          },
+          "message": "are u ok?",
+          "timestamp": "2026-02-21T16:18:36.337Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_fd3ef4ef971db719728d1cda",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "c4148e252387ca3728d2c319043f1d571e072019904c98a23c89ef506c9834c7",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 625
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "All good here! Ready to help whenever you need something. What's up?"
+            },
+            "timestamp": "2026-02-21T16:18:40.349Z"
+          },
+          "message": "All good here! Ready to help whenever you need something. What's up?",
+          "timestamp": "2026-02-21T16:18:40.349Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_f21bbb54f81d008f34942207",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "453009aa08fb1fc14d5444fae7a5db8e8fac00865dd58c193901359033fbd77f",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 790
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "hope so",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:18:42.319Z"
+          },
+          "message": "hope so",
+          "timestamp": "2026-02-21T16:18:42.319Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_9b8db027fbacd5780acaaf13",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "086c02da29b8e8cf67d11d3a94839c8098f6d78225d0d6f91c5456edb2f08c60",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 966
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Haha appreciate it. Let me know if you need anything!"
+            },
+            "timestamp": "2026-02-21T16:18:46.533Z"
+          },
+          "message": "Haha appreciate it. Let me know if you need anything!",
+          "timestamp": "2026-02-21T16:18:46.533Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_830e06e4f7580ee05bed5989",
+        "index": 6,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "80d43b3c42299431d876816ea117f0a82ebc609b2d6c41b64621de29a5ee6dd4",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 1129
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "Im gabio",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:18:48.463Z"
+          },
+          "message": "Im gabio",
+          "timestamp": "2026-02-21T16:18:48.463Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_94104e2d6f50449fe3780fbb",
+        "index": 7,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "499b52d572dae257d871f5d17547e5d69d68b083dc0e4f316f8b6e46403e7378",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 1290
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Hey Fabio! (guessing the typo 😄) Nice to meet you. What are we working on today?"
+            },
+            "timestamp": "2026-02-21T16:18:53.161Z"
+          },
+          "message": "Hey Fabio! (guessing the typo 😄) Nice to meet you. What are we working on today?",
+          "timestamp": "2026-02-21T16:18:53.161Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_dd27a77c238430396fc9bf53",
+        "index": 8,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "36fec46851ac7c7017523c62fdd2fc4514f05264646c0ccd31b294693c01fd22",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 1454
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "nice to meet you",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:18:55.081Z"
+          },
+          "message": "nice to meet you",
+          "timestamp": "2026-02-21T16:18:55.081Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_83cf4ebffefb85abc620f811",
+        "index": 9,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "696eaadae3c186bc2f6613ca724de42835c6b327a601beefb5496b07feb8afd5",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 1645
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Likewise! Whenever you're ready to build something, I'm here."
+            },
+            "timestamp": "2026-02-21T16:18:59.083Z"
+          },
+          "message": "Likewise! Whenever you're ready to build something, I'm here.",
+          "timestamp": "2026-02-21T16:18:59.083Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_d2181082a68cc084dee509f7",
+        "index": 10,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "56cb17397cf1d2cce6a47157402b152373f9936e1b600402b56efd23208ba392",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-18-30-872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8.jsonl",
+          "session_id": "872f07e1-a1fd-41b0-a2b5-5bfe3d0dbfe8",
+          "engineer_id": "engineer-01",
+          "file_offset": 1817
+        }
+      }
+    ],
+    "version": 0
+  }
+}

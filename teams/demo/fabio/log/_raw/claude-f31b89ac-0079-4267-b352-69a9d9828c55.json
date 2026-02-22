@@ -1,0 +1,125 @@
+{
+  "pulledAt": "2026-02-22T01:20:16.403Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:f31b89ac-0079-4267-b352-69a9d9828c55",
+    "contextId": "ctx_d3c0a2bb2008517df0b22ba7",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "f31b89ac-0079-4267-b352-69a9d9828c55",
+    "updatedAtUnix": 1771690357
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext/agents/vercel-ai-sdk",
+            "type": "user",
+            "uuid": "1d17e9ef-4999-47d0-ac3a-e9de9d7b0aea",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "why this happens after I execute a query on /rlm?\n\n❯ Console Error                                                                                                                                                   \n                                                                                                                                                                  \n                                                                                                                                                                  \n  RLM Error: \"Failed after 3 attempts. Last error: Internal server error\"                                                                                         \n  components/rlm/rlm-chat.tsx (29:21) @ RLMChat.useRLM                                                                                                            \n                                                                                                                                                                  \n                                                                                                                                                                  \n  27 |         },                                                                                                                                                 \n  28 |         onError: (error) => {                                                                                                                              \n  > 29 |             console.error('RLM Error:', error);                                                                                                          \n  |                     ^                                                                                                                                         \n  30 |         },                                                                                                                                                 \n  31 |     });                                                                                                                                                    \n  32 |  "
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "f31b89ac-0079-4267-b352-69a9d9828c55",
+            "timestamp": "2026-01-22T22:19:54.711Z",
+            "parentUuid": "3c24829d-861a-48c1-8bcc-dbf4ded123a2",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "why this happens after I execute a query on /rlm? ❯ Console Error RLM Error: \"Failed after 3 attempts. Last error: Internal server error\" components/rlm/rlm-chat.tsx (29:21) @ RLMChat.useRLM 27 | }, 28 | onError: (error) => { > 29 | console.error('RLM Error:', error); | ^ 30 | }, 31 | }); 32 |",
+          "timestamp": "2026-01-22T22:19:54.711Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_1f82465b7bc13980aac83cb0",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "71ac1265556b1fc78d142859d25d15ab3c524922e66538135fe5bfc23021d3df",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext-agents-vercel-ai-sdk/f31b89ac-0079-4267-b352-69a9d9828c55.jsonl",
+          "session_id": "f31b89ac-0079-4267-b352-69a9d9828c55",
+          "engineer_id": "engineer-01",
+          "file_offset": 819
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext/agents/vercel-ai-sdk",
+            "type": "assistant",
+            "uuid": "0fb30063-743b-4561-b78f-ad7519bd98ab",
+            "error": "unknown",
+            "message": {
+              "id": "86694e49-2dc0-4955-93e8-8514a1ef9183",
+              "role": "assistant",
+              "type": "message",
+              "model": "<synthetic>",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": null,
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "server_tool_use": {
+                  "web_fetch_requests": 0,
+                  "web_search_requests": 0
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"},\"request_id\":\"req_011CXPCDu8cuSfJ2oSTxt6jq\"}",
+                  "type": "text"
+                }
+              ],
+              "container": null,
+              "stop_reason": "stop_sequence",
+              "stop_sequence": "",
+              "context_management": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "f31b89ac-0079-4267-b352-69a9d9828c55",
+            "timestamp": "2026-01-22T22:19:59.120Z",
+            "parentUuid": "1d17e9ef-4999-47d0-ac3a-e9de9d7b0aea",
+            "isSidechain": false,
+            "isApiErrorMessage": true
+          },
+          "message": "API Error: 500 {\"type\":\"error\",\"error\":{\"type\":\"api_error\",\"message\":\"Internal server error\"},\"request_id\":\"req_011CXPCDu8cuSfJ2oSTxt6jq\"}",
+          "timestamp": "2026-01-22T22:19:59.120Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_0354777a3a8d47bf20ec8751",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3f1d5ca4b919243a5a1b30298929fe5e427c69f79af0323eb2fd94c8b74e13a9",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext-agents-vercel-ai-sdk/f31b89ac-0079-4267-b352-69a9d9828c55.jsonl",
+          "session_id": "f31b89ac-0079-4267-b352-69a9d9828c55",
+          "engineer_id": "engineer-01",
+          "file_offset": 3508
+        }
+      }
+    ],
+    "version": 0
+  }
+}

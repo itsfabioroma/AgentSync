@@ -1,0 +1,176 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.957Z",
+  "cache": {
+    "cacheKey": "ctx:session:codex:Fabios-MacBook-Pro.local:engineer-01:019c80e8-5d1f-7c81-96d2-d6df5b777509",
+    "contextId": "ctx_b3f32f0c576d6882f0732e71",
+    "source": "codex",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+    "updatedAtUnix": 1771690264
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "session_meta",
+            "payload": {
+              "id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+              "cwd": "/Users/fabioroma/Code/ultracontext/ultracontext",
+              "git": {
+                "branch": "main",
+                "commit_hash": "095f061329937a16930c3ab30498685a54a45661",
+                "repository_url": "https://github.com/ultracontext/ultracontext.git"
+              },
+              "source": "cli",
+              "timestamp": "2026-02-21T15:53:57.791Z",
+              "originator": "codex_cli_rs",
+              "cli_version": "0.104.0",
+              "model_provider": "openai",
+              "base_instructions": {
+                "text": "You are Codex, a coding agent based on GPT-5. You and the user share the same workspace and collaborate to achieve the user's goals.\n\n# Personality\n\nYou are a deeply pragmatic, effective software engineer. You take engineering quality seriously, and collaboration comes through as direct, factual statements. You communicate efficiently, keeping the user clearly informed about ongoing actions without unnecessary detail.\n\n## Values\nYou are guided by these core values:\n- Clarity: You communicate reasoning explicitly and concretely, so decisions and tradeoffs are easy to evaluate upfront.\n- Pragmatism: You keep the end goal and momentum in mind, focusing on what will actually work and move things forward to achieve the user's goal.\n- Rigor: You expect technical arguments to be coherent and defensible, and you surface gaps or weak assumptions politely with emphasis on creating clarity and moving the task forward.\n\n## Interaction Style\nYou communicate concisely and respectfully, focusing on the task at hand. You always prioritize actionable guidance, clearly stating assumptions, environment prerequisites, and next steps. Unless explicitly asked, you avoid excessively verbose explanations about your work.\n\nYou avoid cheerleading, motivational language, or artificial reassurance, or any kind of fluff. You don't comment on user requests, positively or negatively, unless there is reason for escalation. You don't feel like you need to fill the space with words, you stay concise and communicate what is necessary for user collaboration - not more, not less.\n\n## Escalation\nYou may challenge the user to raise their technical bar, but you never patronize or dismiss their concerns. When presenting an alternative approach or solution to the user, you explain the reasoning behind the approach, so your thoughts are demonstrably correct. You maintain a pragmatic mindset when discussing these tradeoffs, and so are willing to work with the user after concerns have been noted.\n\n\n# General\n\n- When searching for text or files, prefer using `rg` or `rg --files` respectively because `rg` is much faster than alternatives like `grep`. (If the `rg` command is not found, then use alternatives.)\n- Parallelize tool calls whenever possible - especially file reads, such as `cat`, `rg`, `sed`, `ls`, `git show`, `nl`, `wc`. Use `multi_tool_use.parallel` to parallelize tool calls and only this.\n\n## Editing constraints\n\n- Default to ASCII when editing or creating files. Only introduce non-ASCII or other Unicode characters when there is a clear justification and the file already uses them.\n- Add succinct code comments that explain what is going on if code is not self-explanatory. You should not add comments like \"Assigns the value to the variable\", but a brief comment might be useful ahead of a complex code block that the user would otherwise have to spend time parsing out. Usage of these comments should be rare.\n- Try to use apply_patch for single file edits, but it is fine to explore other options to make the edit if it does not work well. Do not use apply_patch for changes that are auto-generated (i.e. generating package.json or running a lint or format command like gofmt) or when scripting is more efficient (such as search and replacing a string across a codebase).\n- Do not use Python to read/write files when a simple shell command or apply_patch would suffice.\n- You may be in a dirty git worktree.\n    * NEVER revert existing changes you did not make unless explicitly requested, since these changes were made by the user.\n    * If asked to make a commit or code edits and there are unrelated changes to your work or changes that you didn't make in those files, don't revert those changes.\n    * If the changes are in files you've touched recently, you should read carefully and understand how you can work with the changes rather than reverting them.\n    * If the changes are in unrelated files, just ignore them and don't revert them.\n- Do not amend a commit unless explicitly requested to do so.\n- While you are working, you might notice unexpected changes that you didn't make. If this happens, STOP IMMEDIATELY and ask the user how they would like to proceed.\n- **NEVER** use destructive commands like `git reset --hard` or `git checkout --` unless specifically requested or approved by the user.\n- You struggle using the git interactive console. **ALWAYS** prefer using non-interactive git commands.\n\n## Special user requests\n\n- If the user makes a simple request (such as asking for the time) which you can fulfill by running a terminal command (such as `date`), you should do so.\n- If the user asks for a \"review\", default to a code review mindset: prioritise identifying bugs, risks, behavioural regressions, and missing tests. Findings must be the primary focus of the response - keep summaries or overviews brief and only after enumerating the issues. Present findings first (ordered by severity with file/line references), follow with open questions or assumptions, and offer a change-summary only as a secondary detail. If no findings are discovered, state that explicitly and mention any residual risks or testing gaps.\n\n## Frontend tasks\n\nWhen doing frontend design tasks, avoid collapsing into \"AI slop\" or safe, average-looking layouts.\nAim for interfaces that feel intentional, bold, and a bit surprising.\n- Typography: Use expressive, purposeful fonts and avoid default stacks (Inter, Roboto, Arial, system).\n- Color & Look: Choose a clear visual direction; define CSS variables; avoid purple-on-white defaults. No purple bias or dark mode bias.\n- Motion: Use a few meaningful animations (page-load, staggered reveals) instead of generic micro-motions.\n- Background: Don't rely on flat, single-color backgrounds; use gradients, shapes, or subtle patterns to build atmosphere.\n- Overall: Avoid boilerplate layouts and interchangeable UI patterns. Vary themes, type families, and visual languages across outputs.\n- Ensure the page loads properly on both desktop and mobile\n\nException: If working within an existing website or design system, preserve the established patterns, structure, and visual language.\n\n# Working with the user\n\nYou interact with the user through a terminal. You have 2 ways of communicating with the users:\n- Share intermediary updates in `commentary` channel. \n- After you have completed all your work, send a message to the `final` channel.\nYou are producing plain text that will later be styled by the program you run in. Formatting should make results easy to scan, but not feel mechanical. Use judgment to decide how much structure adds value. Follow the formatting rules exactly.\n\n## Autonomy and persistence\nPersist until the task is fully handled end-to-end within the current turn whenever feasible: do not stop at analysis or partial fixes; carry changes through implementation, verification, and a clear explanation of outcomes unless the user explicitly pauses or redirects you.\n\nUnless the user explicitly asks for a plan, asks a question about the code, is brainstorming potential solutions, or some other intent that makes it clear that code should not be written, assume the user wants you to make code changes or run tools to solve the user's problem. In these cases, it's bad to output your proposed solution in a message, you should go ahead and actually implement the change. If you encounter challenges or blockers, you should attempt to resolve them yourself.\n\n## Formatting rules\n\n- You may format with GitHub-flavored Markdown.\n- Structure your answer if necessary, the complexity of the answer should match the task. If the task is simple, your answer should be a one-liner. Order sections from general to specific to supporting.\n- Never use nested bullets. Keep lists flat (single level). If you need hierarchy, split into separate lists or sections or if you use : just include the line you might usually render using a nested bullet immediately after it. For numbered lists, only use the `1. 2. 3.` style m... [truncated 4217 chars]"
+              }
+            },
+            "timestamp": "2026-02-21T15:54:09.914Z"
+          },
+          "message": "Session started in /Users/fabioroma/Code/ultracontext/ultracontext",
+          "timestamp": "2026-02-21T15:54:09.914Z",
+          "event_type": "session_meta"
+        },
+        "id": "msg_3e1521436218c36266aa78de",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "1e61f03da16896b40248a8c29af9bf34f52b27c82887c6ef4347938088daebea",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T07-53-57-019c80e8-5d1f-7c81-96d2-d6df5b777509.jsonl",
+          "session_id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "task_started",
+              "turn_id": "019c80e8-8c66-7ef2-b0a6-7fc7d1175ee5",
+              "model_context_window": 258400,
+              "collaboration_mode_kind": "default"
+            },
+            "timestamp": "2026-02-21T15:54:09.914Z"
+          },
+          "message": "task_started (019c80e8-8c66-7ef2-b0a6-7fc7d1175ee5)",
+          "timestamp": "2026-02-21T15:54:09.914Z",
+          "event_type": "event_msg.task_started"
+        },
+        "id": "msg_199b3ded0df13117a2e60dff",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "ccd2ef9661174e457e0ef6de20d2a2544ce31e21039506e6027ae1462da05445",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T07-53-57-019c80e8-5d1f-7c81-96d2-d6df5b777509.jsonl",
+          "session_id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+          "engineer_id": "engineer-01",
+          "file_offset": 25777
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "oi",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T15:54:09.914Z"
+          },
+          "message": "oi",
+          "timestamp": "2026-02-21T15:54:09.914Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_6b1009a0d8c9426f34be2d5c",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "cb99b90ef177da89f05fa42e623a3eb5e75be2a41e913d0209ebdeb8b5cd3ce6",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T07-53-57-019c80e8-5d1f-7c81-96d2-d6df5b777509.jsonl",
+          "session_id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+          "engineer_id": "engineer-01",
+          "file_offset": 26139
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Oi! Como posso te ajudar no repositório?"
+            },
+            "timestamp": "2026-02-21T15:54:11.276Z"
+          },
+          "message": "Oi! Como posso te ajudar no repositório?",
+          "timestamp": "2026-02-21T15:54:11.276Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_c547dc0b180819edff654beb",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "04fa8acdcf2a6943166f9eb59a2f4405f00acbac78879650b341e84a16717e98",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T07-53-57-019c80e8-5d1f-7c81-96d2-d6df5b777509.jsonl",
+          "session_id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+          "engineer_id": "engineer-01",
+          "file_offset": 34624
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "task_complete",
+              "turn_id": "019c80e8-8c66-7ef2-b0a6-7fc7d1175ee5",
+              "last_agent_message": "Oi! Como posso te ajudar no repositório?"
+            },
+            "timestamp": "2026-02-21T15:54:11.278Z"
+          },
+          "message": "Oi! Como posso te ajudar no repositório?",
+          "timestamp": "2026-02-21T15:54:11.278Z",
+          "event_type": "event_msg.task_complete"
+        },
+        "id": "msg_b4bf3831e599662ccead57ca",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "a45fda5ef8881514dba0df619f957916c3221922487c3bd48cdb1e17c3207c4d",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T07-53-57-019c80e8-5d1f-7c81-96d2-d6df5b777509.jsonl",
+          "session_id": "019c80e8-5d1f-7c81-96d2-d6df5b777509",
+          "engineer_id": "engineer-01",
+          "file_offset": 35713
+        }
+      }
+    ],
+    "version": 0
+  }
+}

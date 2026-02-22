@@ -25,7 +25,9 @@
     "dev": "mcp-use dev",
     "start": "mcp-use start",
     "deploy": "mcp-use deploy",
-    "postinstall": "mcp-use generate-types || true"
+    "postinstall": "mcp-use generate-types || true",
+    "demo:pull-fabio-sessions": "tsx src/pullFabioSessions.ts",
+    "demo:pull-fabio-sessions:dry-run": "tsx src/pullFabioSessions.ts --dry-run"
   },
   "dependencies": {
     "@openai/apps-sdk-ui": "^0.2.1",

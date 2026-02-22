@@ -1,0 +1,142 @@
+{
+  "pulledAt": "2026-02-22T01:20:16.444Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+    "contextId": "ctx_ece22373ba2e74f8137778e7",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+    "updatedAtUnix": 1771690353
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext/agents/vercel-ai-sdk",
+            "type": "user",
+            "uuid": "200270df-ffbc-4694-bd00-d0a877a75e0e",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hello"
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+            "timestamp": "2025-12-27T02:41:17.077Z",
+            "parentUuid": null,
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "hello",
+          "timestamp": "2025-12-27T02:41:17.077Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_d9d6abf7be104a3e2ea2ac7f",
+        "index": 0,
+        "metadata": {
+          "day": "2025-12-27",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "2d2c71b4ea6ebfc23f9a0cd347b5fe63e1db3d30d7bb38da48e40425e630a508",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext-agents-vercel-ai-sdk/03fc4f9c-1c32-45ae-91c5-9e419e3be9d4.jsonl",
+          "session_id": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+          "engineer_id": "engineer-01",
+          "file_offset": 236
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext/agents/vercel-ai-sdk",
+            "type": "assistant",
+            "uuid": "b62a9003-0889-4e9b-903d-92da4d1f798d",
+            "message": {
+              "id": "msg_01PrGkG8YULZ1Qc4gjuPMfsF",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! How can I help you today?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CWWRK2YpH4yZisaqpYav4",
+            "sessionId": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+            "timestamp": "2025-12-27T02:41:21.606Z",
+            "parentUuid": "19c90a95-56f3-48cf-8024-beca79c77da9",
+            "isSidechain": false
+          },
+          "message": "Hey! How can I help you today?",
+          "timestamp": "2025-12-27T02:41:21.606Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_efeacff77f9d76ffb6654b11",
+        "index": 1,
+        "metadata": {
+          "day": "2025-12-27",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "7c05c36775030b115a18fe16964cc71bfff14c87a441fe0b9ca6281a02e764dd",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext-agents-vercel-ai-sdk/03fc4f9c-1c32-45ae-91c5-9e419e3be9d4.jsonl",
+          "session_id": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+          "engineer_id": "engineer-01",
+          "file_offset": 1935
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "summary",
+            "summary": "User Greeting and Assistant Offer of Help",
+            "leafUuid": "b62a9003-0889-4e9b-903d-92da4d1f798d"
+          },
+          "message": "User Greeting and Assistant Offer of Help",
+          "timestamp": "2026-02-21T16:12:34.512Z",
+          "event_type": "claude.summary"
+        },
+        "id": "msg_fdac9c99e0e1b7badc220a33",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "36b05697b7895c6de30949c8331e05eb531746fc47ec0e97e88292d341e61adb",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext-agents-vercel-ai-sdk/03fc4f9c-1c32-45ae-91c5-9e419e3be9d4.jsonl",
+          "session_id": "03fc4f9c-1c32-45ae-91c5-9e419e3be9d4",
+          "engineer_id": "engineer-01",
+          "file_offset": 3401
+        }
+      }
+    ],
+    "version": 0
+  }
+}

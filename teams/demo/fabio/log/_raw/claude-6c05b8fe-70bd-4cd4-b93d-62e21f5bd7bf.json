@@ -1,0 +1,415 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.725Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+    "contextId": "ctx_e6acb2388573d39d0567edd7",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+    "updatedAtUnix": 1771690274
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "type": "user",
+            "uuid": "1114b6a8-aaed-4d78-8270-80aa135bbeaa",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Explain how billing works here. How firecral charges? Also, why is the billing open source?"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T01:08:42.014Z",
+            "parentUuid": "14fbdc10-881c-4229-b85a-b1721ee88507",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Explain how billing works here. How firecral charges? Also, why is the billing open source?",
+          "timestamp": "2026-02-15T01:08:42.014Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_8cf792330d950fddf1d7115a",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b39d61e8fae247e789f51ec116a4a75149f4c0715906445c0dfcf5bb3abdc866",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 795
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "assistant",
+            "uuid": "54d86d1c-a40c-475c-b7df-e53ecf8acfd8",
+            "message": {
+              "id": "msg_01DNfNeJ5Kw7fQZsmPtr8ihC",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "## How Firecrawl Billing Works\n\n### Credit-based system\n\nFirecrawl uses a **credit currency** — each API operation costs credits:\n\n| Operation | Cost |\n|---|---|\n| Basic scrape | 1 credit |\n| Scrape + JSON extraction | 5 credits |\n| PDF parsing | 1 credit/page (after first) |\n| Stealth proxy | +4 credits |\n| Search | 2 credits per 10 results |\n| Map | 1 credit |\n\nAI/extract operations are tracked separately in **tokens**.\n\n### Billing flow\n\n1. **Auth middleware** loads an `AuthCreditUsageChunk` (ACUC) — the central billing object containing plan credits, coupon credits, credits used, remaining credits, rate limits, and concurrency limits.\n2. **Pre-check** middleware returns `402 Payment Required` if insufficient credits.\n3. After a scrape completes, credits are **batched** into Redis (`billing_batch` key), then flushed to Supabase every 15s or at 5000 ops via `bill_team_6` RPC.\n4. ACUC is cached in Redis for 10 min per API key.\n\n### Auto-recharge\n\nTeams can enable auto-recharge via Stripe:\n- Self-serve: **$11 for 1000 credits** via payment intent\n- Scale/Enterprise: subscription-based expansion packs\n- Protected by cooldowns (10 min), hourly caps (5/hr), monthly caps, and distributed locks\n\n### Rate limiting\n\nEach plan defines per-minute limits per endpoint (e.g., free tier: 15 crawls/min, 100 scrapes/min). Enforced via Redis rate limiter.\n\n### Notifications\n\nEmail alerts (via Resend) at 80% usage, 100% limit reached, auto-recharge events.\n\n---\n\n## Why is billing open source?\n\nThe main reason is **self-hosting**. Firecrawl is designed to run self-hosted with `USE_DB_AUTHENTICATION=false`, which **bypasses all billing** and gives infinite credits. The billing code being open source means:\n\n1. **Transparency** — users see exactly how credits are metered. No hidden costs.\n2. **Self-host flexibility** — you can see how auth/billing is wired and either skip it entirely or plug in your own Supabase instance.\n3. **Trust** — open billing logic = verifiable pricing claims.\n4. **The billing itself isn't the moat** — Firecrawl's value is in fire-engine (the advanced scraping infra, which is *not* open source) and the hosted service reliability. The billing logic is commodity code, so open-sourcing it costs nothing competitively while building trust.\n\nKey files if you want to dig deeper:\n- `apps/api/src/services/billing/credit_billing.ts` — credit check logic\n- `apps/api/src/services/billing/batch_billing.ts` — batched billing pipeline\n- `apps/api/src/services/billing/auto_charge.ts` — auto-recharge\n- `apps/api/src/lib/scrape-billing.ts` — per-operation credit pricing",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CY8y4CFsvinDu5LdwuD8H",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T01:13:43.894Z",
+            "parentUuid": "4592bb1a-e14f-4fbf-a395-3e394e051a6f",
+            "isSidechain": false
+          },
+          "message": "## How Firecrawl Billing Works ### Credit-based system Firecrawl uses a **credit currency** — each API operation costs credits: | Operation | Cost | |---|---| | Basic scrape | 1 credit | | Scrape + JSON extraction | 5 credits | | PDF parsing | 1 credit/page (after first) | | Stealth proxy | +4 credits | | Search | 2 credits per 10 results | | Map | 1 credit | AI/extract operations are tracked separately in **tokens**. ### Billing flow 1. **Auth middleware** loads an `AuthCreditUsageChunk` (ACUC) — the central billing object containing plan credits, coupon credits, credits used, remaining credits, rate limits, and concurrency limits. 2. **Pre-check** middleware returns `402 Payment Required` if insufficient credits. 3. After a scrape completes, credits are **batched** into Redis (`billing_batch` key), then flushed to Supabase every 15s or at 5000 ops via `bill_team_6` RPC. 4. ACUC is cached in Redis for 10 min per API key. ### Auto-recharge Teams can enable auto-recharge via Stripe: - Self-serve: **$11 for 1000 credits** via payment intent - Scale/Enterprise: subscription-based expansion packs - Protected by cooldowns (10 min), hourly caps (5/hr), monthly caps, and distributed locks ### Rate limiting Each plan defines per-minute limits per endpoint (e.g., free tier: 15 crawls/min, 100 scrapes/min). Enforced via Redis rate limiter. ### Notifications Email alerts (via Resend) at 80% usage, 100% limit reached, auto-recharge events. --- ## Why is billing open source? The main reason is **self-hosting**. Firecrawl is designed to run self-hosted with `USE_DB_AUTHENTICATION=false`, which **bypasses all billing** and gives infinite credits. The billing code being open source means: 1. **Transparency** — users see exactly how credits are metered. No hidden costs. 2. **Self-host flexibility** — you can see how auth/billing is wired and either skip it entirely or plug in your own Supabase instance. 3. **Trust** — open billing logic = verifiable pricing claims. 4. **The billing itself isn't the moat** — Firecrawl's value is in fire-engine (the advanced scraping infra, which is *not* open source) and the hosted service reliability. The billing logic is commodity code, so open-sourcing it costs nothing competitively while building trust. Key files if you want to dig deeper: - `apps/api/src/services/billing/credit_billing.ts` — credit check logic - `apps/api/src/services/billing/batch_billing.ts` — batched billing pipeline - `apps/api/src/services/billing/auto_charge.ts` — auto-recharge - `apps/api/src/lib/scrape-billing.ts` — per-operation credit pricing",
+          "timestamp": "2026-02-15T01:13:43.894Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_61a0c13e74344d6bf135cf4f",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "4127c9ba9db0faece5d6aa50f93f883d1cfac9ea599e8fdd67aaa77bf992e342",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 390711
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "user",
+            "uuid": "181693e4-d74e-454b-99e3-7dd695807427",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hi"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T10:02:06.763Z",
+            "parentUuid": "0fb9d3e0-bc12-4b1c-af61-ddea9084220e",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "hi",
+          "timestamp": "2026-02-15T10:02:06.763Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_7499faef845b6b32942e5bb5",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "438c447999426d31b1dbe66d408556fd6a971706543f97e46a9a8b4d6f871ad6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 396119
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "assistant",
+            "uuid": "5051c3e2-1cce-4ea0-a1a5-0cad2a385db8",
+            "error": "rate_limit",
+            "message": {
+              "id": "7d4ab1ce-6f6b-44db-b75c-9f50c9cec3a7",
+              "role": "assistant",
+              "type": "message",
+              "model": "<synthetic>",
+              "usage": {
+                "speed": null,
+                "iterations": null,
+                "input_tokens": "***REDACTED***",
+                "service_tier": null,
+                "inference_geo": null,
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "server_tool_use": {
+                  "web_fetch_requests": 0,
+                  "web_search_requests": 0
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "You've hit your limit · resets 4am (America/Los_Angeles)",
+                  "type": "text"
+                }
+              ],
+              "container": null,
+              "stop_reason": "stop_sequence",
+              "stop_sequence": "",
+              "context_management": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T10:02:09.671Z",
+            "parentUuid": "181693e4-d74e-454b-99e3-7dd695807427",
+            "isSidechain": false,
+            "isApiErrorMessage": true
+          },
+          "message": "You've hit your limit · resets 4am (America/Los_Angeles)",
+          "timestamp": "2026-02-15T10:02:09.671Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_6b41bd13a0d16751175efb43",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ead4e6dbc0576367115997c8c8a605f782440e5f2a9d5e78e436b24f79c468f1",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 396602
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "user",
+            "uuid": "e22e7f69-8f0e-40dc-b390-06978e0defcb",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hi"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T10:03:38.654Z",
+            "parentUuid": "30b49ac4-f77e-43bf-8531-7885c3a5f064",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "hi",
+          "timestamp": "2026-02-15T10:03:38.654Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_96c0b7be5db186c41f106dfc",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "44bffbdff558256acad9e43891e51bafb1bd5265086fe3167bf7f267c6f5e29f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 399411
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "assistant",
+            "uuid": "03d6e573-aa12-4d68-93c9-8dbefb77c403",
+            "message": {
+              "id": "msg_01KTYL3SeqGQe15Ex5cGf5z7",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! What can I help you with?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CY9fVKWYiX3tJeVqfawnm",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T10:03:43.260Z",
+            "parentUuid": "e22e7f69-8f0e-40dc-b390-06978e0defcb",
+            "isSidechain": false
+          },
+          "message": "Hey! What can I help you with?",
+          "timestamp": "2026-02-15T10:03:43.260Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_cb427459eb1f209d8bc4d242",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "664b02d33eb8aca62e2aad3625dbf59c5b3c01419879f431405194849465f126",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 399894
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "user",
+            "uuid": "9051e55f-ee3f-4dac-891a-1e7a4ff88494",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Olha o ../ultracontext. Acha que podemos fazer um billing semelhante? Como vc estruturaria o pricing sendo value based?"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-15T10:20:34.364Z",
+            "parentUuid": "9e411618-18e3-4102-9302-5e8eba3ad368",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Olha o ../ultracontext. Acha que podemos fazer um billing semelhante? Como vc estruturaria o pricing sendo value based?",
+          "timestamp": "2026-02-15T10:20:34.364Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_83419807d84327d0c8aa93a7",
+        "index": 6,
+        "metadata": {
+          "day": "2026-02-15",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "e061e42bce30e15b8b9e84d8ba002d29539aee3f54ece5a91c8609caff629e8c",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 402234
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tidy-tickling-lightning",
+            "type": "user",
+            "uuid": "ae968570-10bf-40e8-b768-49088030a882",
+            "message": {
+              "role": "user",
+              "content": [
+                {
+                  "text": "[Request interrupted by user for tool use]",
+                  "type": "text"
+                }
+              ]
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+            "timestamp": "2026-02-16T02:13:56.871Z",
+            "parentUuid": "a3c77576-453b-4236-8898-ed8934bdc6ca",
+            "isSidechain": false
+          },
+          "message": "[Request interrupted by user for tool use]",
+          "timestamp": "2026-02-16T02:13:56.871Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_13512e0a41b8ef8a69fb6db7",
+        "index": 7,
+        "metadata": {
+          "day": "2026-02-16",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "84890e940b9d506b08944120c47945082735b8104d2c23dcbdd1c151aa5e327f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/b338a4c5-248b-4f3f-a98f-d35cd7dbb408.jsonl",
+          "session_id": "6c05b8fe-70bd-4cd4-b93d-62e21f5bd7bf",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      }
+    ],
+    "version": 0
+  }
+}

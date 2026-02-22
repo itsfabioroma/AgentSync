@@ -1,0 +1,117 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.885Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:01530afb-592f-4050-8732-b0c986b132d6",
+    "contextId": "ctx_885bcc116695a3ecd08c4d0e",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "01530afb-592f-4050-8732-b0c986b132d6",
+    "updatedAtUnix": 1771690267
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "9fa48445-8839-4e4b-a7f8-8a9a09166050",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hi"
+            },
+            "version": "2.1.39",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "01530afb-592f-4050-8732-b0c986b132d6",
+            "timestamp": "2026-02-10T23:50:21.390Z",
+            "parentUuid": "21f3af8d-528f-454f-ad3f-4130fba709d3",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "hi",
+          "timestamp": "2026-02-10T23:50:21.390Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_2b5863940293e58ddde1b8f2",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "acb1ed2c1afc3e7ecbea0fe917bd229e2b8cbbd7a6f3a3ff17c108223b1b114d",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/01530afb-592f-4050-8732-b0c986b132d6.jsonl",
+          "session_id": "01530afb-592f-4050-8732-b0c986b132d6",
+          "engineer_id": "engineer-01",
+          "file_offset": 785
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "49d4861e-5290-431f-ae80-5e7dd0040720",
+            "message": {
+              "id": "msg_01GZxXQ3uBaSvee9iyYkiAZN",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hi! How can I help you today?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.39",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY1HVB4xF5c4F8VkGcyz9",
+            "sessionId": "01530afb-592f-4050-8732-b0c986b132d6",
+            "timestamp": "2026-02-10T23:50:25.851Z",
+            "parentUuid": "42af1e0d-7f70-4e16-bd80-8ac70dd4143b",
+            "isSidechain": false
+          },
+          "message": "Hi! How can I help you today?",
+          "timestamp": "2026-02-10T23:50:25.851Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_aa9136d812fcc893d811cc7a",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "92f07fea8c8d5590825e7e4d9900095bc811e2aa2de7af02f675bb341bad8416",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/01530afb-592f-4050-8732-b0c986b132d6.jsonl",
+          "session_id": "01530afb-592f-4050-8732-b0c986b132d6",
+          "engineer_id": "engineer-01",
+          "file_offset": 3197
+        }
+      }
+    ],
+    "version": 0
+  }
+}

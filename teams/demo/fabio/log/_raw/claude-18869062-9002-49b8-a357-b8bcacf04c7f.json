@@ -1,0 +1,220 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.700Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:18869062-9002-49b8-a357-b8bcacf04c7f",
+    "contextId": "ctx_4c5e2709ea407713a9137134",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "18869062-9002-49b8-a357-b8bcacf04c7f",
+    "updatedAtUnix": 1771690272
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "type": "user",
+            "uuid": "e4f9afcc-6785-42b5-b0fb-615876e71f7c",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "check if the dashboard code is there"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "18869062-9002-49b8-a357-b8bcacf04c7f",
+            "timestamp": "2026-02-13T22:27:11.756Z",
+            "parentUuid": "ce54c309-519b-4485-82a1-bedde831067b",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "check if the dashboard code is there",
+          "timestamp": "2026-02-13T22:27:11.756Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_a1f82ec4cdc140c7842eb2be",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-13",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ecb46cea4d2a1711665a0b8b1e078900c9197b5e298679056af46b99c85a42c0",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/18869062-9002-49b8-a357-b8bcacf04c7f.jsonl",
+          "session_id": "18869062-9002-49b8-a357-b8bcacf04c7f",
+          "engineer_id": "engineer-01",
+          "file_offset": 795
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tingly-gathering-starfish",
+            "type": "assistant",
+            "uuid": "e2bda472-c776-4173-97d0-6b19413940c4",
+            "message": {
+              "id": "msg_01JvJxnmc6yRCL3G6s9dKbZR",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "No `dashboard` directory or references found. The closest thing is `apps/ui` — could be what you're looking for. Want me to check what's inside `apps/ui`?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CY6radt1P3GrX2KRBEGpC",
+            "sessionId": "18869062-9002-49b8-a357-b8bcacf04c7f",
+            "timestamp": "2026-02-13T22:27:23.580Z",
+            "parentUuid": "3f4e0917-1678-4692-a749-2b0fe1127000",
+            "isSidechain": false
+          },
+          "message": "No `dashboard` directory or references found. The closest thing is `apps/ui` — could be what you're looking for. Want me to check what's inside `apps/ui`?",
+          "timestamp": "2026-02-13T22:27:23.580Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_19efc23824efb550ffec21c8",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-13",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "c21a569a8646643863c2aa95e034a52892d14f54e75106e8fab484bdab8cc5cc",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/18869062-9002-49b8-a357-b8bcacf04c7f.jsonl",
+          "session_id": "18869062-9002-49b8-a357-b8bcacf04c7f",
+          "engineer_id": "engineer-01",
+          "file_offset": 11967
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tingly-gathering-starfish",
+            "type": "user",
+            "uuid": "7e475bb0-1ebe-4775-b113-afce4a8444ab",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "So firecrawl wont open source their dashboard?"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "18869062-9002-49b8-a357-b8bcacf04c7f",
+            "timestamp": "2026-02-13T22:41:56.924Z",
+            "parentUuid": "9c5c0cef-4c66-4bf4-8d62-955a4aa54491",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "So firecrawl wont open source their dashboard?",
+          "timestamp": "2026-02-13T22:41:56.924Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_a56b80a17151ae0ef810ab05",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-13",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "867cf118abf57f21ee548b83119fe9f6b6133d653da2f0408581a0dab3f0e9e7",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/18869062-9002-49b8-a357-b8bcacf04c7f.jsonl",
+          "session_id": "18869062-9002-49b8-a357-b8bcacf04c7f",
+          "engineer_id": "engineer-01",
+          "file_offset": 14439
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/firecrawl",
+            "slug": "tingly-gathering-starfish",
+            "type": "assistant",
+            "uuid": "24c6b8f0-4e35-409c-8d2e-71a9c266f6ed",
+            "message": {
+              "id": "msg_01HP2zyf5LrmdYaP6jnFHRbV",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "No, the Firecrawl dashboard is not included in the open-source repo. What's here:\n\n- `apps/ui/ingestion-ui` — a small ingestion UI, not the full dashboard\n- The dashboard references in docs all point to `firecrawl.dev/app` — their hosted/closed-source product\n\nThe dashboard (billing, API key management, usage tracking, etc.) is proprietary and not part of this repo. This is a common pattern — open-source the core engine, keep the management dashboard closed-source as part of the commercial offering.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CY6shkhqDvZWThBvrh515",
+            "sessionId": "18869062-9002-49b8-a357-b8bcacf04c7f",
+            "timestamp": "2026-02-13T22:42:09.801Z",
+            "parentUuid": "625dfbf3-78ce-485b-8604-0e8d1f667561",
+            "isSidechain": false
+          },
+          "message": "No, the Firecrawl dashboard is not included in the open-source repo. What's here: - `apps/ui/ingestion-ui` — a small ingestion UI, not the full dashboard - The dashboard references in docs all point to `firecrawl.dev/app` — their hosted/closed-source product The dashboard (billing, API key management, usage tracking, etc.) is proprietary and not part of this repo. This is a common pattern — open-source the core engine, keep the management dashboard closed-source as part of the commercial offering.",
+          "timestamp": "2026-02-13T22:42:09.801Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_098037d932e93ca07f362ca4",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-13",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "5d8ebe3782d14ac2d19f524e215cd2a03b887f228ded91d84357e5b8af346397",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-firecrawl/18869062-9002-49b8-a357-b8bcacf04c7f.jsonl",
+          "session_id": "18869062-9002-49b8-a357-b8bcacf04c7f",
+          "engineer_id": "engineer-01",
+          "file_offset": 29653
+        }
+      }
+    ],
+    "version": 0
+  }
+}

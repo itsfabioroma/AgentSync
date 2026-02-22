@@ -1,0 +1,109 @@
+{
+  "pulledAt": "2026-02-22T01:20:18.736Z",
+  "cache": {
+    "cacheKey": "ctx:session:codex:Fabios-MacBook-Pro.local:engineer-01:1ea10ec9-d084-4392-871c-4fd3da51315a",
+    "contextId": "ctx_947d1e8e50e37c689443447e",
+    "source": "codex",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "1ea10ec9-d084-4392-871c-4fd3da51315a",
+    "updatedAtUnix": 1771690190
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "session_meta",
+            "payload": {
+              "id": "1ea10ec9-d084-4392-871c-4fd3da51315a",
+              "cwd": "/Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+              "source": "cli",
+              "timestamp": "2026-02-19T14:25:04.647Z",
+              "originator": "ultracontext_daemon",
+              "cli_version": "restored",
+              "model_provider": "openai"
+            },
+            "timestamp": "2026-02-19T14:25:04.647Z"
+          },
+          "message": "Session started in /Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+          "timestamp": "2026-02-19T14:25:04.647Z",
+          "event_type": "session_meta"
+        },
+        "id": "msg_5985ba4bf43cd60865766a28",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-19",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "d812a3207fa604d6ebbf155bba6e334ac39d14f3f018ac0c836844566b7a89d9",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/19/rollout-2026-02-19T14-25-04-1ea10ec9-d084-4392-871c-4fd3da51315a.jsonl",
+          "session_id": "1ea10ec9-d084-4392-871c-4fd3da51315a",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "teste",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-19T14:25:04.647Z"
+          },
+          "message": "teste",
+          "timestamp": "2026-02-19T14:25:04.647Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_f1c4d3b56513016bc73b72f3",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-19",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "ef119cbf62a085773c46b8fa610b7b46e41efe3f2e384d5a8c3e704e84a8c410",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/19/rollout-2026-02-19T14-25-04-1ea10ec9-d084-4392-871c-4fd3da51315a.jsonl",
+          "session_id": "1ea10ec9-d084-4392-871c-4fd3da51315a",
+          "engineer_id": "engineer-01",
+          "file_offset": 324
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "It looks like you typed \"teste\" — could you clarify what you'd like help with? Are you testing the connection, or is there something specific you'd like me to do in this project? I'm ready to help with any software engineering tasks in the `ultracontext` codebase."
+            },
+            "timestamp": "2026-02-19T14:25:08.282Z"
+          },
+          "message": "It looks like you typed \"teste\" — could you clarify what you'd like help with? Are you testing the connection, or is there something specific you'd like me to do in this project? I'm ready to help with any software engineering tasks in the `ultracontext` codebase.",
+          "timestamp": "2026-02-19T14:25:08.282Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_3f0985aaa110db002415f33b",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-19",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "91ffd28cb71ca953c9258e43e17d12aadf3ad06afb035c80e37f16a5bb52a0c7",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/19/rollout-2026-02-19T14-25-04-1ea10ec9-d084-4392-871c-4fd3da51315a.jsonl",
+          "session_id": "1ea10ec9-d084-4392-871c-4fd3da51315a",
+          "engineer_id": "engineer-01",
+          "file_offset": 485
+        }
+      }
+    ],
+    "version": 0
+  }
+}

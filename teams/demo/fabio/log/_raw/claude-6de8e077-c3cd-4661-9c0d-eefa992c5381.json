@@ -1,0 +1,114 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.072Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:6de8e077-c3cd-4661-9c0d-eefa992c5381",
+    "contextId": "ctx_66ed49dbfbccf818f5261a50",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+    "updatedAtUnix": 1771690562
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "user",
+            "uuid": "e9fef332-18f4-4ef3-93e4-ee4afcfcb47e",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "hello man"
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+            "timestamp": "2026-02-21T16:16:00.147Z",
+            "parentUuid": "4851dc2a-80a6-440a-8959-6bde16ae47cf",
+            "isSidechain": false,
+            "permissionMode": "default"
+          },
+          "message": "hello man",
+          "timestamp": "2026-02-21T16:16:00.147Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_d31c6509e07941fc89ee458f",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "a5e248a02140224f6a038ce1d6749584609c7fe8d0249037fa11944786c32fb7",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/6de8e077-c3cd-4661-9c0d-eefa992c5381.jsonl",
+          "session_id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+          "engineer_id": "engineer-01",
+          "file_offset": 780
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma",
+            "type": "assistant",
+            "uuid": "0579e408-1268-4031-a684-1e4d9d336052",
+            "message": {
+              "id": "msg_01SPoj4AEfG6PVK5U96cxcto",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Hey! How can I help you today?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.50",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CYMWjhqMm6moNi6QwFp2h",
+            "sessionId": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+            "timestamp": "2026-02-21T16:16:04.104Z",
+            "parentUuid": "e9fef332-18f4-4ef3-93e4-ee4afcfcb47e",
+            "isSidechain": false
+          },
+          "message": "Hey! How can I help you today?",
+          "timestamp": "2026-02-21T16:16:04.104Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_21d5fd9b86a96cf1897c38d7",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "26a9f1028bdb9a725a8fc660b7af88d5462c506e1e0c0bf1f86defc45bd2b4ae",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma/6de8e077-c3cd-4661-9c0d-eefa992c5381.jsonl",
+          "session_id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+          "engineer_id": "engineer-01",
+          "file_offset": 1175
+        }
+      }
+    ],
+    "version": 0
+  }
+}

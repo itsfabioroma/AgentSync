@@ -1,0 +1,109 @@
+{
+  "pulledAt": "2026-02-22T01:20:18.095Z",
+  "cache": {
+    "cacheKey": "ctx:session:codex:Fabios-MacBook-Pro.local:engineer-01:7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+    "contextId": "ctx_924ed1abd20981f4eef9998b",
+    "source": "codex",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+    "updatedAtUnix": 1771690260
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "session_meta",
+            "payload": {
+              "id": "7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+              "cwd": "/Users/fabioroma/Code/ultracontext/ultracontext-context-api/apps/tui",
+              "source": "cli",
+              "timestamp": "2026-02-21T02:29:46.027Z",
+              "originator": "ultracontext_daemon",
+              "cli_version": "restored",
+              "model_provider": "openai"
+            },
+            "timestamp": "2026-02-21T02:29:46.027Z"
+          },
+          "message": "Session started in /Users/fabioroma/Code/ultracontext/ultracontext-context-api/apps/tui",
+          "timestamp": "2026-02-21T02:29:46.027Z",
+          "event_type": "session_meta"
+        },
+        "id": "msg_1b148b74c94d41c4b7604fa9",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "9958e2ae38905ab12c3502992de02ea94eaee2726d2770eb0d4d78feb8d8a3bd",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T02-29-46-7bdcab87-ac49-40e5-8b5b-a375a09f7125.jsonl",
+          "session_id": "7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "testando 123",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T02:29:46.027Z"
+          },
+          "message": "testando 123",
+          "timestamp": "2026-02-21T02:29:46.027Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_1b5d5b3c8f33a5584aa3b3a6",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "5e4392b64536ff21884b8ebfd000d6276225c666ae49f0c7f950e851b147abbc",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T02-29-46-7bdcab87-ac49-40e5-8b5b-a375a09f7125.jsonl",
+          "session_id": "7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+          "engineer_id": "engineer-01",
+          "file_offset": 336
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Tudo certo! Como posso ajudar?"
+            },
+            "timestamp": "2026-02-21T02:29:50.101Z"
+          },
+          "message": "Tudo certo! Como posso ajudar?",
+          "timestamp": "2026-02-21T02:29:50.101Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_6defe65cea9294eed7091975",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "69194f88478923afdc84729688fa2f448be3b28a36b4f92edbafdd7faf343cf2",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T02-29-46-7bdcab87-ac49-40e5-8b5b-a375a09f7125.jsonl",
+          "session_id": "7bdcab87-ac49-40e5-8b5b-a375a09f7125",
+          "engineer_id": "engineer-01",
+          "file_offset": 504
+        }
+      }
+    ],
+    "version": 0
+  }
+}

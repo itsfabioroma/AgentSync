@@ -1,0 +1,279 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.997Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:5471d4ee-147a-44f5-a972-5ee250540b88",
+    "contextId": "ctx_e250e6b7f808e4622570789a",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+    "updatedAtUnix": 1771690381
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "2ee68cba-1809-4b1b-9c1b-5a0a77befff2",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "I wanna build a cli for UltraContext. Open up a Claude code and ask that. Do it in rust"
+            },
+            "version": "2.1.38",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+            "timestamp": "2026-02-10T08:20:59.190Z",
+            "parentUuid": "555592d5-6106-4730-a8f6-9ef19e108975",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "I wanna build a cli for UltraContext. Open up a Claude code and ask that. Do it in rust",
+          "timestamp": "2026-02-10T08:20:59.190Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_d5d1e33106bdfc7310952f13",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "4a86aab453a37fb2d4087e9a7136eb1a49dc1139d7f2a573260a382745b28fee",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/5471d4ee-147a-44f5-a972-5ee250540b88.jsonl",
+          "session_id": "5471d4ee-147a-44f5-a972-5ee250540b88",
+          "engineer_id": "engineer-01",
+          "file_offset": 798
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "d6bfa43f-333b-4ff7-ad08-d17b40634745",
+            "message": {
+              "id": "msg_01A78bxSyY1cyWkpvvY2Jz18",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Let me first explore the codebase to understand what UltraContext is.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.38",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CXz4chXTHiUdy5ULhYZ6Z",
+            "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+            "timestamp": "2026-02-10T08:21:04.370Z",
+            "parentUuid": "0a1540fd-3dd2-464b-a7b7-0a9f3a724554",
+            "isSidechain": false
+          },
+          "message": "Let me first explore the codebase to understand what UltraContext is.",
+          "timestamp": "2026-02-10T08:21:04.370Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_4016dd3e106a654a7716d624",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f40e0482a87e819140b25688ca112c7c4f97c3bbb8c35e84b573b054b2b2f15a",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/5471d4ee-147a-44f5-a972-5ee250540b88.jsonl",
+          "session_id": "5471d4ee-147a-44f5-a972-5ee250540b88",
+          "engineer_id": "engineer-01",
+          "file_offset": 3705
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "calm-beaming-scone",
+            "type": "assistant",
+            "uuid": "d1ae03ff-84f8-4269-ba84-e960078c3e0c",
+            "message": {
+              "id": "msg_01CDiRa4724c4NCu8cjWYR8L",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Got it. UltraContext is a context versioning API for AI agents with 5 core methods (create, get, append, update, delete). No CLI exists yet. Let me plan the Rust CLI.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.38",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CXz4iRkbFjLwG9MqNdiFw",
+            "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+            "timestamp": "2026-02-10T08:22:22.874Z",
+            "parentUuid": "90a24fc3-2ec0-4e85-9981-513842cb6f6e",
+            "isSidechain": false
+          },
+          "message": "Got it. UltraContext is a context versioning API for AI agents with 5 core methods (create, get, append, update, delete). No CLI exists yet. Let me plan the Rust CLI.",
+          "timestamp": "2026-02-10T08:22:22.874Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_b5fcd8c2e41254c7ecf45cf3",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "cdd4d230b9453be057195e5ee4caa2ff8eebc37e03578847ff072c30c88693c8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/5471d4ee-147a-44f5-a972-5ee250540b88.jsonl",
+          "session_id": "5471d4ee-147a-44f5-a972-5ee250540b88",
+          "engineer_id": "engineer-01",
+          "file_offset": 270702
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "calm-beaming-scone",
+            "type": "assistant",
+            "uuid": "731cf17e-f583-4f73-a4ac-4d011d09a1d7",
+            "message": {
+              "id": "msg_019uz18um1ew2NiHTAfgyHPF",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now let me design the implementation plan.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.38",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CXz4mqTCssKrcVtwr5Mrb",
+            "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+            "timestamp": "2026-02-10T08:23:07.656Z",
+            "parentUuid": "ef9dbdaf-b057-4110-b488-29240d525dbe",
+            "isSidechain": false
+          },
+          "message": "Now let me design the implementation plan.",
+          "timestamp": "2026-02-10T08:23:07.656Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_b02056eb3a120283cb984eb2",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "2057a8b993771456eda114b49181ae28b941ddb3b76a0daf0353135f9c47fe96",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/5471d4ee-147a-44f5-a972-5ee250540b88.jsonl",
+          "session_id": "5471d4ee-147a-44f5-a972-5ee250540b88",
+          "engineer_id": "engineer-01",
+          "file_offset": 455908
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "calm-beaming-scone",
+            "type": "user",
+            "uuid": "e9638726-8bc0-46cd-8f6a-d9814be187b6",
+            "message": {
+              "role": "user",
+              "content": [
+                {
+                  "text": "[Request interrupted by user for tool use]",
+                  "type": "text"
+                }
+              ]
+            },
+            "version": "2.1.38",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "5471d4ee-147a-44f5-a972-5ee250540b88",
+            "timestamp": "2026-02-10T08:36:41.098Z",
+            "parentUuid": "9d910139-c027-4b8d-a6d4-a7b7279ffe7c",
+            "isSidechain": false
+          },
+          "message": "[Request interrupted by user for tool use]",
+          "timestamp": "2026-02-10T08:36:41.098Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_72a07c9212ac3680bb9f5929",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-10",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "8de45518a08caebd910900a390b4b4144af1b8480e062d8d842173b50c05f507",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/bdab6801-4267-47cd-b5c7-1f7f22c19263.jsonl",
+          "session_id": "5471d4ee-147a-44f5-a972-5ee250540b88",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      }
+    ],
+    "version": 0
+  }
+}

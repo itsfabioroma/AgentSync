@@ -1,0 +1,223 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.983Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:54dee6db-0b25-481d-acf1-727475c967a2",
+    "contextId": "ctx_1acb51e696c0488251c73d2a",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "54dee6db-0b25-481d-acf1-727475c967a2",
+    "updatedAtUnix": 1771690383
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "d28c6dc9-c2b3-41b4-9a81-e6abfba72b65",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "how do I run next on a different port than 3000?"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "54dee6db-0b25-481d-acf1-727475c967a2",
+            "timestamp": "2026-02-14T05:49:37.316Z",
+            "parentUuid": "fabd52ee-42b5-463d-b3f8-999cdf0c8e7d",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "how do I run next on a different port than 3000?",
+          "timestamp": "2026-02-14T05:49:37.316Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_18afe50e0ab1f7e5656c0a47",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "447f89dbb9ec91e995f7fd2c9596c81c7f169b5c2ce6efcd23f8c01bb198f885",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/54dee6db-0b25-481d-acf1-727475c967a2.jsonl",
+          "session_id": "54dee6db-0b25-481d-acf1-727475c967a2",
+          "engineer_id": "engineer-01",
+          "file_offset": 798
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "89677395-c89e-40ab-9990-e23a630ea64f",
+            "message": {
+              "id": "msg_018rvXPf8AgWFGc4F2DH8c5z",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "```bash\nnext dev -p 4000\n```\n\nOr in `package.json`:\n\n```json\n\"scripts\": {\n  \"dev\": \"next dev -p 4000\"\n}\n```\n\nYou can also use the `PORT` env var:\n\n```bash\nPORT=4000 next dev\n```",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY7SJwvyBTiYHD1ynxMQo",
+            "sessionId": "54dee6db-0b25-481d-acf1-727475c967a2",
+            "timestamp": "2026-02-14T05:49:43.432Z",
+            "parentUuid": "91b9a652-f347-432c-bc6d-dcfe08cb73ec",
+            "isSidechain": false
+          },
+          "message": "```bash next dev -p 4000 ``` Or in `package.json`: ```json \"scripts\": { \"dev\": \"next dev -p 4000\" } ``` You can also use the `PORT` env var: ```bash PORT=4000 next dev ```",
+          "timestamp": "2026-02-14T05:49:43.432Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_a404fea493cf3f9e25391305",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "936f338517153c393d071ae5943e3e35ab093457eb63c45a90509a330ce68bb4",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/54dee6db-0b25-481d-acf1-727475c967a2.jsonl",
+          "session_id": "54dee6db-0b25-481d-acf1-727475c967a2",
+          "engineer_id": "engineer-01",
+          "file_offset": 3325
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "db246885-d185-4bb0-811e-1e1196a0b99f",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "but manually without changing the script"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "54dee6db-0b25-481d-acf1-727475c967a2",
+            "timestamp": "2026-02-14T05:50:06.603Z",
+            "parentUuid": "f7db8aff-4b78-4694-af86-617a1fc72d43",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "but manually without changing the script",
+          "timestamp": "2026-02-14T05:50:06.603Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_6a286f8d39fe11532823657c",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "dbde6c6b4d93b4c063f11a8032f385975e656a965b80aaa74ba1aca7dab5a916",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/54dee6db-0b25-481d-acf1-727475c967a2.jsonl",
+          "session_id": "54dee6db-0b25-481d-acf1-727475c967a2",
+          "engineer_id": "engineer-01",
+          "file_offset": 5745
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "0fd20d72-8844-4975-9b00-cc04eeaf5604",
+            "message": {
+              "id": "msg_01AotE2SL4npxTPxH7kCLVvb",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "speed": "standard",
+                "iterations": [],
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "server_tool_use": {
+                  "web_fetch_requests": 0,
+                  "web_search_requests": 0
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "\n\n```bash\nnpx next dev -p 4000\n```\n\nOr:\n\n```bash\nPORT=4000 npm run dev\n```",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY7SM4XuBuHNPMFCtX7sE",
+            "sessionId": "54dee6db-0b25-481d-acf1-727475c967a2",
+            "timestamp": "2026-02-14T05:50:10.791Z",
+            "parentUuid": "db246885-d185-4bb0-811e-1e1196a0b99f",
+            "isSidechain": false
+          },
+          "message": "```bash npx next dev -p 4000 ``` Or: ```bash PORT=4000 npm run dev ```",
+          "timestamp": "2026-02-14T05:50:10.791Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_568e67ae5501dba11845c8ff",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "db101217ce371762579b40a5530b7b7f9793f38301cad9d94eee4d8b16cef478",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/54dee6db-0b25-481d-acf1-727475c967a2.jsonl",
+          "session_id": "54dee6db-0b25-481d-acf1-727475c967a2",
+          "engineer_id": "engineer-01",
+          "file_offset": 6236
+        }
+      }
+    ],
+    "version": 0
+  }
+}

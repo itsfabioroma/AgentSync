@@ -1,0 +1,117 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.690Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+    "contextId": "ctx_38d8c6dc9f85752e8e150440",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+    "updatedAtUnix": 1771690287
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/moltbot",
+            "type": "user",
+            "uuid": "d2c004ce-df67-4150-b65c-2cbbf0d8937e",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "I wanna have a profound understanding of this repo"
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+            "timestamp": "2026-01-29T23:53:23.225Z",
+            "parentUuid": "b3c087b0-8d3d-4332-8f03-6967370e0a3c",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "I wanna have a profound understanding of this repo",
+          "timestamp": "2026-01-29T23:53:23.225Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_12ebfc54afcfd5ddd9c73cba",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-29",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "836a2448b3309c99e6fae1a28a2ad1e9198d358a1f23fbca72dd83a1992e6bac",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-moltbot/9ab492e6-3290-4a97-ad6a-4b12e3a559dd.jsonl",
+          "session_id": "9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+          "engineer_id": "engineer-01",
+          "file_offset": 793
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/moltbot",
+            "slug": "swift-purring-snail",
+            "type": "assistant",
+            "uuid": "f4725330-5c6f-46b2-9139-d5502a099d49",
+            "message": {
+              "id": "msg_01WcRi9e8C7uTEzZdqHUQcyD",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "## Moltbot: Comprehensive Overview\n\n### What It Is\nPersonal AI assistant that runs on your devices, connecting to channels you already use (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, Teams, Matrix, etc.) with configurable AI backends (Claude, OpenAI, Bedrock).\n\n### Architecture (High-Level)\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                        Gateway                               │\n│  (WebSocket/HTTP server - control plane @ port 18789)       │\n├─────────────────────────────────────────────────────────────┤\n│                                                              │\n│  ┌──────────┐   ┌──────────┐   ┌──────────┐                │\n│  │ Channels │ → │ Routing  │ → │  Agents  │                │\n│  └──────────┘   └──────────┘   └──────────┘                │\n│       ↑              ↓              ↓                       │\n│  40+ plugins    session keys    Pi + tools                  │\n│  (core+ext)     allowlists      model fallback              │\n│                                                              │\n└─────────────────────────────────────────────────────────────┘\n```\n\n### Key Abstractions\n\n| Concept | Location | Purpose |\n|---------|----------|---------|\n| `ChannelPlugin` | `src/channels/` | Unified interface for all messaging platforms |\n| `PluginRegistry` | `src/plugins/registry.ts` | Runtime discovery of channels, providers, tools |\n| `MoltbotConfig` | `src/config/types.ts` | YAML/JSON5 configuration schema |\n| `AuthProfile` | `src/agents/auth-profiles/` | Model auth with rotation/fallback |\n| Routing | `src/routing/resolve-route.ts` | Maps channel+peer → agent+session |\n\n### Message Flow\n\n```\nInbound (channel) → Access control → Route resolution → Session queue\n    → Agent execution → Auto-reply templating → Outbound (channel)\n```\n\n### Directory Structure\n\n- `src/cli/` - Commander.js CLI wiring\n- `src/commands/` - CLI command implementations\n- `src/gateway/` - WebSocket/HTTP server + RPC methods\n- `src/agents/` - Agent system, model selection, tools\n- `src/channels/` - Channel abstraction layer\n- `src/routing/` - Message routing logic\n- `src/config/` - Config loading/validation (Zod)\n- `src/{telegram,discord,slack,signal,imessage,web}/` - Core channel impls\n- `extensions/` - Plugin packages (Teams, Matrix, memory, etc.)\n\n### Extension System\n\nPlugins in `extensions/*` export manifests discovered at runtime via jiti (no build step). Types: channel, provider, tool, service, hook.\n\n### Entry Points\n\n1. **CLI**: `moltbot.mjs` → `src/entry.ts` → `buildProgram()`\n2. **Gateway**: `src/gateway/server.impl.ts::startGatewayServer()`\n3. **Agent**: `src/commands/agent.ts` (runs Pi with models)\n\n### Testing\n\nVitest + V8 coverage (70% threshold). Live tests via `CLAWDBOT_LIVE_TEST=1`. Docker E2E available.\n\n---\n\n**Unresolved Qs:**\n- Specific channel impl you want to dive into?\n- Agent tools/capabilities detail needed?\n- Config schema deep-dive wanted?\n- Extension authoring walkthrough?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.25",
+            "userType": "external",
+            "gitBranch": "main",
+            "requestId": "req_011CXcaZtgkSESFZFQY4LcWb",
+            "sessionId": "9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+            "timestamp": "2026-01-30T00:01:01.008Z",
+            "parentUuid": "594c5135-658e-4353-8171-6b90565c977b",
+            "isSidechain": false
+          },
+          "message": "## Moltbot: Comprehensive Overview ### What It Is Personal AI assistant that runs on your devices, connecting to channels you already use (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, Teams, Matrix, etc.) with configurable AI backends (Claude, OpenAI, Bedrock). ### Architecture (High-Level) ``` ┌─────────────────────────────────────────────────────────────┐ │ Gateway │ │ (WebSocket/HTTP server - control plane @ port 18789) │ ├─────────────────────────────────────────────────────────────┤ │ │ │ ┌──────────┐ ┌──────────┐ ┌──────────┐ │ │ │ Channels │ → │ Routing │ → │ Agents │ │ │ └──────────┘ └──────────┘ └──────────┘ │ │ ↑ ↓ ↓ │ │ 40+ plugins session keys Pi + tools │ │ (core+ext) allowlists model fallback │ │ │ └─────────────────────────────────────────────────────────────┘ ``` ### Key Abstractions | Concept | Location | Purpose | |---------|----------|---------| | `ChannelPlugin` | `src/channels/` | Unified interface for all messaging platforms | | `PluginRegistry` | `src/plugins/registry.ts` | Runtime discovery of channels, providers, tools | | `MoltbotConfig` | `src/config/types.ts` | YAML/JSON5 configuration schema | | `AuthProfile` | `src/agents/auth-profiles/` | Model auth with rotation/fallback | | Routing | `src/routing/resolve-route.ts` | Maps channel+peer → agent+session | ### Message Flow ``` Inbound (channel) → Access control → Route resolution → Session queue → Agent execution → Auto-reply templating → Outbound (channel) ``` ### Directory Structure - `src/cli/` - Commander.js CLI wiring - `src/commands/` - CLI command implementations - `src/gateway/` - WebSocket/HTTP server + RPC methods - `src/agents/` - Agent system, model selection, tools - `src/channels/` - Channel abstraction layer - `src/routing/` - Message routing logic - `src/config/` - Config loading/validation (Zod) - `src/{telegram,discord,slack,signal,imessage,web}/` - Core channel impls - `extensions/` - Plugin packages (Teams, Matrix, memory, etc.) ### Extension System Plugins in `extensions/*` export manifests discovered at runtime via jiti (no build step). Types: channel, provider, tool, service, hook. ### Entry Points 1. **CLI**: `moltbot.mjs` → `src/entry.ts` → `buildProgram()` 2. **Gateway**: `src/gateway/server.impl.ts::startGatewayServer()` 3. **Agent**: `src/commands/agent.ts` (runs Pi with models) ### Testing Vitest + V8 coverage (70% threshold). Live tests via `CLAWDBOT_LIVE_TEST=1`. Docker E2E available. --- **Unresolved Qs:** - Specific channel impl you want to dive into? - Agent tools/capabilities detail needed? - Config schema deep-dive wanted? - Extension authoring walkthrough?",
+          "timestamp": "2026-01-30T00:01:01.008Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_e4320c068027c1146066eef7",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-30",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "8ef5c384735dbc9b2ab7a511e92e5567a7a302c57832b0c131ef775b0b322fc6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-moltbot/9ab492e6-3290-4a97-ad6a-4b12e3a559dd.jsonl",
+          "session_id": "9ab492e6-3290-4a97-ad6a-4b12e3a559dd",
+          "engineer_id": "engineer-01",
+          "file_offset": 376832
+        }
+      }
+    ],
+    "version": 0
+  }
+}

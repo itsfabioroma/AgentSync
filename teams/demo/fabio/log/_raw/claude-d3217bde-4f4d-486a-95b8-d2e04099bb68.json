@@ -1,0 +1,615 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.419Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:d3217bde-4f4d-486a-95b8-d2e04099bb68",
+    "contextId": "ctx_7971b1e565e2813e76b8b22f",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+    "updatedAtUnix": 1771690449
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "summary",
+            "summary": "Implement optional history param & reserve metadata field",
+            "leafUuid": "9f308d77-ad35-43b9-8235-dc91b8238bc2"
+          },
+          "message": "Implement optional history param & reserve metadata field",
+          "timestamp": "2026-02-21T16:14:09.726Z",
+          "event_type": "claude.summary"
+        },
+        "id": "msg_0a794d1c271ecc897ff6810f",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "115b71884dcb5d00cb4167fe4d3d002e5f44fe95dfe0084e5ed143e81264b366",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "summary",
+            "summary": "Add metadata field to append endpoint",
+            "leafUuid": "bdcbfa5f-675f-4cdc-9e3e-fcda4d318d6c"
+          },
+          "message": "Add metadata field to append endpoint",
+          "timestamp": "2026-02-21T16:14:10.217Z",
+          "event_type": "claude.summary"
+        },
+        "id": "msg_dcc7ae0cae32aaf6c9616cca",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "11c87ddce2528afca23d08a59e513a51404777c06dc966cad68515e77bd258cb",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 139
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "user",
+            "uuid": "65dfda61-5132-403d-84f7-38510738d58f",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "You are experienced apple dev especialized in building INSANELY simple docs. Your goal is to create ultracontext documentatio, (docs only, api reference is okay for now). read the ./sdk and ./api to understand how it works, then make the work inside ./website/docs (using mintlify)"
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:22:07.358Z",
+            "parentUuid": null,
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "You are experienced apple dev especialized in building INSANELY simple docs. Your goal is to create ultracontext documentatio, (docs only, api reference is okay for now). read the ./sdk and ./api to understand how it works, then make the work inside ./website/docs (using mintlify)",
+          "timestamp": "2025-12-31T04:22:07.358Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_278df28fac45dfc0071ee53c",
+        "index": 2,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3dba4e1345f510418b5f34d4b495f020fc526763568b02a53801d63f22483e0f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 494
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "62220fe2-9805-48c1-8ddf-eef7c9e2136f",
+            "message": {
+              "id": "msg_01ByJhWyRs3C6G9fiD6Ly3Dv",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "I'll explore the codebase first to understand how ultracontext works, then create the docs.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe8EidVVCkp2nmvUsUxQ",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:22:15.264Z",
+            "parentUuid": "b573fd1d-5474-4d4a-8c11-4c269e584620",
+            "isSidechain": false
+          },
+          "message": "I'll explore the codebase first to understand how ultracontext works, then create the docs.",
+          "timestamp": "2025-12-31T04:22:15.264Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_426560e3f04327be6c1cd126",
+        "index": 3,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b59258594248e47ff783318ffa2c57b0dcc607be491c9047ebb9bb0d1066ec90",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 2994
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "3afc2edd-1ada-471e-90f0-d8395dc8131c",
+            "message": {
+              "id": "msg_01XgUdTnezBu5gZM7vzvLwWr",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now I'll write the documentation. Starting with the intro page:",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe8PmWskKyUTrHZF1BGr",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:24:20.019Z",
+            "parentUuid": "93b18491-095b-4d59-b251-17cf98430b2d",
+            "isSidechain": false
+          },
+          "message": "Now I'll write the documentation. Starting with the intro page:",
+          "timestamp": "2025-12-31T04:24:20.019Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_2534befa384c7629a01a553c",
+        "index": 4,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "08299537035e53ad341f1be4068a9cce8e7c11bded65c0663c63e1dcc7ab8af8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 151725
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "c6721c09-515d-417b-b32d-500900f0cc5c",
+            "message": {
+              "id": "msg_01XDMA5bXjNJnJEZWZLbNiyn",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Created UltraContext docs:\n\n**Structure:**\n```\ndocs/\n├── index.mdx          # intro + why ultracontext\n├── quickstart.mdx     # install → create → append → get\n├── concepts/\n│   ├── contexts.mdx   # create, list, retrieve, fork\n│   ├── messages.mdx   # append, update, delete, metadata\n│   └── versioning.mdx # audit trail, history, fork from version\n├── api-reference/     # (kept existing)\n│   ├── introduction.mdx\n│   └── openapi.json\n├── changelog.mdx      # (kept existing)\n└── docs.json          # updated nav\n```\n\n**Removed:** Mintlify templates (essentials/, development.mdx, snippets/)\n\n**Nav:**\n- Documentation → Getting started (index, quickstart) + Concepts (contexts, messages, versioning)\n- API Reference → (auto-generated from OpenAPI)\n- Changelog",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe8YdvUNgFVWwbXEHnFs",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:26:21.942Z",
+            "parentUuid": "b819a1e1-bbed-4e64-a13a-0f91ef987bbb",
+            "isSidechain": false
+          },
+          "message": "Done. Created UltraContext docs: **Structure:** ``` docs/ ├── index.mdx # intro + why ultracontext ├── quickstart.mdx # install → create → append → get ├── concepts/ │ ├── contexts.mdx # create, list, retrieve, fork │ ├── messages.mdx # append, update, delete, metadata │ └── versioning.mdx # audit trail, history, fork from version ├── api-reference/ # (kept existing) │ ├── introduction.mdx │ └── openapi.json ├── changelog.mdx # (kept existing) └── docs.json # updated nav ``` **Removed:** Mintlify templates (essentials/, development.mdx, snippets/) **Nav:** - Documentation → Getting started (index, quickstart) + Concepts (contexts, messages, versioning) - API Reference → (auto-generated from OpenAPI) - Changelog",
+          "timestamp": "2025-12-31T04:26:21.942Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_70f3e7426fba2a72e25eb958",
+        "index": 5,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "e3f4aea71204e38b531df6fd48909df150b8620c69f890d2cbc1354144a9c9db",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 249095
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "user",
+            "uuid": "b178568e-661a-47c4-a66d-492a7eac15ec",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "I want you to create a learn menu below concepts.\n\nHere is some tutorials with examples I want it to have (each one is a guide):\n- Conversation Memory\n- Debugging Agent Decisions (Understanding whys, not just what)\n- Branching for Experiments\n- Rollback After Bad Response\n- Audit Trail for Compliance\n"
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:34:27.440Z",
+            "parentUuid": "5dab90ce-4bc1-4e69-bc81-fdb907519780",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "I want you to create a learn menu below concepts. Here is some tutorials with examples I want it to have (each one is a guide): - Conversation Memory - Debugging Agent Decisions (Understanding whys, not just what) - Branching for Experiments - Rollback After Bad Response - Audit Trail for Compliance",
+          "timestamp": "2025-12-31T04:34:27.440Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_7a98514bbe441f887958b884",
+        "index": 6,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "79c655847166c92247fc59f8388fd531cfd1cdfe9b52318fdc2d09460cc3a12b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 252414
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "41e55cb1-2f25-433f-bb9c-b11a891ac40e",
+            "message": {
+              "id": "msg_01XFF7bu7JqxzaP3X6UKrbXk",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Done. Added Learn section with 5 guides:\n\n```\ndocs/\n├── learn/\n│   ├── conversation-memory.mdx    # persist chat history across sessions\n│   ├── debugging-decisions.mdx    # trace agent reasoning with metadata\n│   ├── branching-experiments.mdx  # A/B test prompts, models, strategies\n│   ├── rollback.mdx               # recover from bad responses\n│   └── audit-trail.mdx            # GDPR/HIPAA/SOC2 compliance patterns\n```\n\n**Nav structure:**\n- Getting started → index, quickstart\n- Concepts → contexts, messages, versioning\n- **Learn** → conversation-memory, debugging-decisions, branching-experiments, rollback, audit-trail",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe9MgM8dFhihsXLsrveu",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:36:58.658Z",
+            "parentUuid": "6e1be678-c13a-47f8-9bad-0fc77a24a8fa",
+            "isSidechain": false
+          },
+          "message": "Done. Added Learn section with 5 guides: ``` docs/ ├── learn/ │ ├── conversation-memory.mdx # persist chat history across sessions │ ├── debugging-decisions.mdx # trace agent reasoning with metadata │ ├── branching-experiments.mdx # A/B test prompts, models, strategies │ ├── rollback.mdx # recover from bad responses │ └── audit-trail.mdx # GDPR/HIPAA/SOC2 compliance patterns ``` **Nav structure:** - Getting started → index, quickstart - Concepts → contexts, messages, versioning - **Learn** → conversation-memory, debugging-decisions, branching-experiments, rollback, audit-trail",
+          "timestamp": "2025-12-31T04:36:58.658Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_ba2d0bc4e7f09a977f5c150f",
+        "index": 7,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "436a037dcb4a54f3f961b1094978c1dd2a8af9929e711616159d186e30f02041",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 335265
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "user",
+            "uuid": "184dbe22-8887-411d-8698-a03472251f23",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Oh, actually, I forgot that claude web had generated a great outline for the docs. The code is outdated and needs to be corrected probably, but outline is great.\n\n# UltraContext Documentation Outline\n\n## Overview\n\nDocumentation structure for developers building AI agents. Prioritizes \"time to first context\" and progressive disclosure — basics first, depth when needed.\n\n---\n\n## 1. Home / Introduction\n\n**Goal:** Explain what UltraContext is in 30 seconds.\n\n### Content\n- One-liner: \"Context infrastructure for AI agents\"\n- The problem: Managing conversation history, tool calls, and decision context across agent sessions\n- The solution: Git-like versioned context that's always recoverable\n- Key differentiators:\n  - 6 methods, zero config\n  - History is never lost (branching on mutations)\n  - Time-travel and audit built-in\n\n### Tone\nHook developers fast. No enterprise fluff.\n\n---\n\n## 2. Quickstart\n\n**Goal:** Working code in under 5 minutes.\n\n### Content\n\n```typescript\n// 1. Install\nnpm install @ultracontext/sdk\n\n// 2. Initialize\nimport { UltraContext } from '@ultracontext/sdk'\nconst uc = new UltraContext({ apiKey: 'uc_...' })\n\n// 3. Create context\nconst ctx = await uc.create()\n\n// 4. Add messages\nawait uc.append(ctx.id, [\n  { role: 'user', content: 'Hello' },\n  { role: 'assistant', content: 'Hi there!' }\n])\n\n// 5. Retrieve\nconst { data } = await uc.get(ctx.id)\n// → Ready to pass to your LLM\n```\n\n### What to cover\n- Installation (npm/yarn/pnpm)\n- API key (where to get it, format)\n- Create → Append → Get flow\n- Link to full API reference\n\n### What NOT to cover\n- Versioning, branching (save for concepts)\n- All method options\n- Error handling\n\n---\n\n## 3. Core Concepts\n\n**Goal:** Build the mental model. This is where we share the \"git-like\" story.\n\n### 3.1 Contexts\n\n- What they are: Containers for messages and tool interactions\n- Each context has a stable ID (`ctx_...`)\n- Contexts are isolated — no cross-contamination\n- Use cases: one context per conversation, per agent session, per task\n\n### 3.2 Messages\n\n- Standard format: `{ role, content }` — works with any LLM\n- Each message gets a stable ID and index\n- Append-only within a version (order preserved)\n- Can include metadata for your own tracking\n\n### 3.3 Versioning (The Git Mental Model)\n\n**This is the key concept to nail.**\n\n- Every context starts at version 0\n- `append()` adds to current version (no new version)\n- `update()` and `delete()` create new versions (branching)\n- Old versions are never lost\n- You're always reading from latest version unless you specify otherwise\n\n**Analogy:**\n> \"Think of your context like a git branch. Appending messages is like adding new commits. But if you need to change or remove a message, UltraContext creates a new branch — your original history stays intact.\"\n\n**Visual:**\n```\nVersion 0 (create)\n    │\n    ├── append msg1\n    ├── append msg2\n    ├── append msg3\n    │\nVersion 1 (update msg2)\n    │\n    ├── msg1\n    ├── msg2 (modified)\n    ├── msg3\n    │\nVersion 2 (delete msg3)\n    │\n    ├── msg1\n    ├── msg2 (modified)\n```\n\n### 3.4 Time Travel\n\n- Access any version: `get(ctx.id, { version: 1 })`\n- Slice within a version: `get(ctx.id, { at: 5 })` — first 6 messages\n- Combine: `get(ctx.id, { version: 1, at: 3 })`\n- Fork from any point: `create({ from: ctx.id, version: 1 })`\n\n### 3.5 Audit Trail\n\n- Every version records: `operation`, `affected` IDs, `created_at`\n- Add your own context via `metadata`\n- Use cases: debugging, compliance, understanding agent decisions\n\n---\n\n## 4. API Reference\n\n**Goal:** Complete reference for all 6 methods. One page per method.\n\n### 4.1 create()\n\n**Purpose:** Create a new context, optionally copying from existing.\n\n**Signature:**\n```typescript\ncreate(input?: CreateContextInput): Promise<CreateResponse>\n```\n\n**Parameters:**\n| Param | Type | Description |\n|-------|------|-------------|\n| `from` | string | Context ID to copy from |\n| `version` | number | Version to copy from (default: latest) |\n| `at` | number | Message index to copy up to |\n| `[key]` | any | Custom metadata stored on context |\n\n**Examples:**\n```typescript\n// Empty context\nconst ctx = await uc.create()\n\n// With metadata\nconst ctx = await uc.create({ agent: 'support-bot', userId: 'u_123' })\n\n// Fork from existing\nconst fork = await uc.create({ from: ctx.id })\n\n// Fork from specific version\nconst fork = await uc.create({ from: ctx.id, version: 1 })\n\n// Fork with partial messages\nconst fork = await uc.create({ from: ctx.id, at: 5 })\n```\n\n**Response:**\n```typescript\n{\n  id: 'ctx_...',\n  version: 0,\n  // ...your metadata\n}\n```\n\n---\n\n### 4.2 append()\n\n**Purpose:** Add messages to a context.\n\n**Signature:**\n```typescript\nappend(contextId: string, messages: Message[]): Promise<AppendResponse>\n```\n\n**Parameters:**\n| Param | Type | Description |\n|-------|------|-------------|\n| `contextId` | string | Target context |\n| `messages` | array | Messages to append |\n\n**Message format:**\n```typescript\n{\n  role: 'user' | 'assistant' | 'system' | 'tool',\n  content: string,\n  metadata?: Record<string, unknown>  // optional\n}\n```\n\n**Examples:**\n```typescript\n// Single message\nawait uc.append(ctx.id, [\n  { role: 'user', content: 'What is the weather?' }\n])\n\n// Multiple messages\nawait uc.append(ctx.id, [\n  { role: 'user', content: 'What is the weather?' },\n  { role: 'assistant', content: 'Let me check...' }\n])\n\n// With metadata\nawait uc.append(ctx.id, [\n  { role: 'assistant', content: '...', metadata: { model: 'gpt-4', tokens: 150 } }\n])\n```\n\n**Response:**\n```typescript\n{\n  data: [\n    { id: 'msg_...', index: 0, role: 'user', content: '...', metadata: {} }\n  ],\n  version: 0\n}\n```\n\n**Note:** Append does not create a new version. Messages are added to current HEAD.\n\n---\n\n### 4.3 get()\n\n**Purpose:** Retrieve messages from a context.\n\n**Signature:**\n```typescript\nget(contextId: string, options?: GetOptions): Promise<GetResponse>\n```\n\n**Parameters:**\n| Param | Type | Description |\n|-------|------|-------------|\n| `contextId` | string | Target context |\n| `version` | number | Specific version (default: latest) |\n| `at` | number | Slice up to this index |\n\n**Examples:**\n```typescript\n// Get all messages (latest version)\nconst { data, version, versions } = await uc.get(ctx.id)\n\n// Get specific version\nconst { data } = await uc.get(ctx.id, { version: 1 })\n\n// Get first 10 messages\nconst { data } = await uc.get(ctx.id, { at: 9 })\n\n// Combine: version 1, first 5 messages\nconst { data } = await uc.get(ctx.id, { version: 1, at: 4 })\n```\n\n**Response:**\n```typescript\n{\n  data: [\n    { id: 'msg_...', index: 0, role: 'user', content: '...', metadata: {} },\n    { id: 'msg_...', index: 1, role: 'assistant', content: '...', metadata: {} }\n  ],\n  version: 2,\n  versions: [\n    { version: 0, created_at: '...', operation: 'create', affected: null, metadata: {} },\n    { version: 1, created_at: '...', operation: 'update', affected: ['msg_x'], metadata: {} },\n    { version: 2, created_at: '...', operation: 'delete', affected: ['msg_y'], metadata: {} }\n  ]\n}\n```\n\n---\n\n### 4.4 list()\n\n**Purpose:** List root contexts for a project.\n\n**Signature:**\n```typescript\nlist(): Promise<ListResponse>\n```\n\n**Examples:**\n```typescript\nconst { data } = await uc.list()\n// → [{ id: 'ctx_...', created_at: '...', metadata: {} }, ...]\n```\n\n**Notes:**\n- Returns only root contexts (not version branches)\n- Scoped to your project API key\n- Pagination TBD?\n\n---\n\n### 4.5 update()\n\n**Purpose:** Modify messages. Creates a new version.\n\n**Signature:**\n```typescript\nupdate(\n  contextId: string, \n  input: UpdateInput | UpdateInput[], \n  options?: MutationOptions\n): Promise<WriteResponse>\n```\n\n**Parameters:**\n| Param | Type | Description |\n|-------|------|-------------|\n| `contextId` | string | Target context |\n| `input` | object/array | Message(s) to update |\n| `options.metadata` | object | Audit metadata |\n\n**UpdateInput:**\n```typescript\n{\n  id: string,       // Message ID to update\n  content?: string, // New content\n  role?: string,    // New role\n  metadata?: o... [truncated 30541 chars]"
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:42:58.766Z",
+            "parentUuid": "70ec4a8c-eb15-4e8c-9a26-aa6b0c2a5376",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": [
+                {
+                  "end": 23700,
+                  "text": "ultrathink",
+                  "start": 23690
+                }
+              ]
+            }
+          },
+          "message": "Oh, actually, I forgot that claude web had generated a great outline for the docs. The code is outdated and needs to be corrected probably, but outline is great. # UltraContext Documentation Outline ## Overview Documentation structure for developers building AI agents. Prioritizes \"time to first context\" and progressive disclosure — basics first, depth when needed. --- ## 1. Home / Introduction **Goal:** Explain what UltraContext is in 30 seconds. ### Content - One-liner: \"Context infrastructure for AI agents\" - The problem: Managing conversation history, tool calls, and decision context across agent sessions - The solution: Git-like versioned context that's always recoverable - Key differentiators: - 6 methods, zero config - History is never lost (branching on mutations) - Time-travel and audit built-in ### Tone Hook developers fast. No enterprise fluff. --- ## 2. Quickstart **Goal:** Working code in under 5 minutes. ### Content ```typescript // 1. Install npm install @ultracontext/sdk // 2. Initialize import { UltraContext } from '@ultracontext/sdk' const uc = new UltraContext({ apiKey: 'uc_...' }) // 3. Create context const ctx = await uc.create() // 4. Add messages await uc.append(ctx.id, [ { role: 'user', content: 'Hello' }, { role: 'assistant', content: 'Hi there!' } ]) // 5. Retrieve const { data } = await uc.get(ctx.id) // → Ready to pass to your LLM ``` ### What to cover - Installation (npm/yarn/pnpm) - API key (where to get it, format) - Create → Append → Get flow - Link to full API reference ### What NOT to cover - Versioning, branching (save for concepts) - All method options - Error handling --- ## 3. Core Concepts **Goal:** Build the mental model. This is where we share the \"git-like\" story. ### 3.1 Contexts - What they are: Containers for messages and tool interactions - Each context has a stable ID (`ctx_...`) - Contexts are isolated — no cross-contamination - Use cases: one context per conversation, per agent session, per task ### 3.2 Messages - Standard format: `{ role, content }` — works with any LLM - Each message gets a stable ID and index - Append-only within a version (order preserved) - Can include metadata for your own tracking ### 3.3 Versioning (The Git Mental Model) **This is the key concept to nail.** - Every context starts at version 0 - `append()` adds to current version (no new version) - `update()` and `delete()` create new versions (branching) - Old versions are never lost - You're always reading from latest version unless you specify otherwise **Analogy:** > \"Think of your context like a git branch. Appending messages is like adding new commits. But if you need to change or remove a message, UltraContext creates a new branch — your original history stays intact.\" **Visual:** ``` Version 0 (create) │ ├── append msg1 ├── append msg2 ├── append msg3 │ Version 1 (update msg2) │ ├── msg1 ├── msg2 (modified) ├── msg3 │ Version 2 (delete msg3) │ ├── msg1 ├── msg2 (modified) ``` ### 3.4 Time Travel - Access any version:... [truncated 34894 chars]",
+          "timestamp": "2025-12-31T04:42:58.766Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_1c5f4c7f828149d4b2d897b2",
+        "index": 8,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "c064b1550ace6a446282edabe40bcb175e0f022bdf2488d501e7de4deccc00dd",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 339074
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "8bc8600e-cabd-44d9-a9e6-86f1c896ba62",
+            "message": {
+              "id": "msg_01VSte3mepkLJHDcwd86Zq2E",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Let me explore the SDK to verify the actual API and then plan the full documentation overhaul.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe9pzqdVZ3tT4CpYjvTU",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:43:20.826Z",
+            "parentUuid": "27b9d8bd-3454-497f-8308-18d879d87892",
+            "isSidechain": false
+          },
+          "message": "Let me explore the SDK to verify the actual API and then plan the full documentation overhaul.",
+          "timestamp": "2025-12-31T04:43:20.826Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_29a8cde57e871eb54f414448",
+        "index": 9,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "0572bcaf11bd8b9d9bafe873c6bf29d1761cf4268b838e9027c76a6f63cbfcf8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 385448
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "e33974c4-2b1c-4615-849d-eca3bce543d4",
+            "message": {
+              "id": "msg_016n8yj3vEfAE3EPeugqHphD",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now I have a complete picture. Let me write the plan:",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWe9uJkkezrDkVBzU2SjH",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:44:20.294Z",
+            "parentUuid": "4d351a8a-9bd0-46e6-a5e0-c491491d7e87",
+            "isSidechain": false
+          },
+          "message": "Now I have a complete picture. Let me write the plan:",
+          "timestamp": "2025-12-31T04:44:20.294Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_dc9429b07246628d1baade91",
+        "index": 10,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "08d5cfd188277c3a47083cabfe2b84d95250bdfe9fcc3b88590ae64ee7f4acae",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 418185
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "declarative-cooking-teacup",
+            "type": "assistant",
+            "uuid": "eed0b524-09df-4104-b3e2-b7e7ae12703b",
+            "message": {
+              "id": "msg_01TWKVrmSo6SFKErERMj42jj",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Plan ready. Summary:\n\n**UPDATE (4 files):**\n- `index.mdx` - stronger positioning, problem→solution hook\n- `quickstart.mdx` - verify code examples\n- `concepts/versioning.mdx` - ASCII diagram, git mental model\n- `docs.json` - new nav structure\n\n**CREATE (4 files):**\n- `patterns/tool-tracking.mdx`\n- `patterns/multi-agent.mdx`\n- `reference/authentication.mdx`\n- `reference/errors.mdx`\n\n**RENAME:**\n- `learn/` → `patterns/`\n- 2 file renames for clarity",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.0.76",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CWeA6VP2Vgj1K9bg5rdxD",
+            "sessionId": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+            "timestamp": "2025-12-31T04:46:39.696Z",
+            "parentUuid": "3d1ebf69-9300-44ff-8307-cb5f2da9c076",
+            "isSidechain": false
+          },
+          "message": "Plan ready. Summary: **UPDATE (4 files):** - `index.mdx` - stronger positioning, problem→solution hook - `quickstart.mdx` - verify code examples - `concepts/versioning.mdx` - ASCII diagram, git mental model - `docs.json` - new nav structure **CREATE (4 files):** - `patterns/tool-tracking.mdx` - `patterns/multi-agent.mdx` - `reference/authentication.mdx` - `reference/errors.mdx` **RENAME:** - `learn/` → `patterns/` - 2 file renames for clarity",
+          "timestamp": "2025-12-31T04:46:39.696Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_95dbffcaad6abb325b94eb48",
+        "index": 11,
+        "metadata": {
+          "day": "2025-12-31",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "6d172bebd7d74595233cfb0d4337b7547cdceaa6fb5d70c8b886447f372f5f36",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/d3217bde-4f4d-486a-95b8-d2e04099bb68.jsonl",
+          "session_id": "d3217bde-4f4d-486a-95b8-d2e04099bb68",
+          "engineer_id": "engineer-01",
+          "file_offset": 467152
+        }
+      }
+    ],
+    "version": 0
+  }
+}

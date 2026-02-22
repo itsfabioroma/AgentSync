@@ -1,0 +1,109 @@
+{
+  "pulledAt": "2026-02-22T01:20:14.793Z",
+  "cache": {
+    "cacheKey": "ctx:session:codex:Fabios-MacBook-Pro.local:engineer-01:6de8e077-c3cd-4661-9c0d-eefa992c5381",
+    "contextId": "ctx_446b6e7b7a0cd776fbd0a212",
+    "source": "codex",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+    "updatedAtUnix": 1771690605
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "session_meta",
+            "payload": {
+              "id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+              "cwd": "/Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+              "source": "cli",
+              "timestamp": "2026-02-21T16:16:00.147Z",
+              "originator": "ultracontext_daemon",
+              "cli_version": "restored",
+              "model_provider": "openai"
+            },
+            "timestamp": "2026-02-21T16:16:00.147Z"
+          },
+          "message": "Session started in /Users/fabioroma/Code/ultracontext/ultracontext/apps/tui",
+          "timestamp": "2026-02-21T16:16:00.147Z",
+          "event_type": "session_meta"
+        },
+        "id": "msg_ce905d919405e89ab2028b2f",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "2a460ea461d9933582d935857c3a5fc4567302bd900a0dc60b5f9212f78963ee",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-16-00-6de8e077-c3cd-4661-9c0d-eefa992c5381.jsonl",
+          "session_id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+          "engineer_id": "engineer-01",
+          "file_offset": 0
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "user_message",
+              "images": [],
+              "message": "hello man",
+              "local_images": [],
+              "text_elements": []
+            },
+            "timestamp": "2026-02-21T16:16:00.147Z"
+          },
+          "message": "hello man",
+          "timestamp": "2026-02-21T16:16:00.147Z",
+          "event_type": "event_msg.user_message"
+        },
+        "id": "msg_ec66ed222a473cba31676ca2",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "85f1fe64ea42f6aa568f109f0051fd8adc2f3c0b946f15e691c6a9ac1ec6d7e9",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-16-00-6de8e077-c3cd-4661-9c0d-eefa992c5381.jsonl",
+          "session_id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+          "engineer_id": "engineer-01",
+          "file_offset": 324
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "type": "event_msg",
+            "payload": {
+              "type": "agent_message",
+              "message": "Hey! How can I help you today?"
+            },
+            "timestamp": "2026-02-21T16:16:04.104Z"
+          },
+          "message": "Hey! How can I help you today?",
+          "timestamp": "2026-02-21T16:16:04.104Z",
+          "event_type": "event_msg.agent_message"
+        },
+        "id": "msg_a2b6e01372ea1b6a01a2a1e9",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "codex",
+          "event_id": "c8522e99932e1eb618cb75ead4e3445ad0fcbf52058c25699d444acbbd40fb93",
+          "file_path": "/Users/fabioroma/.codex/sessions/2026/02/21/rollout-2026-02-21T16-16-00-6de8e077-c3cd-4661-9c0d-eefa992c5381.jsonl",
+          "session_id": "6de8e077-c3cd-4661-9c0d-eefa992c5381",
+          "engineer_id": "engineer-01",
+          "file_offset": 489
+        }
+      }
+    ],
+    "version": 0
+  }
+}

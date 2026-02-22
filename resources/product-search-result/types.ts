@@ -14,18 +14,6 @@ export const propSchema = z.object({
     )
     .optional()
     .describe("Runtime themes and optional engineer names for graph nodes"),
-  selectedNodeIds: z
-    .array(z.string())
-    .optional()
-    .describe("Node IDs that should render as selected"),
-  scopeTeams: z
-    .array(z.string())
-    .optional()
-    .describe("Team filters currently applied to query scope"),
-  scopeEngineers: z
-    .array(z.string())
-    .optional()
-    .describe("Engineer filters currently applied to query scope"),
   focusEngineers: z
     .array(z.string())
     .optional()

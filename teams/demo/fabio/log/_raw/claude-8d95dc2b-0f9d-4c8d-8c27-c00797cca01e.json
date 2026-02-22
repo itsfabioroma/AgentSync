@@ -1,0 +1,58 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.735Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:8d95dc2b-0f9d-4c8d-8c27-c00797cca01e",
+    "contextId": "ctx_bb4ce9d6aec0c613bb16f4da",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "8d95dc2b-0f9d-4c8d-8c27-c00797cca01e",
+    "updatedAtUnix": 1771690272
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/beads",
+            "type": "user",
+            "uuid": "e7d6fc1d-6134-4906-8556-1cc00422b3ad",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Explore this. See how useful could it be for ultracontext (../ultracontext)"
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "main",
+            "sessionId": "8d95dc2b-0f9d-4c8d-8c27-c00797cca01e",
+            "timestamp": "2026-02-09T06:15:57.018Z",
+            "parentUuid": "0234782d-92e0-4465-a22c-6b26adad5c87",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Explore this. See how useful could it be for ultracontext (../ultracontext)",
+          "timestamp": "2026-02-09T06:15:57.018Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_7f8b8a449673bfda159a1e10",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "1eaa7b01c8bc8839e01e0c7dcebe365168d83e5d6127153345fe6af376de0a43",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-beads/8d95dc2b-0f9d-4c8d-8c27-c00797cca01e.jsonl",
+          "session_id": "8d95dc2b-0f9d-4c8d-8c27-c00797cca01e",
+          "engineer_id": "engineer-01",
+          "file_offset": 791
+        }
+      }
+    ],
+    "version": 0
+  }
+}

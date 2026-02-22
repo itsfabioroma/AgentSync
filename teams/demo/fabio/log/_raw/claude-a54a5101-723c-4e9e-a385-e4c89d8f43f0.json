@@ -1,0 +1,117 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.958Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+    "contextId": "ctx_7a51ce20dbc4e6350116fcc6",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+    "updatedAtUnix": 1771690396
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "d57a36a4-4eca-4f9b-8711-101a14d09799",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "can this folder be better?"
+            },
+            "version": "2.1.9",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+            "timestamp": "2026-01-16T21:38:16.980Z",
+            "parentUuid": "dfc6a74c-9df4-4ebe-baca-52dc91e80092",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "can this folder be better?",
+          "timestamp": "2026-01-16T21:38:16.980Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_8bd3128d35424fe8fb9f2cd7",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-16",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "9b98eb9438a49457fa889069ac3a6a44dbd346c954e0ab5285feee12bbe0c863",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/a54a5101-723c-4e9e-a385-e4c89d8f43f0.jsonl",
+          "session_id": "a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+          "engineer_id": "engineer-01",
+          "file_offset": 793
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "e0793766-b787-476b-a54a-b7030b2566aa",
+            "message": {
+              "id": "msg_01861UDgmSMxu9bohsLs3vKJ",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Let me explore the codebase structure first.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.9",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXBnC8bbZGVknTN9C9B4Q",
+            "sessionId": "a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+            "timestamp": "2026-01-16T21:38:22.022Z",
+            "parentUuid": "67083d82-1a99-4112-b5f5-974753492e93",
+            "isSidechain": false
+          },
+          "message": "Let me explore the codebase structure first.",
+          "timestamp": "2026-01-16T21:38:22.022Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_db7ba6488325609570a778cf",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-16",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "0eaa5fb9a491fb478081d4529fdccd8116e8a42695e4f3a9fe3dcac3a273763b",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/a54a5101-723c-4e9e-a385-e4c89d8f43f0.jsonl",
+          "session_id": "a54a5101-723c-4e9e-a385-e4c89d8f43f0",
+          "engineer_id": "engineer-01",
+          "file_offset": 2660
+        }
+      }
+    ],
+    "version": 0
+  }
+}

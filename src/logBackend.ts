@@ -78,6 +78,13 @@ function parseTimestampToMs(value: unknown): number {
 }
 
 function inferSource(filePath: string, record: Record<string, unknown>): LogSource {
+  if (typeof record.source === "string") {
+    const explicit = record.source.trim().toLowerCase();
+    if (explicit === "codex" || explicit === "claude") {
+      return explicit;
+    }
+  }
+
   if (
     filePath.includes(`${path.sep}.codex${path.sep}`) ||
     typeof record.ts === "number" ||
@@ -165,8 +172,13 @@ async function listEngineerLogs(
   teams?: string[],
   engineers?: string[]
 ): Promise<EngineerLog[]> {
-  const selectedTeams = teams && teams.length > 0 ? new Set(teams) : null;
-  const selectedEngineers = engineers && engineers.length > 0 ? new Set(engineers) : null;
+  const toLookupKey = (value: string) => value.trim().toLowerCase();
+  const selectedTeams =
+    teams && teams.length > 0 ? new Set(teams.map(toLookupKey).filter(Boolean)) : null;
+  const selectedEngineers =
+    engineers && engineers.length > 0
+      ? new Set(engineers.map(toLookupKey).filter(Boolean))
+      : null;
   const entries = await fs.readdir(teamRoot, { withFileTypes: true });
   const results: EngineerLog[] = [];
 
@@ -178,18 +190,23 @@ async function listEngineerLogs(
 
     if (await pathExists(directLogDir)) {
       // Flat structure: <teamRoot>/<engineer>/log
-      if (selectedEngineers && !selectedEngineers.has(entry.name)) continue;
+      if (selectedEngineers && !selectedEngineers.has(toLookupKey(entry.name))) continue;
       results.push({ engineer: entry.name, logDir: directLogDir });
     } else {
       // Nested structure: <teamRoot>/<team>/<engineer>/log
-      if (selectedTeams && !selectedTeams.has(entry.name)) continue;
+      if (selectedTeams && !selectedTeams.has(toLookupKey(entry.name))) continue;
 
       const teamName = entry.name;
       const teamEntries = await fs.readdir(entryPath, { withFileTypes: true });
 
       for (const engineerEntry of teamEntries) {
         if (!engineerEntry.isDirectory()) continue;
-        if (selectedEngineers && !selectedEngineers.has(engineerEntry.name)) continue;
+        if (
+          selectedEngineers &&
+          !selectedEngineers.has(toLookupKey(engineerEntry.name))
+        ) {
+          continue;
+        }
 
         const logDir = path.join(entryPath, engineerEntry.name, "log");
         if (await pathExists(logDir)) {

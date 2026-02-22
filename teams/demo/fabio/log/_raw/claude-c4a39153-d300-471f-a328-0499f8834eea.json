@@ -1,0 +1,425 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.586Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:c4a39153-d300-471f-a328-0499f8834eea",
+    "contextId": "ctx_819511f053d8b917feca4160",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+    "updatedAtUnix": 1771690443
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "7e3f1bdd-8046-4507-a28e-36d823593c27",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "use context7 to see what is and how Ultracontext works"
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-21T23:56:29.396Z",
+            "parentUuid": "d3464631-b58f-466c-9110-48d99dd20525",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "use context7 to see what is and how Ultracontext works",
+          "timestamp": "2026-01-21T23:56:29.396Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_565d66f63d425763fcd8aa72",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "035e4665c3debd22c43cf4bc859f2be3d04fbec398831fb6af71a17ccd10d274",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 794
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "85712dda-1567-4165-8b71-9de3808f5cad",
+            "message": {
+              "id": "msg_014ueMkwxoFxmeXojCu8Gmwe",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "**Ultracontext** isn't found in Context7's indexed libraries. The search returned similar names (Ultralight, UltraRAG, Ultracite) but no exact match.\n\nGiven your working directory is `/Users/fabioroma/Code/ultracontext`, this appears to be:\n- A local project you're building, or\n- A library not yet indexed in Context7\n\nWould you like me to explore your local codebase instead to understand how it works?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXMRntSNN6o9cpxK859CY",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-21T23:56:49.519Z",
+            "parentUuid": "dffeeb0b-c3cc-4c10-ac6b-208f39e98c63",
+            "isSidechain": false
+          },
+          "message": "**Ultracontext** isn't found in Context7's indexed libraries. The search returned similar names (Ultralight, UltraRAG, Ultracite) but no exact match. Given your working directory is `/Users/fabioroma/Code/ultracontext`, this appears to be: - A local project you're building, or - A library not yet indexed in Context7 Would you like me to explore your local codebase instead to understand how it works?",
+          "timestamp": "2026-01-21T23:56:49.519Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_63c73c20b6c5bb880f1f72f7",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "0bb7a172606191741df7ef8c1cb477091f766ab6eaf09abeee3330b16f365964",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 21893
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "9bb74fb1-40f5-492d-86f8-c7415e82c8fb",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "how to index ultracontext on context7?"
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-21T23:57:09.202Z",
+            "parentUuid": "18ee3eea-0ad1-4f17-8b8d-7b580238a194",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "how to index ultracontext on context7?",
+          "timestamp": "2026-01-21T23:57:09.202Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_421a70e2064358ef972abb11",
+        "index": 2,
+        "metadata": {
+          "day": "2026-01-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "9613c338bac55e8f60dd6ef77eb6603051f7353b9c919e3756f77255011f7c05",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 24488
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "1173cff8-6fea-47cb-be18-79c0475be4a2",
+            "message": {
+              "id": "msg_01Gyafx8gzNKjXQtXa5nS3DN",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "## How to index on Context7\n\n**Quickest way:**\n1. Go to [context7.com](https://context7.com)\n2. Paste your GitHub repo URL\n3. Adjust folders/exclusions if needed\n4. Submit — Context7 parses and indexes your docs\n\n**Requirements:**\n- Repo must be public (private needs Pro/Enterprise plan)\n- Must be on GitHub\n\n**Optional: Add `context7.json` to repo root for advanced config:**\n```json\n{\n  \"previousVersions\": [\n    {\n      \"tag\": \"v1.0.0\",\n      \"title\": \"version 1.0.0\"\n    }\n  ]\n}\n```\n\n**To claim ownership after indexing:**\nAdd `context7.json` with `url` and `public_key` from the claiming modal.\n\n---\n\nIs your ultracontext project on GitHub? If not, you'd need to push it first.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXMRqmbCLdsE9RJVPZgdA",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-21T23:57:28.349Z",
+            "parentUuid": "43c34daa-c502-495b-9e79-c717fef89aad",
+            "isSidechain": false
+          },
+          "message": "## How to index on Context7 **Quickest way:** 1. Go to [context7.com](https://context7.com) 2. Paste your GitHub repo URL 3. Adjust folders/exclusions if needed 4. Submit — Context7 parses and indexes your docs **Requirements:** - Repo must be public (private needs Pro/Enterprise plan) - Must be on GitHub **Optional: Add `context7.json` to repo root for advanced config:** ```json { \"previousVersions\": [ { \"tag\": \"v1.0.0\", \"title\": \"version 1.0.0\" } ] } ``` **To claim ownership after indexing:** Add `context7.json` with `url` and `public_key` from the claiming modal. --- Is your ultracontext project on GitHub? If not, you'd need to push it first.",
+          "timestamp": "2026-01-21T23:57:28.349Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_b50056decdb861adaddd71b5",
+        "index": 3,
+        "metadata": {
+          "day": "2026-01-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f27d824b4d6b4c2deec194425b261f1ed7c489aee2d1e1e6ff4108b937b2cb8c",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 44782
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "d6b5a9e2-ec2b-40a7-9ea9-5277811423f2",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "how to index ultracontext on context7?"
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-22T00:02:51.268Z",
+            "parentUuid": "18ee3eea-0ad1-4f17-8b8d-7b580238a194",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "how to index ultracontext on context7?",
+          "timestamp": "2026-01-22T00:02:51.268Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_59b1fd648d7e22a5f2e92dfe",
+        "index": 4,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "7303c5ec17135208efa7de772a16ab74842cb13491d0dda5084c2b31bae5b864",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 47691
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "5d753910-d4b3-4eb6-a450-e784d826c88d",
+            "message": {
+              "role": "user",
+              "content": [
+                {
+                  "text": "[Request interrupted by user]",
+                  "type": "text"
+                }
+              ]
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-22T00:02:52.786Z",
+            "parentUuid": "d6b5a9e2-ec2b-40a7-9ea9-5277811423f2",
+            "isSidechain": false
+          },
+          "message": "[Request interrupted by user]",
+          "timestamp": "2026-01-22T00:02:52.786Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_59166801aba1028da3f6853d",
+        "index": 5,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "a52ee78ee7af46f3e52788e80ff6608366d8d4b0b643ecdad1e974f880aa4cb3",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 48169
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "96150db4-772f-442c-a15f-c8bfdc7ab633",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "use context7 to see what is and how Ultracontext works"
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-22T00:02:56.801Z",
+            "parentUuid": "d3464631-b58f-466c-9110-48d99dd20525",
+            "isSidechain": false,
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "use context7 to see what is and how Ultracontext works",
+          "timestamp": "2026-01-22T00:02:56.801Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_4c36a698d64685251220f3b2",
+        "index": 6,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "ea845541077b7e922fc408fda1555cc8e15e7e169ca014867101656b45c1e7b0",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 48821
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "0f7a0307-f73c-4f9b-aa37-278148f12164",
+            "message": {
+              "id": "msg_016ZpBzSXZCpW93rQJKvjAt3",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "No results for \"Ultracontext\" in Context7's library database. The search returned related libraries (Superlinked, ContextGem, DeepContext, UltraRAG) but not Ultracontext specifically.\n\nSince the current working directory is `/Users/fabioroma/Code/ultracontext`, it seems you may be working on a local project called \"ultracontext\". Would you like me to explore this local codebase instead to understand what it is and how it works?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.14",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXMSGxVEJScSv1jd9VLyH",
+            "sessionId": "c4a39153-d300-471f-a328-0499f8834eea",
+            "timestamp": "2026-01-22T00:03:09.021Z",
+            "parentUuid": "4b970971-4d87-49cb-a2cc-899db9776c0d",
+            "isSidechain": false
+          },
+          "message": "No results for \"Ultracontext\" in Context7's library database. The search returned related libraries (Superlinked, ContextGem, DeepContext, UltraRAG) but not Ultracontext specifically. Since the current working directory is `/Users/fabioroma/Code/ultracontext`, it seems you may be working on a local project called \"ultracontext\". Would you like me to explore this local codebase instead to understand what it is and how it works?",
+          "timestamp": "2026-01-22T00:03:09.021Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_c7da2d660104a3d8d62be9ce",
+        "index": 7,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "d7bcd61366688208273e38acf55612792ebf6db32767c2f601711a83fe1383ad",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 60287
+        }
+      },
+      {
+        "role": "system",
+        "content": {
+          "raw": {
+            "type": "summary",
+            "summary": "Ultracontext Project Investigation and Context Search",
+            "leafUuid": "0f7a0307-f73c-4f9b-aa37-278148f12164"
+          },
+          "message": "Ultracontext Project Investigation and Context Search",
+          "timestamp": "2026-02-21T16:14:06.410Z",
+          "event_type": "claude.summary"
+        },
+        "id": "msg_49bb67acef1c698ed7906f6e",
+        "index": 8,
+        "metadata": {
+          "day": "2026-02-21",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "4906058f48e2dfd442bef96599d5e45af81989812a122badda660d8817f0bf85",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/c4a39153-d300-471f-a328-0499f8834eea.jsonl",
+          "session_id": "c4a39153-d300-471f-a328-0499f8834eea",
+          "engineer_id": "engineer-01",
+          "file_offset": 62673
+        }
+      }
+    ],
+    "version": 0
+  }
+}

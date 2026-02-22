@@ -3,6 +3,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 import { queryEngineerTasks } from "./src/logBackend";
+import { pullFabioSessions } from "./src/pullFabioSessions";
 
 const server = new MCPServer({
   name: "engineer-log-query",
@@ -26,28 +27,71 @@ type ThemeNode = {
   engineers: string[];
 };
 
-const RLM_ANIMATION_MS = 14_000;
-const RLM_COMPLETION_GRACE_MS = 3_000;
-
-type AnimationGate = {
-  waitForCompletion: Promise<void>;
-  resolve: () => void;
+const boolFromEnv = (value: string | undefined, fallback: boolean) => {
+  if (value === undefined) return fallback;
+  const normalized = value.trim().toLowerCase();
+  if (["1", "true", "yes", "on"].includes(normalized)) return true;
+  if (["0", "false", "no", "off"].includes(normalized)) return false;
+  return fallback;
 };
 
-type SessionSelectionState = {
-  nodeIds: string[];
-  teams: string[];
-  engineers: string[];
-  updatedAt: number;
+const toInt = (value: string | undefined, fallback: number) => {
+  const parsed = Number.parseInt(String(value ?? ""), 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
 };
 
-const pendingAnimationGates = new Map<string, AnimationGate[]>();
-const sessionSelectionState = new Map<string, SessionSelectionState>();
+const autoFabioSyncEnabled = boolFromEnv(process.env.AUTO_SYNC_FABIO_SESSIONS, true);
+const autoFabioSyncOutDir = (process.env.AUTO_SYNC_FABIO_SESSIONS_OUT_DIR ?? "teams/demo/fabio/log").trim();
+const autoFabioSyncEngineerId = (process.env.AUTO_SYNC_FABIO_SESSIONS_ENGINEER_ID ?? "engineer-01").trim();
+const autoFabioSyncHost = (process.env.AUTO_SYNC_FABIO_SESSIONS_HOST ?? "").trim();
+const autoFabioSyncLimit = Math.max(toInt(process.env.AUTO_SYNC_FABIO_SESSIONS_LIMIT, 120), 1);
+const autoFabioSyncSource = ["codex", "claude"].includes(
+  (process.env.AUTO_SYNC_FABIO_SESSIONS_SOURCE ?? "").trim().toLowerCase()
+)
+  ? ((process.env.AUTO_SYNC_FABIO_SESSIONS_SOURCE ?? "").trim().toLowerCase() as
+      | "codex"
+      | "claude")
+  : ("all" as const);
 
-const sleep = (ms: number) =>
-  new Promise<void>((resolve) => {
-    setTimeout(resolve, ms);
-  });
+let fabioSyncRunning = false;
+let fabioSyncPending = false;
+
+const runFabioSessionSync = async () => {
+  try {
+    const summary = await pullFabioSessions({
+      outDir: autoFabioSyncOutDir,
+      engineerId: autoFabioSyncEngineerId || undefined,
+      host: autoFabioSyncHost || undefined,
+      source: autoFabioSyncSource,
+      limit: autoFabioSyncLimit,
+    });
+    if (!summary.dryRun) {
+      console.log(
+        `[fabio-sync] sessions=${summary.totalSessions} messages=${summary.totalUserMessages} outDir=${summary.outDir}`
+      );
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`[fabio-sync] failed: ${message}`);
+  } finally {
+    fabioSyncRunning = false;
+    if (fabioSyncPending) {
+      fabioSyncPending = false;
+      fabioSyncRunning = true;
+      void runFabioSessionSync();
+    }
+  }
+};
+
+const enqueueFabioSessionSync = () => {
+  if (!autoFabioSyncEnabled) return;
+  if (fabioSyncRunning) {
+    fabioSyncPending = true;
+    return;
+  }
+  fabioSyncRunning = true;
+  void runFabioSessionSync();
+};
 
 const normalizeStringList = (items?: string[]) => {
   if (!items || items.length === 0) return [];
@@ -67,47 +111,38 @@ const normalizeStringList = (items?: string[]) => {
   return values;
 };
 
-const enqueueAnimationGate = (sessionId: string): AnimationGate => {
-  let settled = false;
-  let resolvePromise: () => void = () => {};
+const normalizeForLookup = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-  const waitForCompletion = new Promise<void>((resolve) => {
-    resolvePromise = resolve;
-  });
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-  const gate: AnimationGate = {
-    waitForCompletion,
-    resolve: () => {
-      if (settled) return;
-      settled = true;
-      resolvePromise();
-    },
-  };
+const isEngineerMentioned = (
+  engineerName: string,
+  queryLower: string,
+  normalizedQuery: string,
+  normalizedQueryTokens: Set<string>
+) => {
+  const normalizedEngineer = normalizeForLookup(engineerName);
+  if (!normalizedEngineer) return false;
 
-  const queue = pendingAnimationGates.get(sessionId) ?? [];
-  queue.push(gate);
-  pendingAnimationGates.set(sessionId, queue);
-  return gate;
-};
+  // Exact name boundary match in raw text (handles punctuation like "@name," or "(name)").
+  const rawPattern = new RegExp(
+    `(^|[^a-z0-9])${escapeRegExp(engineerName.toLowerCase())}([^a-z0-9]|$)`,
+    "i"
+  );
+  if (rawPattern.test(queryLower)) return true;
 
-const resolveAnimationGate = (sessionId: string) => {
-  const queue = pendingAnimationGates.get(sessionId);
-  if (!queue || queue.length === 0) return false;
+  // Phrase match in normalized text.
+  const paddedQuery = ` ${normalizedQuery} `;
+  const paddedEngineer = ` ${normalizedEngineer} `;
+  if (paddedQuery.includes(paddedEngineer)) return true;
 
-  const gate = queue.shift();
-  gate?.resolve();
-
-  if (queue.length === 0) pendingAnimationGates.delete(sessionId);
-  return true;
-};
-
-const removeAnimationGate = (sessionId: string, gate: AnimationGate) => {
-  const queue = pendingAnimationGates.get(sessionId);
-  if (!queue || queue.length === 0) return;
-
-  const next = queue.filter((entry) => entry !== gate);
-  if (next.length === 0) pendingAnimationGates.delete(sessionId);
-  else pendingAnimationGates.set(sessionId, next);
+  // Token fallback for simple names.
+  const engineerTokens = normalizedEngineer.split(" ").filter(Boolean);
+  if (engineerTokens.length === 0) return false;
+  if (engineerTokens.length === 1) return normalizedQueryTokens.has(engineerTokens[0]);
+  return engineerTokens.every((token) => normalizedQueryTokens.has(token));
 };
 
 const pathExists = async (target: string) => {
@@ -183,33 +218,19 @@ const queryWithDashboard = async ({
   teams,
   engineers,
   limit,
-  sessionId,
 }: {
   query: string;
   teamRoot?: string;
   teams?: string[];
   engineers?: string[];
   limit?: number;
-  sessionId?: string;
 }) => {
-  const startedAt = Date.now();
-  const animationGate = sessionId ? enqueueAnimationGate(sessionId) : null;
-  const selectionState = sessionId ? sessionSelectionState.get(sessionId) : undefined;
-
-  const explicitTeams = normalizeStringList(teams);
-  const explicitEngineers = normalizeStringList(engineers);
-  const selectedTeams = normalizeStringList(selectionState?.teams);
-  const selectedEngineers = normalizeStringList(selectionState?.engineers);
-
-  const resolvedTeams = explicitTeams.length > 0 ? explicitTeams : selectedTeams;
-  const resolvedEngineers =
-    explicitEngineers.length > 0 ? explicitEngineers : selectedEngineers;
-  const isSelectionScoped =
-    explicitTeams.length === 0 &&
-    explicitEngineers.length === 0 &&
-    (selectedTeams.length > 0 || selectedEngineers.length > 0);
-
   try {
+    const explicitTeams = normalizeStringList(teams);
+    const explicitEngineers = normalizeStringList(engineers);
+    const resolvedTeams = explicitTeams;
+    const resolvedEngineers = explicitEngineers;
+
     const [result, themes] = await Promise.all([
       queryEngineerTasks({
         prompt: query,
@@ -221,10 +242,18 @@ const queryWithDashboard = async ({
       loadThemes(teamRoot),
     ]);
 
+    const queryLower = query.toLowerCase();
+    const normalizedQuery = normalizeForLookup(query);
+    const normalizedQueryTokens = new Set(
+      normalizedQuery.split(" ").map((token) => token.trim()).filter(Boolean)
+    );
+
     const mentionedEngineers = themes
       .flatMap((theme) => theme.engineers)
       .filter((name, idx, all) => all.indexOf(name) === idx)
-      .filter((name) => query.toLowerCase().includes(name.toLowerCase()));
+      .filter((name) =>
+        isEngineerMentioned(name, queryLower, normalizedQuery, normalizedQueryTokens)
+      );
 
     const matchedEngineers = result.matches
       .map((match) => match.engineer)
@@ -239,108 +268,26 @@ const queryWithDashboard = async ({
     const scopedResult = {
       ...result,
       appliedScope: {
-        fromNodeSelection: isSelectionScoped,
         teams: resolvedTeams,
         engineers: resolvedEngineers,
       },
     };
 
-    const elapsedMs = Date.now() - startedAt;
-    if (animationGate) {
-      const fallbackWaitMs = Math.max(
-        0,
-        RLM_ANIMATION_MS + RLM_COMPLETION_GRACE_MS - elapsedMs
-      );
-      if (fallbackWaitMs > 0) {
-        await Promise.race([animationGate.waitForCompletion, sleep(fallbackWaitMs)]);
-      }
-    } else if (elapsedMs < RLM_ANIMATION_MS) {
-      await sleep(RLM_ANIMATION_MS - elapsedMs);
-    }
-
     return openDashboardWidget(query, object(scopedResult), {
       query,
       themes,
-      selectedNodeIds: selectionState?.nodeIds ?? [],
-      scopeTeams: resolvedTeams,
-      scopeEngineers: resolvedEngineers,
       focusEngineers,
     });
   } finally {
-    if (sessionId && animationGate) removeAnimationGate(sessionId, animationGate);
+    enqueueFabioSessionSync();
   }
 };
 
 server.tool(
   {
-    name: "dashboard-rlm-complete",
-    description: "Internal callback from dashboard when recursive animation completes",
-    schema: z.object({
-      playheadMs: z.number().optional(),
-    }),
-    _meta: {
-      ui: { visibility: ["app"] },
-      "openai/widgetAccessible": true,
-    },
-  },
-  async (_args, ctx) => {
-    resolveAnimationGate(ctx.session.sessionId);
-    return object({ ok: true });
-  }
-);
-
-server.tool(
-  {
-    name: "dashboard-set-selection",
-    description:
-      "Internal callback from dashboard to persist selected nodes for scoping future queries",
-    schema: z.object({
-      nodeIds: z.array(z.string()).optional(),
-      teams: z.array(z.string()).optional(),
-      engineers: z.array(z.string()).optional(),
-    }),
-    _meta: {
-      ui: { visibility: ["app"] },
-      "openai/widgetAccessible": true,
-    },
-  },
-  async ({ nodeIds, teams, engineers }, ctx) => {
-    const normalizedNodeIds = normalizeStringList(nodeIds);
-    const normalizedTeams = normalizeStringList(teams);
-    const normalizedEngineers = normalizeStringList(engineers);
-
-    if (
-      normalizedNodeIds.length === 0 &&
-      normalizedTeams.length === 0 &&
-      normalizedEngineers.length === 0
-    ) {
-      sessionSelectionState.delete(ctx.session.sessionId);
-      return object({ ok: true, cleared: true });
-    }
-
-    sessionSelectionState.set(ctx.session.sessionId, {
-      nodeIds: normalizedNodeIds,
-      teams: normalizedTeams,
-      engineers: normalizedEngineers,
-      updatedAt: Date.now(),
-    });
-
-    return object({
-      ok: true,
-      selection: {
-        nodeIds: normalizedNodeIds,
-        teams: normalizedTeams,
-        engineers: normalizedEngineers,
-      },
-    });
-  }
-);
-
-server.tool(
-  {
     name: "query-context",
     description:
-      "General-purpose search over engineer task logs in ~/teams. If teams/engineers are omitted, the most recent node selection from the dashboard is applied automatically.",
+      "General-purpose search over engineer task logs in ~/teams.",
     schema: z.object({
       query: z.string().describe("Task query or prompt text (supports `claude -p` style queries)"),
       teamRoot: z
@@ -363,14 +310,13 @@ server.tool(
       invoked: "Query complete",
     },
   },
-  async ({ query, teamRoot, teams, engineers, limit }, ctx) =>
+  async ({ query, teamRoot, teams, engineers, limit }) =>
     queryWithDashboard({
       query,
       teamRoot,
       teams,
       engineers,
       limit,
-      sessionId: ctx.session.sessionId,
     })
 );
 
@@ -401,14 +347,13 @@ server.tool(
       invoked: "Query complete",
     },
   },
-  async ({ query, focus, teamRoot, teams, engineers, limit }, ctx) =>
+  async ({ query, focus, teamRoot, teams, engineers, limit }) =>
     queryWithDashboard({
       query: query ?? focus ?? "",
       teamRoot,
       teams,
       engineers,
       limit,
-      sessionId: ctx.session.sessionId,
     })
 );
 

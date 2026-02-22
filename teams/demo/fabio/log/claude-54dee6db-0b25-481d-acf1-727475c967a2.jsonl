@@ -1,0 +1,2 @@
+{"type":"user","source":"claude","timestamp":"2026-02-14T05:49:37.316Z","sessionId":"54dee6db-0b25-481d-acf1-727475c967a2","contextId":"ctx_1acb51e696c0488251c73d2a","message":{"content":"how do I run next on a different port than 3000?"}}
+{"type":"user","source":"claude","timestamp":"2026-02-14T05:50:06.603Z","sessionId":"54dee6db-0b25-481d-acf1-727475c967a2","contextId":"ctx_1acb51e696c0488251c73d2a","message":{"content":"but manually without changing the script"}}

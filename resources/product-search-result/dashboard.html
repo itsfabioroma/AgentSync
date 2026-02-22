@@ -184,9 +184,6 @@
     import { RenderPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/RenderPass.js';
     import { UnrealBloomPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js';
     var INITIAL_PLAYHEAD_MS = Number(window.__UC_INITIAL_PLAYHEAD_MS || 0);
-    var INITIAL_SELECTED_NODE_IDS = Array.isArray(window.__UC_SELECTED_NODE_IDS) ? window.__UC_SELECTED_NODE_IDS : [];
-    var INITIAL_SCOPE_TEAMS = Array.isArray(window.__UC_SCOPE_TEAMS) ? window.__UC_SCOPE_TEAMS : [];
-    var INITIAL_SCOPE_ENGINEERS = Array.isArray(window.__UC_SCOPE_ENGINEERS) ? window.__UC_SCOPE_ENGINEERS : [];
     var INITIAL_FOCUS_ENGINEERS = Array.isArray(window.__UC_FOCUS_ENGINEERS) ? window.__UC_FOCUS_ENGINEERS : [];
 
     // ================================
@@ -563,25 +560,6 @@
       }
       return out;
     }
-    function addNamedSelection(store, value) {
-      var key = keyForName(value);
-      if (!key) return;
-      store[key] = value.trim();
-    }
-    function removeNamedSelection(store, value) {
-      var key = keyForName(value);
-      if (!key) return;
-      delete store[key];
-    }
-    function valuesFromNamedSelection(store) {
-      var out = [];
-      for (var key in store) {
-        if (!Object.prototype.hasOwnProperty.call(store, key)) continue;
-        out.push(store[key]);
-      }
-      out.sort(function(a, b) { return a.localeCompare(b); });
-      return out;
-    }
     var runtimeThemes = Array.isArray(window.__UC_THEMES) ? window.__UC_THEMES : [];
     var TEAM_DEFS = runtimeThemes.length > 0
       ? runtimeThemes.map(function(theme, idx) { return normalizeThemeDef(theme, idx); })
@@ -597,18 +575,8 @@
     var dashboardTimelineAnchor = 0;
     var activeEngineerQuery = null;
     var selectedNodeIds = {};
-    var selectedTeams = {};
-    var selectedEngineers = {};
-    var selectionDigest = '';
-    var initialSelectedNodeIds = uniqueNameList(INITIAL_SELECTED_NODE_IDS);
-    var initialScopeTeams = uniqueNameList(INITIAL_SCOPE_TEAMS);
-    var initialScopeEngineers = uniqueNameList(INITIAL_SCOPE_ENGINEERS);
     var initialFocusEngineers = uniqueNameList(INITIAL_FOCUS_ENGINEERS);
     var initialScopeApplied = false;
-
-    for (var i = 0; i < initialSelectedNodeIds.length; i++) {
-      selectedNodeIds[initialSelectedNodeIds[i]] = true;
-    }
 
     for (var i = 0; i < TEAM_DEFS.length; i++) {
       var teamAngle = (i / TEAM_DEFS.length) * Math.PI * 2 - Math.PI / 2;
@@ -713,45 +681,13 @@
       else entry.classList.remove('selected');
     }
 
-    function emitSelectionToHost() {
-      var payload = {
-        nodeIds: Object.keys(selectedNodeIds).sort(),
-        teams: valuesFromNamedSelection(selectedTeams),
-        engineers: valuesFromNamedSelection(selectedEngineers)
-      };
-      var digest = JSON.stringify(payload);
-      if (digest === selectionDigest) return;
-      selectionDigest = digest;
-      try {
-        window.parent.postMessage({
-          type: 'uc-dashboard-selection',
-          nodeIds: payload.nodeIds,
-          teams: payload.teams,
-          engineers: payload.engineers
-        }, '*');
-      } catch (_) {}
-    }
-
     function setNodeSelection(data, isSelected) {
       if (!data || !data.id) return;
 
       if (isSelected) selectedNodeIds[data.id] = true;
       else delete selectedNodeIds[data.id];
 
-      if (data.type === 'team') {
-        if (isSelected) addNamedSelection(selectedTeams, data.team || data.label || '');
-        else removeNamedSelection(selectedTeams, data.team || data.label || '');
-      } else if (data.type === 'engineer') {
-        if (isSelected) {
-          addNamedSelection(selectedEngineers, data.engineer || data.label || '');
-          addNamedSelection(selectedTeams, data.team || '');
-        } else {
-          removeNamedSelection(selectedEngineers, data.engineer || data.label || '');
-        }
-      }
-
       setLogEntrySelection(data.id);
-      emitSelectionToHost();
     }
 
     function toggleNodeSelection(data) {
@@ -765,56 +701,29 @@
       if (initialScopeApplied || rlmActive) return;
       initialScopeApplied = true;
 
-      var hasScopeData =
-        initialSelectedNodeIds.length > 0 ||
-        initialScopeTeams.length > 0 ||
-        initialScopeEngineers.length > 0 ||
-        initialFocusEngineers.length > 0;
-
-      if (!hasScopeData) {
-        emitSelectionToHost();
-        return;
-      }
+      if (initialFocusEngineers.length === 0) return;
 
       var shouldOpenHierarchy = false;
-      var scopeTeamKeys = {};
       var focusEngineerKeys = {};
 
-      for (var i = 0; i < initialScopeTeams.length; i++) {
-        scopeTeamKeys[keyForName(initialScopeTeams[i])] = true;
-      }
-      for (var i = 0; i < initialScopeEngineers.length; i++) {
-        focusEngineerKeys[keyForName(initialScopeEngineers[i])] = true;
-      }
       for (var i = 0; i < initialFocusEngineers.length; i++) {
         focusEngineerKeys[keyForName(initialFocusEngineers[i])] = true;
       }
 
       for (var i = 0; i < teamNodes.length; i++) {
         var teamNode = teamNodes[i];
-        var teamLabel = TEAM_DEFS[i].label;
-        var teamKey = keyForName(teamLabel);
-        var teamExplicitlySelected = !!selectedNodeIds[TEAM_DEFS[i].id] || !!scopeTeamKeys[teamKey];
-
-        if (teamExplicitlySelected) {
-          shouldOpenHierarchy = true;
-          expandedTeams[i] = true;
-          selectedNodeIds[TEAM_DEFS[i].id] = true;
-          addNamedSelection(selectedTeams, teamLabel);
-        }
 
         for (var j = 0; j < teamNode.engineers.length; j++) {
           var engineerNode = teamNode.engineers[j];
           var engineerName = engineerNode.name;
           var engineerKey = keyForName(engineerName);
-          var shouldSelectEngineer = !!selectedNodeIds[engineerNode.id] || !!focusEngineerKeys[engineerKey];
+          var shouldSelectEngineer = !!focusEngineerKeys[engineerKey];
           if (!shouldSelectEngineer) continue;
 
           shouldOpenHierarchy = true;
           expandedTeams[i] = true;
+          selectedNodeIds[TEAM_DEFS[i].id] = true;
           selectedNodeIds[engineerNode.id] = true;
-          addNamedSelection(selectedEngineers, engineerName);
-          addNamedSelection(selectedTeams, engineerNode.team);
         }
       }
 
@@ -823,7 +732,6 @@
         statusEl.textContent = 'selection scope active — engineers expanded';
       }
 
-      emitSelectionToHost();
     }
 
     function resetTeamHierarchy() {
@@ -858,15 +766,20 @@
       }
     }
 
-    function toggleTeamHierarchy() {
-      teamHierarchyOpen = !teamHierarchyOpen;
-      if (!teamHierarchyOpen) {
-        for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = false;
-        activeEngineerQuery = null;
-        statusEl.textContent = 'recursive prelude complete — click blue dot';
-        return;
+    function openTeamHierarchy(expandAllEngineers) {
+      teamHierarchyOpen = true;
+      if (expandAllEngineers) {
+        for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = true;
       }
-      statusEl.textContent = 'teams expanded — click a team to view engineers';
+      statusEl.textContent = expandAllEngineers
+        ? 'teams expanded — all engineers visible'
+        : 'teams expanded — click a team to view engineers';
+    }
+
+    function toggleTeamHierarchy() {
+      // Keep hierarchy open once revealed; center click should not collapse it.
+      if (teamHierarchyOpen) return;
+      openTeamHierarchy(false);
     }
 
     function toggleTeamEngineers(teamIndex) {
@@ -1176,11 +1089,11 @@
           rlmCenter.scale.setScalar(FINAL_DOT_SCALE);
           rlmCenter.children[1].material.opacity = 0.45;
           rlmCenter.children[2].material.opacity = 0.08;
+          openTeamHierarchy(true);
           if (!rlmCompletionNotified) {
             rlmCompletionNotified = true;
             try { window.parent.postMessage({ type: 'uc-dashboard-rlm-complete', ms: t }, '*'); } catch (_) {}
           }
-          if (STOP_AFTER_RLM) statusEl.textContent = 'recursive prelude complete — click blue dot';
         }
         return;
       }

@@ -1,0 +1,118 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.586Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:bc153266-8e14-45ed-beb3-0fd3bf72482a",
+    "contextId": "ctx_51d3a7bd96c98c305eaeb292",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "bc153266-8e14-45ed-beb3-0fd3bf72482a",
+    "updatedAtUnix": 1771690428
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "5ecd9613-0105-4674-a030-20e537ce3a4b",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "claude install"
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "sessionId": "bc153266-8e14-45ed-beb3-0fd3bf72482a",
+            "timestamp": "2026-01-22T22:20:29.060Z",
+            "parentUuid": "1665d21a-7dc6-407f-a308-515aed1e21a6",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "level": "high",
+              "disabled": false,
+              "triggers": []
+            }
+          },
+          "message": "claude install",
+          "timestamp": "2026-01-22T22:20:29.060Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_8dba87028b701ed6fc06549a",
+        "index": 0,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "716dfa4e6a9dbc32234e28109b69209ffdb39569ea2b34c5c152f1a57978756f",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/bc153266-8e14-45ed-beb3-0fd3bf72482a.jsonl",
+          "session_id": "bc153266-8e14-45ed-beb3-0fd3bf72482a",
+          "engineer_id": "engineer-01",
+          "file_offset": 794
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "assistant",
+            "uuid": "47fe5da9-ab8d-4593-8a0e-d8e95717d4fa",
+            "message": {
+              "id": "msg_019jB7NY2Kbtdu86Cq8iwMmr",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-5-20251101",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "To install Claude Code, run:\n\n```bash\nnpm install -g @anthropic-ai/claude-code\n```\n\nOr with other package managers:\n\n```bash\n# yarn\nyarn global add @anthropic-ai/claude-code\n\n# pnpm\npnpm add -g @anthropic-ai/claude-code\n```\n\nAfter installation, run `claude` to start.\n\nNeed help with something specific about the installation?",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.16",
+            "userType": "external",
+            "gitBranch": "",
+            "requestId": "req_011CXPCJiz4ZCYhDopZqpkgz",
+            "sessionId": "bc153266-8e14-45ed-beb3-0fd3bf72482a",
+            "timestamp": "2026-01-22T22:21:08.988Z",
+            "parentUuid": "7750b5d4-dc84-432b-9234-716cd70ae64e",
+            "isSidechain": false
+          },
+          "message": "To install Claude Code, run: ```bash npm install -g @anthropic-ai/claude-code ``` Or with other package managers: ```bash # yarn yarn global add @anthropic-ai/claude-code # pnpm pnpm add -g @anthropic-ai/claude-code ``` After installation, run `claude` to start. Need help with something specific about the installation?",
+          "timestamp": "2026-01-22T22:21:08.988Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_0d68adafbd7c9ac57f09a75b",
+        "index": 1,
+        "metadata": {
+          "day": "2026-01-22",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "f6557bdd803e214afa89581a653d603a00cb76cb06aa0d9ed53165ed71a79b99",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/bc153266-8e14-45ed-beb3-0fd3bf72482a.jsonl",
+          "session_id": "bc153266-8e14-45ed-beb3-0fd3bf72482a",
+          "engineer_id": "engineer-01",
+          "file_offset": 3485
+        }
+      }
+    ],
+    "version": 0
+  }
+}

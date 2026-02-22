@@ -1,0 +1,302 @@
+{
+  "pulledAt": "2026-02-22T01:20:17.921Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+    "contextId": "ctx_6093496e2c69359aa5e3ea0b",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+    "updatedAtUnix": 1771690270
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "317a2120-981e-4cc4-b477-423bc6d185a6",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Whats the difference between supabase and supabase-js?\n\nhttps://github.com/supabase/supabase\n\nhttps://github.com/supabase/supabase-js"
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:06:30.646Z",
+            "parentUuid": "a56c97d8-678e-4a3f-84bb-f4ecde1d6d47",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Whats the difference between supabase and supabase-js? https://github.com/supabase/supabase https://github.com/supabase/supabase-js",
+          "timestamp": "2026-02-09T06:06:30.646Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_4c48ca6bd49142fce930e53c",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "e8cf5a24abf3c87e2451f5161a6d363b3d7b402ca9e603fc670bb33b8e2f764c",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 785
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "assistant",
+            "uuid": "8747650c-b280-48a8-a78c-304a41075e44",
+            "message": {
+              "id": "msg_017ugtGwuaDAHTkKL8AJhEwb",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "**supabase/supabase** — The full Supabase platform. It's the open-source Firebase alternative that includes:\n- Dashboard (Next.js app)\n- Edge Functions runtime\n- Realtime server\n- Storage server\n- Auth server (GoTrue)\n- Database tooling (postgres-meta)\n- Documentation site\n- Docker setup for self-hosting\n\nEssentially the **backend infrastructure + admin UI**.\n\n**supabase/supabase-js** — The JavaScript/TypeScript **client library**. It's what you `npm install` in your app to talk to a Supabase instance:\n```ts\nimport { createClient } from '@supabase/supabase-js'\nconst supabase = createClient(url, anonKey)\nconst { data } = await supabase.from('todos').select()\n```\n\nIt bundles sub-clients for Auth, Realtime, Storage, PostgREST, and Functions into one unified SDK.\n\n**TL;DR**: `supabase` = the platform/server, `supabase-js` = the JS client to consume it.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CXwzYzN9DhFfv7v3SsQ9p",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:06:39.931Z",
+            "parentUuid": "52af3f46-f41f-4333-8dcc-d270eab51afa",
+            "isSidechain": false
+          },
+          "message": "**supabase/supabase** — The full Supabase platform. It's the open-source Firebase alternative that includes: - Dashboard (Next.js app) - Edge Functions runtime - Realtime server - Storage server - Auth server (GoTrue) - Database tooling (postgres-meta) - Documentation site - Docker setup for self-hosting Essentially the **backend infrastructure + admin UI**. **supabase/supabase-js** — The JavaScript/TypeScript **client library**. It's what you `npm install` in your app to talk to a Supabase instance: ```ts import { createClient } from '@supabase/supabase-js' const supabase = createClient(url, anonKey) const { data } = await supabase.from('todos').select() ``` It bundles sub-clients for Auth, Realtime, Storage, PostgREST, and Functions into one unified SDK. **TL;DR**: `supabase` = the platform/server, `supabase-js` = the JS client to consume it.",
+          "timestamp": "2026-02-09T06:06:39.931Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_5acf4efdbe3b563aeb1133e1",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "bef44b35f975bae6c7eb9de9d9ae1ecf72114b6125727db39471b5cf49d1ff86",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 3522
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "type": "user",
+            "uuid": "34ccd547-1105-41cf-80cc-e5621fdbfb02",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "see ./ultracontext\n\nwhat would be the analogous?"
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:07:28.470Z",
+            "parentUuid": "dd332e86-6461-421f-bbdf-eaac9f5c47a8",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "see ./ultracontext what would be the analogous?",
+          "timestamp": "2026-02-09T06:07:28.470Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_dcaf460af0283f12f8a64f34",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "bed00e2f4bfb3adf60688acb8ee4fa58977eabae4ac186824f976384a79d811c",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 6589
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "slug": "recursive-tickling-globe",
+            "type": "assistant",
+            "uuid": "24add9e9-12aa-43f5-85d8-aa89987c41f1",
+            "message": {
+              "id": "msg_011jPSr7j2iKnNTH43NteU9e",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Drawing the analogy to the Supabase split:\n\n| Supabase | UltraContext |\n|---|---|\n| `supabase/supabase` (platform) | `ultracontext/api` + `ultracontext/website` |\n| `supabase/supabase-js` (JS client) | `ultracontext/ultracontext-node` |\n| `supabase/supabase-py` (Python client) | `ultracontext/ultracontext-python` |\n\nRight now everything lives in one monorepo. The analogous split would be:\n\n- **`ultracontext/ultracontext`** — the platform repo (API, website, agents/examples, playground)\n- **`ultracontext/ultracontext-node`** — standalone JS/TS client SDK repo (already published to npm as `ultracontext`)\n- **`ultracontext/ultracontext-python`** — standalone Python client SDK repo (already published to PyPI as `ultracontext`)\n\nThe SDKs are already independent packages with their own `package.json` / `pyproject.toml` — they just haven't been split into separate GitHub repos yet. Supabase did this separation so the client libs have their own issue trackers, release cycles, and contributor workflows independent of the platform.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CXwzjaYVKaDy8Ucz1Zkg9",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:09:02.738Z",
+            "parentUuid": "ef6b2e52-96b8-4f74-87a6-eeb49f1b0ab0",
+            "isSidechain": false
+          },
+          "message": "Drawing the analogy to the Supabase split: | Supabase | UltraContext | |---|---| | `supabase/supabase` (platform) | `ultracontext/api` + `ultracontext/website` | | `supabase/supabase-js` (JS client) | `ultracontext/ultracontext-node` | | `supabase/supabase-py` (Python client) | `ultracontext/ultracontext-python` | Right now everything lives in one monorepo. The analogous split would be: - **`ultracontext/ultracontext`** — the platform repo (API, website, agents/examples, playground) - **`ultracontext/ultracontext-node`** — standalone JS/TS client SDK repo (already published to npm as `ultracontext`) - **`ultracontext/ultracontext-python`** — standalone Python client SDK repo (already published to PyPI as `ultracontext`) The SDKs are already independent packages with their own `package.json` / `pyproject.toml` — they just haven't been split into separate GitHub repos yet. Supabase did this separation so the client libs have their own issue trackers, release cycles, and contributor workflows independent of the platform.",
+          "timestamp": "2026-02-09T06:09:02.738Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_3a59731e402e6f5489fdd61c",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "2d9fa5e793d5fe302bacd97fdd6029576df050d54236af4ec39bcc632fa64c9e",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 240099
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "slug": "recursive-tickling-globe",
+            "type": "user",
+            "uuid": "ef06a3e1-5f45-406c-9970-ef4c7bf25d6d",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "split them into separate repos"
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:46:45.647Z",
+            "parentUuid": "2e62da3f-2612-464a-904e-5d5660438607",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "split them into separate repos",
+          "timestamp": "2026-02-09T06:46:45.647Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_a3fe55e70b6469f5cf34a5a5",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "8115d887af6bfe1adaf8fd6edc820a2632dd08f1acb21e08a11046e4cfe50d63",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 243853
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code",
+            "slug": "recursive-tickling-globe",
+            "type": "user",
+            "uuid": "512e7027-fe8d-4630-9f03-47d47dec4e29",
+            "message": {
+              "role": "user",
+              "content": [
+                {
+                  "text": "[Request interrupted by user]",
+                  "type": "text"
+                }
+              ]
+            },
+            "version": "2.1.37",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+            "timestamp": "2026-02-09T06:46:50.718Z",
+            "parentUuid": "0e1a2798-c6b4-4d1e-89d8-283ec60cb4a8",
+            "isSidechain": false
+          },
+          "message": "[Request interrupted by user]",
+          "timestamp": "2026-02-09T06:46:50.718Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_bbdcc47d68240220e8ea82e4",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-09",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "7fa8686418c390f32d4bc277c43d09121067fc850620f0e630a5742e2e037bf6",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code/71d2fd20-4df8-47d5-8e21-3a16bc8a474b.jsonl",
+          "session_id": "71d2fd20-4df8-47d5-8e21-3a16bc8a474b",
+          "engineer_id": "engineer-01",
+          "file_offset": 245190
+        }
+      }
+    ],
+    "version": 0
+  }
+}

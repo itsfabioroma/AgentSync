@@ -1,0 +1,322 @@
+{
+  "pulledAt": "2026-02-22T01:20:15.072Z",
+  "cache": {
+    "cacheKey": "ctx:session:claude:Fabios-MacBook-Pro.local:engineer-01:e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+    "contextId": "ctx_b88c6b67bc707eba57ec6924",
+    "source": "claude",
+    "host": "Fabios-MacBook-Pro.local",
+    "engineerId": "engineer-01",
+    "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+    "updatedAtUnix": 1771690477
+  },
+  "detail": {
+    "data": [
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "type": "user",
+            "uuid": "53f91102-03cb-4e28-bd15-9a063e81061c",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "clone supermemory on the parent directory and see what its actually open source. I think they are not fully open source"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T05:59:22.400Z",
+            "parentUuid": "de5d3ca8-616d-4ca8-a2cf-ef66663b4bc6",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "clone supermemory on the parent directory and see what its actually open source. I think they are not fully open source",
+          "timestamp": "2026-02-14T05:59:22.400Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_7a20070f35b3dfd1caf6323a",
+        "index": 0,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "476991cf945bd3a80941a2e9e2144dfa6d6c9aa15193d70c6bce0d652e5d0777",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 798
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "lively-singing-trinket",
+            "type": "assistant",
+            "uuid": "2e999ce7-cade-4ec1-a255-617efca9ba10",
+            "message": {
+              "id": "msg_0127mc9nX9btGCCuMB8qAFqW",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Now let me dig into what's actually in each app and package to see what's real code vs thin wrappers.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY7TJqmkTbVvCz9r4XMB3",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T06:02:49.512Z",
+            "parentUuid": "489ad58f-fa22-4e8f-8ad5-6b29f3338754",
+            "isSidechain": false
+          },
+          "message": "Now let me dig into what's actually in each app and package to see what's real code vs thin wrappers.",
+          "timestamp": "2026-02-14T06:02:49.512Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_7b3356c80af7c563587d07a8",
+        "index": 1,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "b0cdaa38074aa85b39f9d94a035ebf02146a87f1c52ee75650e8ea4edc4e6b88",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 44143
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "lively-singing-trinket",
+            "type": "assistant",
+            "uuid": "5292c1f6-21ab-44b4-9dd0-c71b5b943743",
+            "message": {
+              "id": "msg_01CZAVGp2PxyGjsbb8mBLGRy",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "## Verdict: supermemory is **frontend-open, backend-closed**\n\n### What IS open source\n- **Web app** (`apps/web/`) — Next.js frontend shell that calls `api.supermemory.ai`\n- **Browser extension** — fully open, but just saves things to their API\n- **MCP server** — open, but just a thin client to their API\n- **SDKs** — thin HTTP wrappers around their hosted API\n- **UI components & memory graph visualization**\n\n### What is NOT open source (the actual product)\n- **Core backend** — hidden behind the `alchemy` npm package and `api.supermemory.ai`\n- **Embedding generation** — proprietary\n- **Vector search / RAG pipeline** — proprietary\n- **Memory extraction & distillation** — proprietary\n- **File processing** (PDF, video, OCR) — proprietary\n- **User profile synthesis** — proprietary\n\n### Self-hosting is misleading\nTheir self-hosting guide requires an **enterprise agreement** + a proprietary \"deployment package\" (compiled JS bundle, not source). You run their UI + your DB, but the intelligence layer stays theirs.\n\n### TL;DR\n~10% of the value (UI, integrations) is open. ~90% (the actual memory engine) is closed behind their API. You **cannot** run a fully functional instance from this repo. It's an API-first SaaS that open-sourced the client layer for adoption — not the core tech.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY7TRtyBgmfKCL48iTw5v",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T06:04:30.043Z",
+            "parentUuid": "c7c5cd99-86c2-4cbf-9edf-fb9236e010c3",
+            "isSidechain": false
+          },
+          "message": "## Verdict: supermemory is **frontend-open, backend-closed** ### What IS open source - **Web app** (`apps/web/`) — Next.js frontend shell that calls `api.supermemory.ai` - **Browser extension** — fully open, but just saves things to their API - **MCP server** — open, but just a thin client to their API - **SDKs** — thin HTTP wrappers around their hosted API - **UI components & memory graph visualization** ### What is NOT open source (the actual product) - **Core backend** — hidden behind the `alchemy` npm package and `api.supermemory.ai` - **Embedding generation** — proprietary - **Vector search / RAG pipeline** — proprietary - **Memory extraction & distillation** — proprietary - **File processing** (PDF, video, OCR) — proprietary - **User profile synthesis** — proprietary ### Self-hosting is misleading Their self-hosting guide requires an **enterprise agreement** + a proprietary \"deployment package\" (compiled JS bundle, not source). You run their UI + your DB, but the intelligence layer stays theirs. ### TL;DR ~10% of the value (UI, integrations) is open. ~90% (the actual memory engine) is closed behind their API. You **cannot** run a fully functional instance from this repo. It's an API-first SaaS that open-sourced the client layer for adoption — not the core tech.",
+          "timestamp": "2026-02-14T06:04:30.043Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_bc9bb20f4cd0135687615b53",
+        "index": 2,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "680b5e3c1f644bf80d8c405333fdfffb785fbb485608c317344a0ccd6fe0ff20",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 461693
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "lively-singing-trinket",
+            "type": "user",
+            "uuid": "e35d6035-e55e-48dd-9d37-d9ff536b2361",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "Whats the point then?"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T06:16:53.580Z",
+            "parentUuid": "42900d38-3f7f-495d-8910-39a24e503707",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "Whats the point then?",
+          "timestamp": "2026-02-14T06:16:53.580Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_5af304f90fe5e14abbc31853",
+        "index": 3,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "facc805531047525fd2a21140c28edca51321617baa9a05ed86fc1442c7d66b8",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 465769
+        }
+      },
+      {
+        "role": "assistant",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "lively-singing-trinket",
+            "type": "assistant",
+            "uuid": "4bbd839c-8b10-4ef5-97e2-41ea8b92eb07",
+            "message": {
+              "id": "msg_01KAQn5WkFXrTp3k8EQePyg7",
+              "role": "assistant",
+              "type": "message",
+              "model": "claude-opus-4-6",
+              "usage": {
+                "input_tokens": "***REDACTED***",
+                "service_tier": "standard",
+                "inference_geo": "not_available",
+                "output_tokens": "***REDACTED***",
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": "***REDACTED***",
+                  "ephemeral_5m_input_tokens": "***REDACTED***"
+                },
+                "cache_read_input_tokens": "***REDACTED***",
+                "cache_creation_input_tokens": "***REDACTED***"
+              },
+              "content": [
+                {
+                  "text": "Mostly **marketing and distribution**:\n\n1. **Trust theater** — \"open source\" badge builds trust, gets GitHub stars, attracts developers\n2. **SDK adoption** — open clients/SDKs lower friction to integrate with their paid API\n3. **Community contributions** — free labor on UI, extensions, integrations (the parts they don't monetize)\n4. **SEO/discoverability** — GitHub repo ranks well, drives traffic to their SaaS\n\nFor **you building ultracontext**, the useful takeaway is:\n\n- Their open source code shows you the **API contract** (Zod schemas, endpoint shapes) — basically their product spec for free\n- The `memory-graph` visualization package is genuinely reusable\n- The MCP server pattern is a good reference for how to expose memory to AI tools\n- But the actual hard problem (embeddings, chunking, search, extraction) — you'd have to build yourself anyway\n\nSo it's worth skimming their schemas/types for product design inspiration, but there's zero reusable backend logic to borrow.",
+                  "type": "text"
+                }
+              ],
+              "stop_reason": null,
+              "stop_sequence": null
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "requestId": "req_011CY7UPXgL3YHC5LhWeC8pg",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T06:17:05.471Z",
+            "parentUuid": "58b1376d-3827-403d-b741-2bdb2df82188",
+            "isSidechain": false
+          },
+          "message": "Mostly **marketing and distribution**: 1. **Trust theater** — \"open source\" badge builds trust, gets GitHub stars, attracts developers 2. **SDK adoption** — open clients/SDKs lower friction to integrate with their paid API 3. **Community contributions** — free labor on UI, extensions, integrations (the parts they don't monetize) 4. **SEO/discoverability** — GitHub repo ranks well, drives traffic to their SaaS For **you building ultracontext**, the useful takeaway is: - Their open source code shows you the **API contract** (Zod schemas, endpoint shapes) — basically their product spec for free - The `memory-graph` visualization package is genuinely reusable - The MCP server pattern is a good reference for how to expose memory to AI tools - But the actual hard problem (embeddings, chunking, search, extraction) — you'd have to build yourself anyway So it's worth skimming their schemas/types for product design inspiration, but there's zero reusable backend logic to borrow.",
+          "timestamp": "2026-02-14T06:17:05.471Z",
+          "event_type": "claude.assistant"
+        },
+        "id": "msg_d4cb632a948f9fa740b01213",
+        "index": 4,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "3479a5cefdee00c40ad8c45631a3ec721c90c97a7fa049a0de0f1282d73f5889",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 468443
+        }
+      },
+      {
+        "role": "user",
+        "content": {
+          "raw": {
+            "cwd": "/Users/fabioroma/Code/ultracontext",
+            "slug": "lively-singing-trinket",
+            "type": "user",
+            "uuid": "5a6394e7-dced-430c-b658-e59afe0109f5",
+            "todos": [],
+            "message": {
+              "role": "user",
+              "content": "https://github.com/mem0ai/mem0 check this one then"
+            },
+            "version": "2.1.42",
+            "userType": "external",
+            "gitBranch": "HEAD",
+            "sessionId": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+            "timestamp": "2026-02-14T06:18:21.001Z",
+            "parentUuid": "51de1c89-2dc6-4f0c-941b-042980daa8c0",
+            "isSidechain": false,
+            "permissionMode": "default",
+            "thinkingMetadata": {
+              "maxThinkingTokens": "***REDACTED***"
+            }
+          },
+          "message": "https://github.com/mem0ai/mem0 check this one then",
+          "timestamp": "2026-02-14T06:18:21.001Z",
+          "event_type": "claude.user"
+        },
+        "id": "msg_b08f2b812e995db18cdf7887",
+        "index": 5,
+        "metadata": {
+          "day": "2026-02-14",
+          "host": "Fabios-MacBook-Pro.local",
+          "source": "claude",
+          "event_id": "a23019dd7edc89cebed2d314e61084b940f7130af98be8c1b6f80ea978c4d85c",
+          "file_path": "/Users/fabioroma/.claude/projects/-Users-fabioroma-Code-ultracontext/e7832adf-72b9-485d-a0c4-5bf8af4d056d.jsonl",
+          "session_id": "e7832adf-72b9-485d-a0c4-5bf8af4d056d",
+          "engineer_id": "engineer-01",
+          "file_offset": 471774
+        }
+      }
+    ],
+    "version": 0
+  }
+}
