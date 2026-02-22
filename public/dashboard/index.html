@@ -518,6 +518,9 @@
     var teamHierarchyOpen = false;
     var expandedTeams = [];
     var teamTargetTmp = new THREE.Vector3();
+    var dashboardTimelineEnabled = !STOP_AFTER_RLM;
+    var dashboardTimelineAnchor = 0;
+    var activeEngineerQuery = null;
 
     for (var i = 0; i < TEAM_DEFS.length; i++) {
       var teamAngle = (i / TEAM_DEFS.length) * Math.PI * 2 - Math.PI / 2;
@@ -612,6 +615,7 @@
     function resetTeamHierarchy() {
       teamHierarchyOpen = false;
       for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = false;
+      activeEngineerQuery = null;
 
       for (var i = 0; i < teamNodes.length; i++) {
         var team = teamNodes[i];
@@ -644,6 +648,7 @@
       teamHierarchyOpen = !teamHierarchyOpen;
       if (!teamHierarchyOpen) {
         for (var i = 0; i < expandedTeams.length; i++) expandedTeams[i] = false;
+        activeEngineerQuery = null;
         statusEl.textContent = 'recursive prelude complete — click blue dot';
         return;
       }
@@ -658,6 +663,35 @@
         return;
       }
       statusEl.textContent = TEAM_DEFS[teamIndex].label + ' — engineers expanded';
+    }
+
+    function startEngineerQuery(teamIndex, engineerIndex, t) {
+      if (!teamHierarchyOpen || !expandedTeams[teamIndex]) return;
+      activeEngineerQuery = { teamIndex: teamIndex, engineerIndex: engineerIndex, startedAt: t };
+      statusEl.textContent = TEAM_DEFS[teamIndex].engineers[engineerIndex] + ' querying...';
+
+      if (dashboardTimelineEnabled) return;
+
+      dashboardTimelineEnabled = true;
+      dashboardTimelineAnchor = t - RLM_DURATION;
+
+      for (var i = 0; i < spawned.length; i++) spawned[i] = false;
+      for (var i = 0; i < versionsFired.length; i++) versionsFired[i] = false;
+
+      for (var i = 0; i < nodes.length; i++) {
+        if (nodes[i].group !== rlmCenter) scene.remove(nodes[i].group);
+      }
+      for (var i = 0; i < edges.length; i++) scene.remove(edges[i].line);
+      for (var i = 0; i < particles.length; i++) scene.remove(particles[i].mesh);
+      nodes.length = 0;
+      edges.length = 0;
+      particles.length = 0;
+      nodeById = {};
+
+      versionsEl.innerHTML = '';
+      versionItems.length = 0;
+      activeVersion = null;
+      versionAffectedIds = null;
     }
 
     function animateTeamHierarchy(t) {
@@ -711,10 +745,15 @@
           eng.group.position.lerpVectors(team.group.position, teamTargetTmp, engT);
 
           var engScale = easeInOutCubic(eng.progress);
+          var isQueryingEngineer = activeEngineerQuery &&
+            activeEngineerQuery.teamIndex === i &&
+            activeEngineerQuery.engineerIndex === j;
+          if (isQueryingEngineer) engScale *= 1.12 + Math.sin(t * 0.01) * 0.06;
           if (hoveredRlmGroup === eng.group) engScale *= 1.28;
           eng.group.scale.setScalar(engScale);
 
           var engGlow = 0.1 + eng.progress * 0.24 + Math.sin(t * 0.004 + j) * 0.02;
+          if (isQueryingEngineer) engGlow += 0.18;
           if (hoveredRlmGroup === eng.group) engGlow += 0.2;
           eng.glowSprite.material.opacity = Math.min(0.65, engGlow);
 
@@ -1371,6 +1410,13 @@
           toggleTeamEngineers(i);
           return;
         }
+        for (var j = 0; j < teamNodes[i].engineers.length; j++) {
+          if (rlmHover.group === teamNodes[i].engineers[j].group) {
+            if (!teamHierarchyOpen || !expandedTeams[i]) return;
+            startEngineerQuery(i, j, performance.now() - startTime);
+            return;
+          }
+        }
       }
     });
 
@@ -1500,6 +1546,9 @@
       // Reset RLM state and visuals.
       rlmActive = true;
       rlmCleaned = false;
+      dashboardTimelineEnabled = !STOP_AFTER_RLM;
+      dashboardTimelineAnchor = 0;
+      activeEngineerQuery = null;
       resetTeamHierarchy();
       for (var i = 0; i < rlmLogsFired.length; i++) rlmLogsFired[i] = false;
       delete rlmCenter.children[0].userData.timelineNode;
@@ -1604,10 +1653,12 @@
       if (rlmActive) animateRLM(t);
       animateTeamHierarchy(t);
 
-      if (!STOP_AFTER_RLM) {
+      var timelineT = t - dashboardTimelineAnchor;
+
+      if (dashboardTimelineEnabled) {
         // spawn timeline nodes (after RLM)
         for (var i = 0; i < timeline.length; i++) {
-          if (!spawned[i] && t >= timeline[i].time) {
+          if (!spawned[i] && timelineT >= timeline[i].time) {
             spawned[i] = true;
             spawnNode(timeline[i], t);
           }
@@ -1615,7 +1666,7 @@
 
         // spawn version events
         for (var i = 0; i < versionEvents.length; i++) {
-          if (!versionsFired[i] && t >= VERSIONS_START + versionEvents[i].time) {
+          if (!versionsFired[i] && timelineT >= VERSIONS_START + versionEvents[i].time) {
             versionsFired[i] = true;
             addVersionToRail(versionEvents[i]);
           }
