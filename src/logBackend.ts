@@ -388,6 +388,7 @@ export async function queryEngineerTasks(
     return {
       teamRoot,
       query,
+      scannedTeams: [],
       scannedEngineers: [],
       scannedFiles: 0,
       extractedTasks: 0,

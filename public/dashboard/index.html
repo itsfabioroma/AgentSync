@@ -46,6 +46,11 @@
       background: rgba(255,255,255,0.08);
       border-left-width: 3px;
     }
+    #log .entry.selected {
+      background: rgba(68,170,255,0.12);
+      border-left-width: 3px;
+      border-left-color: #44aaff !important;
+    }
     #log .entry-header {
       display: flex; align-items: center; gap: 8px;
     }
@@ -179,6 +184,10 @@
     import { RenderPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/RenderPass.js';
     import { UnrealBloomPass } from 'https://esm.sh/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js';
     var INITIAL_PLAYHEAD_MS = Number(window.__UC_INITIAL_PLAYHEAD_MS || 0);
+    var INITIAL_SELECTED_NODE_IDS = Array.isArray(window.__UC_SELECTED_NODE_IDS) ? window.__UC_SELECTED_NODE_IDS : [];
+    var INITIAL_SCOPE_TEAMS = Array.isArray(window.__UC_SCOPE_TEAMS) ? window.__UC_SCOPE_TEAMS : [];
+    var INITIAL_SCOPE_ENGINEERS = Array.isArray(window.__UC_SCOPE_ENGINEERS) ? window.__UC_SCOPE_ENGINEERS : [];
+    var INITIAL_FOCUS_ENGINEERS = Array.isArray(window.__UC_FOCUS_ENGINEERS) ? window.__UC_FOCUS_ENGINEERS : [];
 
     // ================================
     // COLORS
@@ -505,12 +514,78 @@
     }
 
     // Team hierarchy (post-RLM click expansion)
-    var TEAM_DEFS = [
-      { id: 'team_database', label: 'database', content: 'Database team handling storage and schema systems.', engineers: ['Ava', 'Noah', 'Mia'] },
-      { id: 'team_frontend', label: 'front-end', content: 'Front-end team focused on client and UI implementation.', engineers: ['Liam', 'Zoe', 'Kai'] },
-      { id: 'team_ml', label: 'machine learning', content: 'Machine learning team for model and inference workflows.', engineers: ['Iris', 'Omar', 'Eli'] },
-      { id: 'team_backend', label: 'backend', content: 'Backend team building APIs and service orchestration.', engineers: ['Nia', 'Jules', 'Theo'] }
+    var DEFAULT_TEAM_DEFS = [
+      { id: 'team_backend_1', label: 'backend', content: 'Backend team currently active.', engineers: ['carlos', 'dain'] },
+      { id: 'team_database_2', label: 'database', content: 'Database team currently active.', engineers: ['james', 'maya'] },
+      { id: 'team_frontend_3', label: 'frontend', content: 'Frontend team currently active.', engineers: ['david', 'sarah'] },
+      { id: 'team_machinelearning_4', label: 'machinelearning', content: 'Machine learning team currently active.', engineers: ['kian', 'priya'] }
     ];
+    function normalizeThemeDef(theme, idx) {
+      var name = '';
+      if (theme && typeof theme === 'object' && typeof theme.name === 'string') name = theme.name.trim();
+      if (!name) name = 'team_' + (idx + 1);
+      var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+      if (!slug) slug = 'team_' + (idx + 1);
+
+      var engineers = [];
+      if (theme && typeof theme === 'object' && Array.isArray(theme.engineers)) {
+        for (var i = 0; i < theme.engineers.length; i++) {
+          if (typeof theme.engineers[i] !== 'string') continue;
+          var eng = theme.engineers[i].trim();
+          if (eng) engineers.push(eng);
+        }
+      }
+      if (engineers.length === 0) engineers = ['engineer-1', 'engineer-2', 'engineer-3'];
+
+      return {
+        id: 'team_' + slug + '_' + (idx + 1),
+        label: name,
+        content: name + ' team currently active.',
+        engineers: engineers
+      };
+    }
+    function keyForName(value) {
+      if (typeof value !== 'string') return '';
+      return value.trim().toLowerCase();
+    }
+    function uniqueNameList(list) {
+      if (!Array.isArray(list)) return [];
+      var seen = {};
+      var out = [];
+      for (var i = 0; i < list.length; i++) {
+        if (typeof list[i] !== 'string') continue;
+        var trimmed = list[i].trim();
+        if (!trimmed) continue;
+        var key = keyForName(trimmed);
+        if (!key || seen[key]) continue;
+        seen[key] = true;
+        out.push(trimmed);
+      }
+      return out;
+    }
+    function addNamedSelection(store, value) {
+      var key = keyForName(value);
+      if (!key) return;
+      store[key] = value.trim();
+    }
+    function removeNamedSelection(store, value) {
+      var key = keyForName(value);
+      if (!key) return;
+      delete store[key];
+    }
+    function valuesFromNamedSelection(store) {
+      var out = [];
+      for (var key in store) {
+        if (!Object.prototype.hasOwnProperty.call(store, key)) continue;
+        out.push(store[key]);
+      }
+      out.sort(function(a, b) { return a.localeCompare(b); });
+      return out;
+    }
+    var runtimeThemes = Array.isArray(window.__UC_THEMES) ? window.__UC_THEMES : [];
+    var TEAM_DEFS = runtimeThemes.length > 0
+      ? runtimeThemes.map(function(theme, idx) { return normalizeThemeDef(theme, idx); })
+      : DEFAULT_TEAM_DEFS;
     var TEAM_RADIUS = 34;
     var ENGINEER_OUTWARD = 14;
     var ENGINEER_SPREAD = 7;
@@ -521,6 +596,19 @@
     var dashboardTimelineEnabled = !STOP_AFTER_RLM;
     var dashboardTimelineAnchor = 0;
     var activeEngineerQuery = null;
+    var selectedNodeIds = {};
+    var selectedTeams = {};
+    var selectedEngineers = {};
+    var selectionDigest = '';
+    var initialSelectedNodeIds = uniqueNameList(INITIAL_SELECTED_NODE_IDS);
+    var initialScopeTeams = uniqueNameList(INITIAL_SCOPE_TEAMS);
+    var initialScopeEngineers = uniqueNameList(INITIAL_SCOPE_ENGINEERS);
+    var initialFocusEngineers = uniqueNameList(INITIAL_FOCUS_ENGINEERS);
+    var initialScopeApplied = false;
+
+    for (var i = 0; i < initialSelectedNodeIds.length; i++) {
+      selectedNodeIds[initialSelectedNodeIds[i]] = true;
+    }
 
     for (var i = 0; i < TEAM_DEFS.length; i++) {
       var teamAngle = (i / TEAM_DEFS.length) * Math.PI * 2 - Math.PI / 2;
@@ -550,6 +638,7 @@
         id: TEAM_DEFS[i].id,
         type: 'team',
         label: TEAM_DEFS[i].label,
+        team: TEAM_DEFS[i].label,
         content: TEAM_DEFS[i].content
       });
 
@@ -586,10 +675,15 @@
           id: engineerId,
           type: 'engineer',
           label: TEAM_DEFS[i].engineers[j],
+          team: TEAM_DEFS[i].label,
+          engineer: TEAM_DEFS[i].engineers[j],
           content: 'Engineer in ' + TEAM_DEFS[i].label + '.'
         });
 
         engineers.push({
+          id: engineerId,
+          team: TEAM_DEFS[i].label,
+          name: TEAM_DEFS[i].engineers[j],
           group: eg,
           mesh: engMesh,
           glowSprite: engGlow,
@@ -610,6 +704,126 @@
       });
 
       expandedTeams.push(false);
+    }
+
+    function setLogEntrySelection(itemId) {
+      var entry = logEntries[itemId];
+      if (!entry) return;
+      if (selectedNodeIds[itemId]) entry.classList.add('selected');
+      else entry.classList.remove('selected');
+    }
+
+    function emitSelectionToHost() {
+      var payload = {
+        nodeIds: Object.keys(selectedNodeIds).sort(),
+        teams: valuesFromNamedSelection(selectedTeams),
+        engineers: valuesFromNamedSelection(selectedEngineers)
+      };
+      var digest = JSON.stringify(payload);
+      if (digest === selectionDigest) return;
+      selectionDigest = digest;
+      try {
+        window.parent.postMessage({
+          type: 'uc-dashboard-selection',
+          nodeIds: payload.nodeIds,
+          teams: payload.teams,
+          engineers: payload.engineers
+        }, '*');
+      } catch (_) {}
+    }
+
+    function setNodeSelection(data, isSelected) {
+      if (!data || !data.id) return;
+
+      if (isSelected) selectedNodeIds[data.id] = true;
+      else delete selectedNodeIds[data.id];
+
+      if (data.type === 'team') {
+        if (isSelected) addNamedSelection(selectedTeams, data.team || data.label || '');
+        else removeNamedSelection(selectedTeams, data.team || data.label || '');
+      } else if (data.type === 'engineer') {
+        if (isSelected) {
+          addNamedSelection(selectedEngineers, data.engineer || data.label || '');
+          addNamedSelection(selectedTeams, data.team || '');
+        } else {
+          removeNamedSelection(selectedEngineers, data.engineer || data.label || '');
+        }
+      }
+
+      setLogEntrySelection(data.id);
+      emitSelectionToHost();
+    }
+
+    function toggleNodeSelection(data) {
+      if (!data || !data.id) return;
+      var nextSelected = !selectedNodeIds[data.id];
+      setNodeSelection(data, nextSelected);
+      statusEl.textContent = (nextSelected ? 'selected ' : 'unselected ') + (data.label || data.id);
+    }
+
+    function applyInitialScopeSelection() {
+      if (initialScopeApplied || rlmActive) return;
+      initialScopeApplied = true;
+
+      var hasScopeData =
+        initialSelectedNodeIds.length > 0 ||
+        initialScopeTeams.length > 0 ||
+        initialScopeEngineers.length > 0 ||
+        initialFocusEngineers.length > 0;
+
+      if (!hasScopeData) {
+        emitSelectionToHost();
+        return;
+      }
+
+      var shouldOpenHierarchy = false;
+      var scopeTeamKeys = {};
+      var focusEngineerKeys = {};
+
+      for (var i = 0; i < initialScopeTeams.length; i++) {
+        scopeTeamKeys[keyForName(initialScopeTeams[i])] = true;
+      }
+      for (var i = 0; i < initialScopeEngineers.length; i++) {
+        focusEngineerKeys[keyForName(initialScopeEngineers[i])] = true;
+      }
+      for (var i = 0; i < initialFocusEngineers.length; i++) {
+        focusEngineerKeys[keyForName(initialFocusEngineers[i])] = true;
+      }
+
+      for (var i = 0; i < teamNodes.length; i++) {
+        var teamNode = teamNodes[i];
+        var teamLabel = TEAM_DEFS[i].label;
+        var teamKey = keyForName(teamLabel);
+        var teamExplicitlySelected = !!selectedNodeIds[TEAM_DEFS[i].id] || !!scopeTeamKeys[teamKey];
+
+        if (teamExplicitlySelected) {
+          shouldOpenHierarchy = true;
+          expandedTeams[i] = true;
+          selectedNodeIds[TEAM_DEFS[i].id] = true;
+          addNamedSelection(selectedTeams, teamLabel);
+        }
+
+        for (var j = 0; j < teamNode.engineers.length; j++) {
+          var engineerNode = teamNode.engineers[j];
+          var engineerName = engineerNode.name;
+          var engineerKey = keyForName(engineerName);
+          var shouldSelectEngineer = !!selectedNodeIds[engineerNode.id] || !!focusEngineerKeys[engineerKey];
+          if (!shouldSelectEngineer) continue;
+
+          shouldOpenHierarchy = true;
+          expandedTeams[i] = true;
+          selectedNodeIds[engineerNode.id] = true;
+          addNamedSelection(selectedEngineers, engineerName);
+          addNamedSelection(selectedTeams, engineerNode.team);
+        }
+      }
+
+      if (shouldOpenHierarchy) {
+        teamHierarchyOpen = true;
+        statusEl.textContent = 'selection scope active — engineers expanded';
+      }
+
+      emitSelectionToHost();
     }
 
     function resetTeamHierarchy() {
@@ -707,11 +921,14 @@
         team.group.position.lerpVectors(ZERO, team.targetPos, teamPosT);
 
         var teamScale = teamScaleT;
+        var isSelectedTeam = !!selectedNodeIds[TEAM_DEFS[i].id];
         if (team.progress >= 1) teamScale *= 1 + Math.sin(t * 0.003 + i) * 0.05;
+        if (isSelectedTeam) teamScale *= 1.18 + Math.sin(t * 0.006 + i) * 0.06;
         if (hoveredRlmGroup === team.group) teamScale *= 1.24;
         team.group.scale.setScalar(teamScale);
 
         var teamGlow = 0.18 + team.progress * 0.2 + Math.sin(t * 0.004 + i * 0.7) * 0.03;
+        if (isSelectedTeam) teamGlow += 0.2;
         if (hoveredRlmGroup === team.group) teamGlow += 0.16;
         team.glowSprite.material.opacity = Math.min(0.72, teamGlow);
 
@@ -720,6 +937,7 @@
         teamLinePos[3] = team.group.position.x; teamLinePos[4] = team.group.position.y; teamLinePos[5] = team.group.position.z;
         team.line.geometry.attributes.position.needsUpdate = true;
         var teamLineOpacity = 0.16 * teamPosT;
+        if (isSelectedTeam) teamLineOpacity += 0.08;
         if (hoveredRlmGroup === team.group) teamLineOpacity += 0.08;
         team.line.material.opacity = teamLineOpacity;
 
@@ -748,12 +966,15 @@
           var isQueryingEngineer = activeEngineerQuery &&
             activeEngineerQuery.teamIndex === i &&
             activeEngineerQuery.engineerIndex === j;
+          var isSelectedEngineer = !!selectedNodeIds[eng.id];
           if (isQueryingEngineer) engScale *= 1.12 + Math.sin(t * 0.01) * 0.06;
+          if (isSelectedEngineer) engScale *= 1.18 + Math.sin(t * 0.01 + j) * 0.08;
           if (hoveredRlmGroup === eng.group) engScale *= 1.28;
           eng.group.scale.setScalar(engScale);
 
           var engGlow = 0.1 + eng.progress * 0.24 + Math.sin(t * 0.004 + j) * 0.02;
           if (isQueryingEngineer) engGlow += 0.18;
+          if (isSelectedEngineer) engGlow += 0.2;
           if (hoveredRlmGroup === eng.group) engGlow += 0.2;
           eng.glowSprite.material.opacity = Math.min(0.65, engGlow);
 
@@ -762,6 +983,7 @@
           engLinePos[3] = eng.group.position.x; engLinePos[4] = eng.group.position.y; engLinePos[5] = eng.group.position.z;
           eng.line.geometry.attributes.position.needsUpdate = true;
           var engLineOpacity = 0.12 * engT;
+          if (isSelectedEngineer) engLineOpacity += 0.08;
           if (hoveredRlmGroup === eng.group || hoveredRlmGroup === team.group) engLineOpacity += 0.06;
           eng.line.material.opacity = engLineOpacity;
         }
@@ -786,6 +1008,7 @@
     var RP7_DUR = 2800;  // collapse duration
     var rlmActive = true;
     var rlmCleaned = false;
+    var rlmCompletionNotified = false;
 
     // RLM status label
     var rlmLogs = [
@@ -953,6 +1176,10 @@
           rlmCenter.scale.setScalar(FINAL_DOT_SCALE);
           rlmCenter.children[1].material.opacity = 0.45;
           rlmCenter.children[2].material.opacity = 0.08;
+          if (!rlmCompletionNotified) {
+            rlmCompletionNotified = true;
+            try { window.parent.postMessage({ type: 'uc-dashboard-rlm-complete', ms: t }, '*'); } catch (_) {}
+          }
           if (STOP_AFTER_RLM) statusEl.textContent = 'recursive prelude complete — click blue dot';
         }
         return;
@@ -1272,6 +1499,7 @@
       logEntries[item.id] = div;
       logEl.appendChild(div);
       logEl.scrollTop = logEl.scrollHeight;
+      setLogEntrySelection(item.id);
 
       // remove "fresh" highlight after 2s
       setTimeout(function() { div.classList.remove('fresh'); }, 2000);
@@ -1396,6 +1624,12 @@
       if (hits.length === 0) return;
 
       var hitMesh = hits[0].object;
+      var timelineNode = hitMesh.userData.timelineNode || null;
+      if (timelineNode && timelineNode.data) {
+        toggleNodeSelection(timelineNode.data);
+        return;
+      }
+
       var rlmHover = hitMesh.userData.rlmHover || null;
       if (!rlmHover || !STOP_AFTER_RLM || rlmActive) return;
 
@@ -1407,12 +1641,14 @@
       for (var i = 0; i < teamNodes.length; i++) {
         if (rlmHover.group === teamNodes[i].group) {
           if (!teamHierarchyOpen) return;
+          toggleNodeSelection(rlmHover.data);
           toggleTeamEngineers(i);
           return;
         }
         for (var j = 0; j < teamNodes[i].engineers.length; j++) {
           if (rlmHover.group === teamNodes[i].engineers[j].group) {
             if (!teamHierarchyOpen || !expandedTeams[i]) return;
+            toggleNodeSelection(rlmHover.data);
             startEngineerQuery(i, j, performance.now() - startTime);
             return;
           }
@@ -1546,9 +1782,11 @@
       // Reset RLM state and visuals.
       rlmActive = true;
       rlmCleaned = false;
+      rlmCompletionNotified = false;
       dashboardTimelineEnabled = !STOP_AFTER_RLM;
       dashboardTimelineAnchor = 0;
       activeEngineerQuery = null;
+      initialScopeApplied = false;
       resetTeamHierarchy();
       for (var i = 0; i < rlmLogsFired.length; i++) rlmLogsFired[i] = false;
       delete rlmCenter.children[0].userData.timelineNode;
@@ -1652,6 +1890,7 @@
       // RLM prelude
       if (rlmActive) animateRLM(t);
       animateTeamHierarchy(t);
+      if (!rlmActive) applyInitialScopeSelection();
 
       var timelineT = t - dashboardTimelineAnchor;
 
@@ -1721,7 +1960,8 @@
         }
 
         // highlight from hover (node or log)
-        var isHighlighted = (n === hoveredNode || n === highlightedNode);
+        var isSelected = !!selectedNodeIds[n.data.id];
+        var isHighlighted = (n === hoveredNode || n === highlightedNode || isSelected);
         if (isHighlighted) {
           scale *= 1.4 + Math.sin(t * 0.006) * 0.1;
         }
