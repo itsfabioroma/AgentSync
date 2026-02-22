@@ -9,7 +9,6 @@ export const widgetMetadata: WidgetMetadata = {
   exposeAsTool: false,
   metadata: {
     prefersBorder: false,
-    invoking: "Loading dashboard...",
     invoked: "Dashboard ready",
     csp: {
       resourceDomains: ["https://esm.sh"],
